@@ -1,1 +1,1 @@
-# MES
+# Mining Engineering Society - NIT Rourkela
