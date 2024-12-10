@@ -107,10 +107,10 @@ export default function Navbar() {
                   </button>
                   {isDropdownOpen && (
                     <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                      <DropdownItem href="/services/web-design">
+                      <DropdownItem href="/members/stakeholders">
                         Stake Holders
                       </DropdownItem>
-                      <DropdownItem href="/services/development">
+                      <DropdownItem href="/members/alumni">
                         Alumnis
                       </DropdownItem>
                     </div>
@@ -131,10 +131,10 @@ export default function Navbar() {
                   </button>
                   {isAnotherDropdownOpen && (
                     <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                      <DropdownItem href="/another/item1">
+                      <DropdownItem href="/events/upcoming">
                         Upcoming
                       </DropdownItem>
-                      <DropdownItem href="/another/item2">
+                      <DropdownItem href="/events/past">
                         Past Events
                       </DropdownItem>
                     </div>
@@ -210,12 +210,10 @@ export default function Navbar() {
             </button>
             {isDropdownOpen && (
               <div className="pl-4">
-                <DropdownItem href="/services/web-design">
+                <DropdownItem href="/members/stakeholders">
                   Stake Holders
                 </DropdownItem>
-                <DropdownItem href="/services/development">
-                  Alumnis
-                </DropdownItem>
+                <DropdownItem href="/members/alumni">Alumnis</DropdownItem>
               </div>
             )}
             <button
@@ -229,8 +227,8 @@ export default function Navbar() {
             </button>
             {isAnotherDropdownOpen && (
               <div className="pl-4">
-                <DropdownItem href="/another/item1">Upcoming</DropdownItem>
-                <DropdownItem href="/another/item2">Past Events</DropdownItem>
+                <DropdownItem href="/events/upcoming">Upcoming</DropdownItem>
+                <DropdownItem href="/events/past">Past Events</DropdownItem>
               </div>
             )}
             <NavItem href="/contact">Contact</NavItem>
