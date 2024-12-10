@@ -1,9 +1,11 @@
 import { HomePageMain } from "@/components/features/HomePage/Body/HomePageMain";
 
-export default function Home() {
+const Playground = () => {
   return (
     <>
       <HomePageMain />
     </>
   );
-}
+};
+
+export default Playground;
