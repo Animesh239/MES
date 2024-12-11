@@ -4,7 +4,7 @@ import { VerticalLine } from "./VerticalLine";
 import { HorizontalLine } from "./HorizontalLine";
 import {
   HeadingText,
-  SubHeadingText
+  SubHeadingText,
 } from "@/components/typography/LandingPage";
 import { Button } from "@/components/ui/button";
 import { HeroSectionData, LogosData } from "@/config/Homepage/HomePagedata";
@@ -26,7 +26,7 @@ export const Body = () => {
 
   return (
     <>
-      <div className="bg-[#000000] relative overflow-hidden pt-[10vh] h-auto md:px-[5vw]">
+      <div className="bg-[#000000] relative overflow-hidden pt-[10vh] h-auto md:px-[5vw] -z-10">
         <VerticalLine leftPosition="11vw" delay="0" topPostion="" />
 
         <VerticalLine leftPosition="89vw" delay="0.6" topPostion="" />
@@ -41,7 +41,7 @@ export const Body = () => {
           <div
             key={index}
             style={{
-              marginTop: index === 0 ? (isSmallScreen ? "5vh" : "15vh") : "0"
+              marginTop: index === 0 ? (isSmallScreen ? "5vh" : "15vh") : "0",
             }}
             className="relative text-white flex  h-auto w-full"
           >
