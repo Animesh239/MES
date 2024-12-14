@@ -1,3 +1,7 @@
+import {
+  MiningDeptDescription,
+  MiningDeptImgUrl
+} from "@/config/Homepage/HomePagedata";
 import Image from "next/image";
 
 export const AboutMiningDept = () => {
@@ -9,22 +13,12 @@ export const AboutMiningDept = () => {
             About Mining Department
           </div>
           <div className="text-base xsm:text-lg sm:text-xl md:text-2xl  text-white/[0.7] overflow-y-auto">
-            The Department of Mining Engineering at NIT Rourkela, established in
-            1979 in the coal and mineral belt, aims to lead eco-friendly mineral
-            resource utilization and serve as a top choice for undergraduate and
-            graduate studies. It specializes in areas like Mining Technology,
-            Geomechanics, Mine Environment, Clean Coal Technology, GIS in
-            Mining, Mine Planning, and Surveying, supported by modern equipment
-            and advanced mining software. Faculty members contribute to national
-            and international mining policies and technical evaluations. The
-            Department conducts training for professionals and emphasizes
-            all-round student development through mine visits, expert talks,
-            industry projects, and technical activities.
+            {MiningDeptDescription}
           </div>
         </div>
-        <div className="relative w-full md:w-1/2 lg::w-2/5 h-[30vh] sm:h-[40vh] md:h-[60vh]  ">
+        <div className="relative w-full grayscale hover:grayscale-0 cursor-pointer md:w-1/2 lg::w-2/5 h-[30vh] sm:h-[40vh] md:h-[60vh]  ">
           <Image
-            src="https://res.cloudinary.com/dehegwbs0/image/upload/v1734127534/k0i3zjaupoz2cuj8nboc.png"
+            src={MiningDeptImgUrl}
             alt="Minare"
             layout="fill"
             objectFit="cover"
