@@ -9,7 +9,7 @@ interface CardProp {
 export const Card = ({ url, description, title }: CardProp) => {
   return (
     <>
-      <div className="max-w-[570px] h-[600px] ps-2 xsm:p-4 rounded-lg flex flex-col gap-8 border-[1px] bg-white/[0.02] border-white/[0.3]">
+      <div className="max-w-[570px] sm:w-[570px] h-[600px] ps-2 xsm:p-4 rounded-lg flex flex-col gap-8 border-[1px] bg-white/[0.02] border-white/[0.3]">
         <div className="relative w-full  h-64">
           <Image
             src={url}
