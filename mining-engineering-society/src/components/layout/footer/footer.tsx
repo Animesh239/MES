@@ -46,7 +46,7 @@ export default function Footer() {
               </Link>
             </div>
             <div className="flex justify-center items-center lg:mr-28">
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-3xl font-semibold">
+              <span className="relative z-5 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-3xl font-semibold text-center xsm:text-start">
                 Mining Engineering Society
               </span>
             </div>

@@ -117,7 +117,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <button className="px-6 py-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_10px_#08f] hover:shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_10px_#0ff] transition-all duration-300 ">
+            <button className="px-6 py-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
               <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
                 MINARE
               </span>
@@ -140,7 +140,7 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden h-screen flex items-center justify-center -mt-12">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 items-center flex flex-col">
             <NavItem href="/">Home</NavItem>
             <NavItem href="/aboutus">About</NavItem>
@@ -175,6 +175,13 @@ export default function Navbar() {
               </div>
             )}
             <NavItem href="/contact">Contact</NavItem>
+            <div className=" md:block">
+              <button className="px-6 py-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
+                  MINARE
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       )}
