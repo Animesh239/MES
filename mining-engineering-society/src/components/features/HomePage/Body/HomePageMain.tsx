@@ -1,4 +1,4 @@
-import { Body } from "./Hero_Section/Hero";
+import { Body } from "./HeroSection/Hero";
 
 export const HomePageMain = () => {
   return <Body />;
