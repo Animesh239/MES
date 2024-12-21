@@ -14,11 +14,11 @@ import { YearsData } from "@/config/Eventspage/EventsPageData";
 export const SelectYear = ({
   handleSelectYear
 }: {
-  handleSelectYear: (year: string) => void; // Accepts a string, not an object
+  handleSelectYear: (year: string) => void;
 }) => {
   const handleSelectChange = (value: string) => {
     console.log(`Selected year: ${value}`);
-    handleSelectYear(value); // Pass the value directly
+    handleSelectYear(value);
   };
 
   return (
