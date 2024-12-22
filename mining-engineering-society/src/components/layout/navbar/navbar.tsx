@@ -7,7 +7,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 
 const NavItem = ({
   href,
-  children,
+  children
 }: {
   href: string;
   children: React.ReactNode;
@@ -22,7 +22,7 @@ const NavItem = ({
 
 const DropdownItem = ({
   href,
-  children,
+  children
 }: {
   href: string;
   children: React.ReactNode;
@@ -107,6 +107,9 @@ export default function Navbar() {
                       <DropdownItem href="/events/past">
                         Past Events
                       </DropdownItem>
+                      <DropdownItem href="/events/eventgallery">
+                        Event Gallery
+                      </DropdownItem>
                     </div>
                   )}
                 </div>
@@ -172,6 +175,9 @@ export default function Navbar() {
                   Upcoming Events
                 </DropdownItem>
                 <DropdownItem href="/events/past">Past Events</DropdownItem>
+                <DropdownItem href="/events/eventgallery">
+                  Event Gallery
+                </DropdownItem>
               </div>
             )}
             <NavItem href="/contact">Contact</NavItem>
