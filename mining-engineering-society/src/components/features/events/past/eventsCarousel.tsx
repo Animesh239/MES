@@ -1,1 +1,0 @@
-// Events Carousel Component

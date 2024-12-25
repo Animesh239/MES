@@ -59,12 +59,9 @@ export default function ContactForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-8 max-w-md mx-auto mb-16 pl-4 pr-4"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6 w-full">
       <div>
-        <Label htmlFor="name" className="text-gray-300 text-xl">
+        <Label htmlFor="name" className="text-white text-xl">
           Name
         </Label>
         <Input
@@ -73,11 +70,11 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white"
+          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white mt-1"
         />
       </div>
       <div>
-        <Label htmlFor="institution" className="text-gray-300 text-xl">
+        <Label htmlFor="institution" className="text-white text-xl">
           Institution
         </Label>
         <Input
@@ -86,11 +83,11 @@ export default function ContactForm() {
           value={formData.institution}
           onChange={handleChange}
           required
-          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white"
+          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white mt-1"
         />
       </div>
       <div>
-        <Label htmlFor="email" className="text-gray-300 text-xl">
+        <Label htmlFor="email" className="text-white text-xl">
           Email
         </Label>
         <Input
@@ -100,11 +97,11 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           required
-          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white"
+          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white mt-1"
         />
       </div>
       <div>
-        <Label htmlFor="phone" className="text-gray-300 text-xl">
+        <Label htmlFor="phone" className="text-white text-xl">
           Phone Number
         </Label>
         <Input
@@ -114,11 +111,11 @@ export default function ContactForm() {
           value={formData.phone}
           onChange={handleChange}
           required
-          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white"
+          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white mt-1"
         />
       </div>
       <div>
-        <Label htmlFor="query" className="text-gray-300 text-xl">
+        <Label htmlFor="query" className="text-white text-xl">
           Query
         </Label>
         <Textarea
@@ -127,7 +124,7 @@ export default function ContactForm() {
           value={formData.query}
           onChange={handleChange}
           required
-          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white"
+          className="bg-gray-800 text-gray-100 border-gray-700 focus:border-white mt-1"
         />
       </div>
       <div className="p-[2px] bg-gradient-to-r from-blue-400 to-purple-600 rounded-2xl transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
