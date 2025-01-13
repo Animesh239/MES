@@ -151,7 +151,7 @@ export default function AlumniTable() {
             onClick={loadMore}
             className="px-6 py-2 text-white text-xl font-semibold rounded-xl bg-black border border-white  transition-all duration-300 hover:scale-105"
           >
-            <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
               Load More
             </span>
           </button>
