@@ -60,7 +60,6 @@ export default function Home() {
         {[...Array(80)].map((_, i) => {
           const Icon = FloatingIcons[i % FloatingIcons.length];
           const size = 8 + Math.random() * 16;
-          const opacity = 0.05 + Math.random() * 0.1;
 
           return (
             <div
@@ -92,7 +91,6 @@ export default function Home() {
         {[...Array(90)].map((_, i) => {
           const Icon = FloatingIcons[i % FloatingIcons.length];
           const size = 12 + Math.random() * 24;
-          const opacity = 0.1 + Math.random() * 0.2;
 
           return (
             <div

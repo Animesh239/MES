@@ -1,12 +1,11 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
+import ReactConfetti from "react-confetti";
+// Import types from framer-motion
+import type { HTMLMotionProps } from "framer-motion";
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,7 +19,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       setShowConfetti(true);
-      const timer = setTimeout(() => setShowConfetti(false), 5000); // Stop confetti after 5 seconds
+      const timer = setTimeout(() => setShowConfetti(false), 5000);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
@@ -46,52 +45,76 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-0"
+          // Explicitly type the motion.div as HTMLDivElement
+          {...({} as HTMLMotionProps<"div">)}
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
           exit="hidden"
-          onClick={onClose}
-          style={{
-            backdropFilter: "blur(8px)",
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
-          }}
         >
-          {showConfetti && (
-            <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              recycle={false}
-              numberOfPieces={200}
-            />
-          )}
-          <motion.div
-            className="bg-transparent p-4 sm:p-6 rounded-lg shadow-lg w-full sm:w-4/5 md:w-3/4 lg:w-3/5 xl:w-1/2 max-h-[90vh] overflow-y-auto"
-            variants={modalVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            onClick={(e) => e.stopPropagation()}
+          <div
+            onClick={onClose}
+            className="w-screen"
+            style={{
+              backdropFilter: "blur(8px)",
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              position: "fixed",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 50,
+              padding: "1rem",
+              paddingTop: "0",
+              paddingBottom: "0",
+              paddingLeft: "0",
+              paddingRight: "0",
+            }}
           >
-            <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-[70vh] mb-4 sm:mb-6 overflow-hidden rounded-lg">
-              <Image
-                src="https://picsum.photos/400/800"
-                alt="Random Minerva Image"
-                layout="fill"
-                objectFit="cover"
+            {showConfetti && (
+              <ReactConfetti
+                width={window.innerWidth}
+                height={window.innerHeight}
+                recycle={false}
+                numberOfPieces={500}
               />
-            </div>
-            <div className="flex justify-center">
-              <button
-                className="bg-black text-white hover:scale-105 transition-all duration-300 p-2 border-2 border-white rounded-xl"
-                onClick={() => router.push("/read-more")}
+            )}
+            <motion.div
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <div
+                className="bg-transparent p-4 sm:p-6 rounded-lg shadow-lg w-[40vh] md:w-[80vh] lg:w-[120vh] max-h-[90vh] overflow-y-auto"
+                onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                  e.stopPropagation()
+                }
               >
-                <span className="text-lg sm:text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
-                  Explore Minerva
-                </span>
-              </button>
-            </div>
-          </motion.div>
+                <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-[70vh] mb-4 sm:mb-6 overflow-hidden rounded-lg">
+                  <Image
+                    src="https://picsum.photos/400/800"
+                    alt="Random Minerva Image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <button
+                    className="bg-black text-white hover:scale-105 transition-all duration-300 p-2 border-2 border-white rounded-xl"
+                    onClick={() => router.push("/read-more")}
+                  >
+                    <span className="text-lg sm:text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+                      Explore Minerva
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
