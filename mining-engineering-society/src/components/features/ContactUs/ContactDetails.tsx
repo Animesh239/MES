@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ContactDetails() {
   return (
     <div className="space-y-8 w-full">
-      <h1 className="text-5xl font-bold text-gray-100 text-center md:text-left">
+      <h1 className="text-5xl font-bold text-gray-100 text-center md:text-left bg-gradient-to-t from-white to-gray-500 bg-clip-text text-transparent">
         Contact Us
       </h1>
       <h2 className="text-xl font-semibold text-gray-200 text-center md:text-left">

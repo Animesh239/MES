@@ -137,8 +137,10 @@ export default function Footer() {
           <div className="mb-2 text-gray-400">
             Copyright and All rights reserved 2025
           </div>
-          <div className="w-[850px]"></div>
-          <div className="mb-2 text-gray-400">Made with 💜 by MES NITRKL</div>
+          <div className="w-[750px]"></div>
+          <div className="mb-2 text-gray-400">
+            Made by Mining Engineering Society NITRKL
+          </div>
         </div>
       </div>
 
