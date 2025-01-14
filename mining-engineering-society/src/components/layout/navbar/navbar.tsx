@@ -97,29 +97,38 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`bg-black fixed w-full z-10 border-b border-gray-700 top-0 bg-opacity-100`}
-    >
+    <nav className="bg-black fixed w-full z-10 border-b border-gray-700 top-0 bg-opacity-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <div className="flex items-center justify-between flex-1">
             <div className="flex-shrink-0 flex items-center">
               <Image
                 src="https://res.cloudinary.com/dhv234qct/image/upload/v1733770163/mes/fi0wou0kizqqbuysezfm.svg"
                 alt="Logo 1"
-                width={50}
-                height={50}
+                width={55}
+                height={55}
+                className="hover:scale-105 transition-transform duration-300"
               />
-              <span className="ml-3 sm:ml-5 font-semibold relative">
-                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-2xl">
+              <span className="ml-3 sm:ml-5 font-bold relative">
+                <span
+                  className="relative z-10 text-3xl sm:text-4xl"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "2px white",
+                    textShadow: "2px 2px 0 rgba(0,0,0,0.3)",
+                    letterSpacing: "0.05em",
+                  }}
+                >
                   MES
                 </span>
               </span>
             </div>
+
             <div className="hidden md:block flex-1">
               <div className="flex items-baseline justify-center space-x-4 xl:space-x-7">
                 <NavItem href="/">Home</NavItem>
                 <NavItem href="/aboutus">About Us</NavItem>
+
                 <div className="relative" ref={membersDropdownRef}>
                   <button
                     onClick={() => handleDropdownToggle("members")}
@@ -129,7 +138,7 @@ export default function Navbar() {
                     <ChevronDown className="ml-1 h-5 w-5" />
                   </button>
                   {openDropdown === "members" && (
-                    <div className="origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg py-1 bg-gray-700 text-white ring-1 ring-black ring-opacity-5">
+                    <div className="origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg py-1 bg-gray-700 text-white ring-1 ring-black ring-opacity-5 backdrop-blur-lg bg-opacity-90">
                       <DropdownItem
                         href="/members/stakeholders"
                         onClick={closeDropdown}
@@ -145,6 +154,7 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
+
                 <div className="relative" ref={eventsDropdownRef}>
                   <button
                     onClick={() => handleDropdownToggle("events")}
@@ -154,7 +164,7 @@ export default function Navbar() {
                     <ChevronDown className="ml-1 h-5 w-5" />
                   </button>
                   {openDropdown === "events" && (
-                    <div className="origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg py-1 bg-gray-700 text-white ring-1 ring-black ring-opacity-5">
+                    <div className="origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg py-1 bg-gray-700 text-white ring-1 ring-black ring-opacity-5 backdrop-blur-lg bg-opacity-90">
                       <DropdownItem
                         href="/events/upcoming"
                         onClick={closeDropdown}
@@ -173,7 +183,9 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
+
                 <NavItem href="/contactus">Contact</NavItem>
+
                 <NavItem2 href="/minerva">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl p-2 transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">
                     Minerva
@@ -190,7 +202,8 @@ export default function Navbar() {
               </span>
             </button>
           </div>
-          <div className="md:hidden flex items-center space-x-4">
+
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -206,6 +219,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden h-screen flex items-center justify-center -mt-12">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 items-center flex flex-col">
@@ -238,7 +252,7 @@ export default function Navbar() {
                 Minerva
               </span>
             </NavItem2>
-            <div className=" md:block">
+            <div className="md:block">
               <button className="px-6 py-3 mt-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
                 <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
                   MINARE
