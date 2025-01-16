@@ -28,10 +28,9 @@ export const ModalGallery = ({
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1)); // Wrap to the first image
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  // Swipeable handlers
   const swipeHandlers = useSwipeable({
     onSwipedLeft: handleNext,
     onSwipedRight: handlePrevious,
@@ -73,7 +72,11 @@ export const ModalGallery = ({
               <motion.div
                 key={currentIndex}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="relative w-full h-full"
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%"
+                }}
               >
                 <Image
                   src={images[currentIndex]}
@@ -92,12 +95,16 @@ export const ModalGallery = ({
 
             <div className="absolute bottom-0 left-0 w-full h-2 bg-gray-800">
               <motion.div
-                className="h-full bg-gradient-to-r from-white/30 to-white"
                 initial={{ width: 0 }}
                 animate={{
                   width: `${((currentIndex + 1) / images.length) * 100}%`
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
+                style={{
+                  height: "100%",
+                  background:
+                    "linear-gradient(to right, rgba(255,255,255,0.3), white)"
+                }}
               />
             </div>
           </div>
