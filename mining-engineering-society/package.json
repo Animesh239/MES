@@ -28,6 +28,7 @@
     "react-confetti": "^6.2.2",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
+    "react-swipeable": "^7.0.2",
     "swiper": "^11.1.15",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
