@@ -1,10 +1,10 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { DialogTitle } from "@radix-ui/react-dialog";
+// import { DialogTitle } from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
@@ -39,7 +39,7 @@ export const ModalGallery = ({
   });
 
   return (
-    <Dialog open onOpenChange={(isOpen) => !isOpen && onClose()}>
+    <Dialog open onOpenChange={(isOpen: boolean) => !isOpen && onClose()}>
       <DialogContent
         className="max-w-[95vw] h-[95vh] p-0 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl overflow-hidden border border-white/10 shadow-2xl"
         {...swipeHandlers}
