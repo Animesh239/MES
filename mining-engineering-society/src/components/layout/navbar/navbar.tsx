@@ -196,11 +196,13 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <button className="px-6 py-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
-                MINARE
-              </span>
-            </button>
+            <a href="/minare">
+              <button className="px-6 py-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
+                  MINARE
+                </span>
+              </button>
+            </a>
           </div>
 
           <div className="md:hidden flex items-center">
