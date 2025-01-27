@@ -12,7 +12,7 @@ export default function CarouselCard({
         <CardBody className="overflow-visible py-2 justify-center items-center">
           <Image
             alt="Card background"
-            className="object-cover rounded-full"
+            className="object-cover rounded-full opacity-100"
             src={imgURL}
             width={180}
             height={180}
