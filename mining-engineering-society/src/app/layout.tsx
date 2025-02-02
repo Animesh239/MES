@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/navbar/navbar";
 import Footer from "@/components/layout/footer/footer";
-import { Bebas_Neue, Orbitron, Rajdhani } from "next/font/google";
+import { Bebas_Neue, Orbitron, Rajdhani, Raleway } from "next/font/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,6 +15,11 @@ const bebas = Bebas_Neue({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-Bebas_Neue"
+});
+const raleway = Raleway({
+  weight: ["400", "500", "700", "600"],
+  subsets: ["latin"],
+  variable: "--font-Raleway"
 });
 
 const orbitron = Orbitron({
@@ -47,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${bebas.variable} ${rajdhani.variable} ${orbitron.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${raleway.variable} ${bebas.variable} ${rajdhani.variable} ${orbitron.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
         <Navbar />
