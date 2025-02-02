@@ -31,7 +31,7 @@ export const Hero = () => {
   return (
     <motion.div>
       <section className="relative h-screen w-full bg-black overflow-hidden">
-        <div className="star-container absolute inset-0 z-0" />
+        <div className=" absolute inset-0 z-0" />
 
         <div
           className="absolute inset-0 z-0 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"
@@ -57,7 +57,7 @@ export const Hero = () => {
               }
             }}
           >
-            <h1 className="text-7xl font-Bebas md:text-9xl font-bold mb-6 neon-glow">
+            <h1 className="text-7xl font-Bebas md:text-9xl font-bold mb-6 text-white">
               {title.map((char, i) => (
                 <motion.span
                   key={i}
@@ -90,7 +90,7 @@ export const Hero = () => {
               }
             }}
           >
-            <div className="text-xl sm-text-2xl md:text-3xl font-light tracking-widest text-gray-300 max-w-2xl mx-auto mb-8">
+            <div className="text-xl sm-text-2xl md:text-3xl font-light tracking-widest text-gray-400 max-w-2xl mx-auto mb-8">
               {/* {subtitle.map((word, i) => ( */}
               <motion.span
                 // key={i}
