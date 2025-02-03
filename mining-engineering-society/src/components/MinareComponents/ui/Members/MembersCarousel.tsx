@@ -56,18 +56,18 @@ export default function MembersCarousel({ members }: MembersCarouselProps) {
   }, [api]);
 
   return (
-    <div ref={parent} className="w-full">
+    <div ref={parent} className="w-full overflow-visible">
       <Carousel
         setApi={(api) => {
           console.log("Setting API:", api);
           setApi(api as ApiType);
         }}
-        className="w-full max-w-full mx-auto mt-10 sm:mt-24"
+        className="w-full max-w-full mx-auto mt-10 sm:mt-24 mb-4"
       >
         <CarouselContent>
           {members.map((member) => (
             <CarouselItem key={member.id} className="pl-4">
-              <div className="p-1">
+              <div className="p-4">
                 <MemberCard {...member} />
               </div>
             </CarouselItem>
