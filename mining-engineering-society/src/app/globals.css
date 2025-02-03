@@ -123,3 +123,47 @@
 .animate-twinkle {
   animation: twinkle 2s ease-in-out infinite;
 }
+
+.starry-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(3px 3px at 10px 15px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 20px 35px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 25px 80px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 45px 20px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 65px 40px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 80px 60px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 95px 90px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 110px 110px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 140px 80px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 160px 120px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 5px 50px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 35px 70px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 55px 100px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 75px 30px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 100px 55px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 125px 75px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 150px 95px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(3px 3px at 170px 105px, #ffffff, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: cardTwinkle 5s infinite;
+  opacity: 1.5;
+}
+
+@keyframes cardTwinkle {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 50px 50px;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
