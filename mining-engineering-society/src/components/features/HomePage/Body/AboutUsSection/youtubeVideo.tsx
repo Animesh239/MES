@@ -5,7 +5,7 @@ export const YoutubeVideo = () => {
         <iframe
           className="w-full h-full border-none"
           allow="autoplay"
-          src="https://www.youtube.com/embed/MnaoIvHRl80"
+          src="https://www.youtube.com/embed/TJB7rRN-4Hc"
           title="videolabone"
         ></iframe>
       </div>

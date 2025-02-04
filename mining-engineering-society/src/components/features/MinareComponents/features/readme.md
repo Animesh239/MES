@@ -1,1 +1,0 @@
-# featured for minare part
