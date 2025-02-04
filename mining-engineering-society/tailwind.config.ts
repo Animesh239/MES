@@ -90,7 +90,11 @@ export default {
       fontFamily: {
         Bebas: "var(--font-Bebas_Neue)",
         orbitron: "var(--font-Orbitron)",
-        rajdhani: "var(--font-Rajdhani)"
+        rajdhani: "var(--font-Rajdhani)",
+        raleway: "var(--font-Raleway)"
+      },
+      backdropBlur: {
+        xs: "2px"
       }
     }
   },
