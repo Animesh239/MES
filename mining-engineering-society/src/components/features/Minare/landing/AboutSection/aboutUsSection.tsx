@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { AboutUsData } from "@/config/Minare/landingpagedata";
 import { motion } from "framer-motion";
+import { Header } from "../header";
 
 export const About = () => {
   useEffect(() => {
@@ -26,12 +27,11 @@ export const About = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen h-auto">
-      <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white">
-        <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+    <div className="relative h-auto">
+      <div className=" w-full  text-white">
+        <section className=" border-none max-w-6xl mx-auto">
+          <div className=" ">
             {AboutUsData.map((section) => {
-              const HeaderIcon = section.header.Icon;
               return (
                 <motion.div
                   key={section.id}
@@ -48,42 +48,16 @@ export const About = () => {
                   }}
                 >
                   <div className={section.boxClasses}>
-                    <div className="text-center mb-10">
-                      <HeaderIcon
+                    <div className=" mb-16">
+                      {/* <HeaderIcon
                         className={`w-20 h-20 mx-auto mb-6 ${section.header.iconClass} group-hover:scale-110 transition-transform duration-700`}
-                      />
-                      <h2
-                        className={`font-orbitron text-3xl md:text-4xl font-bold bg-clip-text text-transparent ${section.header.titleGradient} drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]`}
-                      >
-                        {section.header.title}
-                      </h2>
+                      /> */}
+                      <Header label={section.header.title} />
                     </div>
 
-                    <p className="text-gray-100 font-raleway leading-relaxed text-lg md:text-xl tracking-wide font-light">
+                    <p className="text-gray-100 text-center md:text-justify font-raleway leading-relaxed text-lg md:text-2xl tracking-wide font-light">
                       {section.description}
                     </p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
-                      {section.items.map((item, index) => {
-                        const ItemIcon = item.icon;
-                        return (
-                          <div
-                            key={index}
-                            className="group/card p-6 bg-gray-800/50 rounded-2xl hover:bg-gray-800/70 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)]"
-                          >
-                            <ItemIcon
-                              className={`w-10 h-10 mb-4 ${item.iconColor} ${item.iconDropShadow} group-hover/card:scale-110 transition-transform duration-500`}
-                            />
-                            <h3 className="orbitron font-semibold text-lg text-white mb-2">
-                              {item.title}
-                            </h3>
-                            <p className="text-gray-200 font-light">
-                              {item.desc}
-                            </p>
-                          </div>
-                        );
-                      })}
-                    </div>
                   </div>
                 </motion.div>
               );

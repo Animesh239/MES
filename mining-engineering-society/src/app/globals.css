@@ -124,6 +124,12 @@
   animation: twinkle 2s ease-in-out infinite;
 }
 
+@supports not (backdrop-filter: none) {
+  .backdrop-blur-lg {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
 .starry-bg::before {
   content: "";
   position: absolute;
@@ -131,8 +137,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image:
-    radial-gradient(3px 3px at 10px 15px, #ffffff, rgba(0, 0, 0, 0)),
+  background-image: radial-gradient(
+      3px 3px at 10px 15px,
+      #ffffff,
+      rgba(0, 0, 0, 0)
+    ),
     radial-gradient(3px 3px at 20px 35px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(3px 3px at 25px 80px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(3px 3px at 45px 20px, #ffffff, rgba(0, 0, 0, 0)),
@@ -165,5 +174,10 @@
   }
   100% {
     background-position: 0 0;
+  }
+}
+@supports not (backdrop-filter: none) {
+  .backdrop-blur-lg {
+    background-color: rgba(0, 0, 0, 0.7);
   }
 }

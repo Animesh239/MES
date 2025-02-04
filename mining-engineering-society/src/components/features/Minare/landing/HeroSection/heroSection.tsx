@@ -1,83 +1,35 @@
 // components/HeroSection.tsx
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-const title = "MINARE'25".split("");
+// const title = "MINARE'25".split("");
 const subtitle = "Where Engineering Meets the Earth's Core";
 
 export const Hero = () => {
-  useEffect(() => {
-    const createStars = () => {
-      const container = document.querySelector(".star-container");
-      if (!container) return;
-
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement("div");
-        star.className = "absolute bg-white rounded-full animate-twinkle";
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.width = `${Math.random() * 3}px`;
-        star.style.height = star.style.width;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        container.appendChild(star);
-      }
-    };
-
-    createStars();
-  }, []);
-
   return (
     <motion.div>
-      <section className="relative h-screen w-full bg-black overflow-hidden">
-        <div className=" absolute inset-0 z-0" />
-
-        <div
-          className="absolute inset-0 z-0 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)"
-          }}
-        />
-
-        <div className="relative z-10 overflow-hidden flex flex-col items-center justify-center h-full text-center">
+      <section className="mt-60 md:mt-0 md:h-screen h-auto w-full bg-black overflow-hidden">
+        <div className="  flex flex-col items-center justify-center h-full text-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={{
-              hidden: { opacity: 0 },
+              hidden: { opacity: 0, y: -30 },
               visible: {
                 opacity: 1,
-
-                transition: {
-                  delayChildren: 0.3,
-                  staggerChildren: 0.1
-                }
+                y: 0,
+                transition: { duration: 1, ease: easeIn }
               }
             }}
           >
+            <div className="overflow-y-hidden"></div>
             <h1 className="text-7xl font-Bebas md:text-9xl font-bold mb-6 text-white">
-              {title.map((char, i) => (
-                <motion.span
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 90 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { type: "spring", stiffness: 50 }
-                    }
-                  }}
-                >
-                  <div className="inline-block">
-                    {char === " " ? "\u00A0" : char}
-                  </div>
-                </motion.span>
-              ))}
+              MINARE&apos;25
             </h1>
           </motion.div>
-
           <motion.div
             initial="hidden"
             animate="visible"
@@ -111,7 +63,10 @@ export const Hero = () => {
               </motion.span>
               {/* ))} */}
             </div>
-          </motion.div>
+          </motion.div>{" "}
+          <Button variant="default" className="font-semibold cursor-pointer">
+            Register
+          </Button>
         </div>
       </section>
     </motion.div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { galleryData } from "@/config/Minare/Gallery/Data";
+import { Header } from "../landing/header";
 
 interface ImageDimensions {
   width: number;
@@ -14,15 +15,15 @@ export default function Gallery() {
   useEffect(() => {
     const dimensions = galleryData.images.map(() => ({
       width: Math.floor(Math.random() * (600 - 300 + 1)) + 300,
-      height: Math.floor(Math.random() * (400 - 200 + 1)) + 200,
+      height: Math.floor(Math.random() * (400 - 200 + 1)) + 200
     }));
     setImageDimensions(dimensions);
   }, []);
 
   return (
     <div className="min-h-screen bg-black text-white p-8 mb-12">
-      <div className=" text-center text-4xl xxsm:text-6xl font-semibold bg-gradient-to-t from-white to-gray-500 bg-clip-text text-transparent sm:mb-12 mt-20">
-        {galleryData.title}
+      <div className="mt-20 mb-12">
+        <Header label={galleryData.title} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
         {galleryData.images.map((image, index) => (
@@ -34,7 +35,7 @@ export default function Gallery() {
                 (imageDimensions[index]?.height /
                   imageDimensions[index]?.width) *
                 100
-              }%`,
+              }%`
             }}
           >
             <Image
