@@ -29,16 +29,16 @@ export const LandingPage = () => {
   return (
     <div className="h-auto p-[16px] relative flex flex-col gap-32">
       {/* Star Container: Fixed and covers full screen */}
-      <div className="star-container fixed inset-0 z-10 overflow-hidden">
+      <div className="star-container fixed inset-0  overflow-hidden">
         {/* Stars generated dynamically */}
       </div>
 
       {/* Background grid effect */}
       <div
-        className="absolute inset-0 z-10 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"
+        className="absolute inset-0 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)"
+            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
         }}
       />
 
