@@ -6,7 +6,7 @@ import { easeIn, motion } from "framer-motion";
 // import { useEffect } from "react";
 
 // const title = "MINARE'25".split("");
-const subtitle = "Where Engineering Meets the Earth's Core";
+const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
 
 export const Hero = () => {
   return (
@@ -56,7 +56,7 @@ export const Hero = () => {
                 }}
               >
                 <div className="inline-block mr-3 leading-relaxed font-orbitron">
-                  <span className="bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r text-[18px] sm:text-[24px] md:text-[28px] from-gray-300 to-white bg-clip-text text-transparent">
                     {subtitle}
                   </span>
                 </div>
