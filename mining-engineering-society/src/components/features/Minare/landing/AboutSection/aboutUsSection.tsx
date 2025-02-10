@@ -1,31 +1,11 @@
 "use client";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 import { AboutUsData } from "@/config/Minare/landingpagedata";
 import { motion } from "framer-motion";
 import { Header } from "../header";
 
 export const About = () => {
-  useEffect(() => {
-    const createStars = () => {
-      const container = document.querySelector(".star-container");
-      if (!container) return;
-
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement("div");
-        star.className = "absolute bg-white rounded-full animate-twinkle";
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.width = `${Math.random() * 3}px`;
-        star.style.height = star.style.width;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        container.appendChild(star);
-      }
-    };
-
-    createStars();
-  }, []);
-
   return (
     <div className="relative h-auto">
       <div className=" w-full  text-white">
@@ -55,7 +35,7 @@ export const About = () => {
                       <Header label={section.header.title} />
                     </div>
 
-                    <p className="text-gray-100 text-center md:text-justify font-raleway leading-relaxed text-lg md:text-2xl tracking-wide font-light">
+                    <p className="text-gray-100 text-center font-roboto leading-[40px] text-lg md:text-[27px] tracking-wider font-[300]">
                       {section.description}
                     </p>
                   </div>

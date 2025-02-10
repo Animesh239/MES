@@ -28,12 +28,7 @@ export const LandingPage = () => {
 
   return (
     <div className="h-auto p-[16px] relative flex flex-col gap-32">
-      {/* Star Container: Fixed and covers full screen */}
-      <div className="star-container fixed inset-0 z-10 overflow-hidden">
-        {/* Stars generated dynamically */}
-      </div>
-
-      {/* Background grid effect */}
+      <div className="star-container fixed inset-0 z-10 overflow-hidden"></div>
       <div
         className="absolute inset-0 z-10 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"
         style={{
@@ -42,7 +37,6 @@ export const LandingPage = () => {
         }}
       />
 
-      {/* Hero and About sections */}
       <Hero />
       <About />
       <Event />
