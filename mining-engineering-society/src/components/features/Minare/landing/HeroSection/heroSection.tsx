@@ -8,13 +8,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
 
-// const title = "MINARE'25".split("");
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
 
 export const Hero = () => {
   const router = useRouter();
   const handleRegister = () => {
-    router.push("/registration"); // Your registration page
+    router.push("minare/registration");
   };
   return (
     <motion.div>
@@ -33,7 +32,7 @@ export const Hero = () => {
             }}
           >
             <div className="overflow-y-hidden"></div>
-            <h1 className="text-7xl font-playfair_dispaly md:text-9xl font-bold mb-6 text-white">
+            <h1 className="text-6xl sm:text-7xl font-playfair_dispaly md:text-9xl font-bold mb-6 text-white">
               MINARE&apos;25
             </h1>
           </motion.div>
@@ -68,7 +67,6 @@ export const Hero = () => {
                   </span>
                 </div>
               </motion.span>
-              {/* ))} */}
             </div>
           </motion.div>
           <Link href="/">
