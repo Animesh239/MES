@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import MemberCard from "@/components/MinareComponents/ui/Members/MembersCard";
 import MembersCarousel from "@/components/MinareComponents/ui/Members/MembersCarousel";
 import { members } from "@/config/Minare/Members/Data";
@@ -17,6 +18,11 @@ export default function MembersPage() {
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <div className="relative text-white p-4 md:p-8 mt-24 mb-12">
       <div className="star-container"></div>
@@ -28,7 +34,15 @@ export default function MembersPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-y-16 justify-center items-center">
           {members.map((member) => (
-            <MemberCard key={member.id} {...member} />
+            <motion.div
+              key={member.id}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              transition={{ duration: 0.5, delay: member.id * 0.1 }}
+            >
+              <MemberCard {...member} />
+            </motion.div>
           ))}
         </div>
       )}

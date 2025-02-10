@@ -15,7 +15,7 @@ export default function Gallery() {
   useEffect(() => {
     const dimensions = galleryData.images.map(() => ({
       width: Math.floor(Math.random() * (600 - 300 + 1)) + 300,
-      height: Math.floor(Math.random() * (400 - 200 + 1)) + 200
+      height: Math.floor(Math.random() * (400 - 200 + 1)) + 200,
     }));
     setImageDimensions(dimensions);
   }, []);
@@ -35,7 +35,7 @@ export default function Gallery() {
                 (imageDimensions[index]?.height /
                   imageDimensions[index]?.width) *
                 100
-              }%`
+              }%`,
             }}
           >
             <Image
