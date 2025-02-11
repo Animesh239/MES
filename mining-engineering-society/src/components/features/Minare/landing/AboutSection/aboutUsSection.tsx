@@ -1,67 +1,83 @@
 "use client";
-import { useEffect } from "react";
-
 import { AboutUsData } from "@/config/Minare/landingpagedata";
 import { motion } from "framer-motion";
 import { Header } from "../header";
+import { useEffect, useState } from "react";
 
 export const About = () => {
+  const [expandedSections, setExpandedSections] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    const createStars = () => {
-      const container = document.querySelector(".star-container");
-      if (!container) return;
-
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement("div");
-        star.className = "absolute bg-white rounded-full animate-twinkle";
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.width = `${Math.random() * 3}px`;
-        star.style.height = star.style.width;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        container.appendChild(star);
-      }
-    };
-
-    createStars();
+    const updateScreenSize = () => setIsMobile(window.innerWidth < 600);
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+    return () => window.removeEventListener("resize", updateScreenSize);
   }, []);
+
+  const toggleDescription = (sectionId: string) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }));
+  };
+
+  const truncateDescription = (text: string, sectionId: string) => {
+    const words = text.split(" ");
+    const isExpanded = expandedSections[sectionId];
+
+    if (isExpanded) return text;
+
+    const truncatedText = words.slice(0, 50).join(" ");
+    return words.length > 50 ? `${truncatedText}...` : truncatedText;
+  };
 
   return (
     <div className="relative h-auto">
-      <div className=" w-full  text-white">
-        <section className=" border-none max-w-6xl mx-auto">
-          <div className=" ">
-            {AboutUsData.map((section) => {
-              return (
-                <motion.div
-                  key={section.id}
-                  initial={{ opacity: 0, y: 150 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 1,
-                    type: "tween",
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.2
-                  }}
-                >
-                  <div className={section.boxClasses}>
-                    <div className=" mb-16">
-                      {/* <HeaderIcon
-                        className={`w-20 h-20 mx-auto mb-6 ${section.header.iconClass} group-hover:scale-110 transition-transform duration-700`}
-                      /> */}
-                      <Header label={section.header.title} />
-                    </div>
-
-                    <p className="text-gray-100 text-center md:text-justify font-raleway leading-relaxed text-lg md:text-2xl tracking-wide font-light">
-                      {section.description}
-                    </p>
+      <div className="w-full text-white">
+        <section className="border-none max-w-6xl mx-auto">
+          <div>
+            {AboutUsData.map((section) => (
+              <motion.div
+                key={section.id}
+                initial={{ opacity: 0, y: 150 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  type: "tween",
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                <div className={section.boxClasses}>
+                  <div className="mb-16">
+                    <Header label={section.header.title} />
                   </div>
-                </motion.div>
-              );
-            })}
+                  <p className="text-gray-100 text-center font-roboto leading-[30px] sm:leading-[40px] text-lg md:text-[27px] tracking-wider font-[300]">
+                    {isMobile ? (
+                      <>
+                        {truncateDescription(section.description, section.id)}
+                        {section.description.split(" ").length > 42 && (
+                          <button
+                            onClick={() => toggleDescription(section.id)}
+                            className=" text-blue-300 hover:text-blue-500 transition-colors"
+                          >
+                            {expandedSections[section.id]
+                              ? "Show Less"
+                              : "Show More"}
+                          </button>
+                        )}
+                      </>
+                    ) : (
+                      section.description
+                    )}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
       </div>

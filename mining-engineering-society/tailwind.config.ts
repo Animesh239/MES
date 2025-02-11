@@ -91,7 +91,10 @@ export default {
         Bebas: "var(--font-Bebas_Neue)",
         orbitron: "var(--font-Orbitron)",
         rajdhani: "var(--font-Rajdhani)",
-        raleway: "var(--font-Raleway)"
+        raleway: "var(--font-Raleway)",
+        playfair_dispaly: "var(--font-Playfair_Display)",
+        lato: "var(--font-Lato)",
+        roboto: "var(--font-Roboto)"
       },
       backdropBlur: {
         xs: "2px"
