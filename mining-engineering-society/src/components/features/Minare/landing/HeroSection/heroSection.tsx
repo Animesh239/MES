@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 // import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
-import Link from "next/link";
+// import Link from "next/link";
 import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
 
@@ -69,15 +69,14 @@ export const Hero = () => {
               </motion.span>
             </div>
           </motion.div>
-          <Link href="/">
-            <Button
-              variant="default"
-              onClick={() => handleRegister()}
-              className="font-semibold cursor-pointer"
-            >
-              Register
-            </Button>
-          </Link>
+
+          <Button
+            variant="default"
+            onClick={() => handleRegister()}
+            className="font-semibold z-0 cursor-pointer"
+          >
+            Register
+          </Button>
         </div>
       </section>
     </motion.div>

@@ -17,7 +17,7 @@ const Timeline = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const updateScreenSize = () => setIsMobile(window.innerWidth <= 900);
+    const updateScreenSize = () => setIsMobile(window.innerWidth < 900);
     updateScreenSize();
     window.addEventListener("resize", updateScreenSize);
     return () => window.removeEventListener("resize", updateScreenSize);
@@ -27,9 +27,18 @@ const Timeline = () => {
     target: containerRef as RefObject<HTMLElement>,
     offset: ["start start", "end end"]
   });
+  function xOrientation(index: number) {
+    if (isMobile) {
+      return 100;
+    } else {
+      if (index % 2 === 0) {
+        return -100;
+      } else return 100;
+    }
+  }
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen overflow-y-hidden ">
       <motion.div style={{ scaleX: scrollYProgress }}>
         <div className="fixed top-0 left-0 right-0 h-1 bg-white/20 z-50"></div>
       </motion.div>
@@ -42,7 +51,7 @@ const Timeline = () => {
             key={event.id}
             initial={{
               opacity: 0,
-              x: isMobile ? (index % 2 === 0 ? -100 : 100) : 100
+              x: xOrientation(index)
             }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
