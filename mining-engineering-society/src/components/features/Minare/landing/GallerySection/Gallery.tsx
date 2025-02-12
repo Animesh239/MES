@@ -2,13 +2,11 @@ import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { GalleryCard } from "./Card";
 import { Header } from "../header";
+import { useRouter } from "next/navigation";
 // import { GalleryCard } from "./components/GalleryCard";
 
 export const Gallery = () => {
-  const router = {
-    push: (path: string) => console.log("Navigate to:", path)
-  };
-
+  const router = useRouter();
   return (
     <div className="relative min-h-screen   py-20 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">

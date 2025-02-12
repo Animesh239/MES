@@ -17,7 +17,7 @@ export const Hero = () => {
   };
   return (
     <motion.div>
-      <section className="mt-64 md:mt-4 md:h-screen h-auto w-full bg-black overflow-hidden">
+      <section className="mt-64 md:mt-4 md:h-screen h-auto w-full overflow-hidden">
         <div className="flex select-none flex-col items-center justify-center h-full text-center">
           <motion.div
             initial="hidden"
