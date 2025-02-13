@@ -7,6 +7,7 @@ import { CheckCircle2 } from "lucide-react";
 import { PaymentDeatails } from "./PaymentDetails/Details";
 import { PaymentProof } from "./PaymentProof/proof";
 import { LoginWithGoogle } from "./GoogleLogin/google";
+import { useRouter } from "next/navigation";
 
 const steps = [
   { id: 1, name: "Google Login", status: "complete" },
@@ -18,6 +19,7 @@ const steps = [
 export const RegistrationPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   // const [formData, setFormData] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     const createStars = () => {
@@ -41,7 +43,7 @@ export const RegistrationPage = () => {
 
   const handleStepStateChange = () => {
     if (currentStep === 4) {
-      window.location.href = "/minare/";
+      router.push("/minare/");
       setCurrentStep(1);
     }
     setCurrentStep(currentStep + 1);

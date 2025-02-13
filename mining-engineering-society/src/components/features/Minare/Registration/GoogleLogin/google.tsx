@@ -1,13 +1,43 @@
 import { Button } from "@/components/ui/button";
+import { signInWithGoogle } from "@/lib/firebase/signinwithgoogle";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export const LoginWithGoogle = ({
   onGoogleButtonClick
 }: {
   onGoogleButtonClick: () => void;
 }) => {
-  const handleGoogleLogin = () => {
-    onGoogleButtonClick();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      const user = await signInWithGoogle();
+      // console.log(user);
+      // console.log(user);
+      // if (user.isAdmin) {
+      //   router.push("/admin");
+      // }
+      // if (user.isVerify && !user.isAdmin) {
+      //   router.push("/user");
+      // }
+      if (user?.userExists) {
+        router.push("/minare/");
+        toast.success("Successfully signed in!", {
+          style: {
+            backgroundColor: "black",
+            color: "white"
+          }
+        });
+      } else onGoogleButtonClick();
+    } catch (error) {
+      console.error("Google Login Error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div>
@@ -15,6 +45,7 @@ export const LoginWithGoogle = ({
         <Button
           variant="default"
           onClick={() => handleGoogleLogin()}
+          disabled={loading}
           className="w-full h-10 sm:h-12 bg-white font-normal font-roboto text-[#211330] hover:bg-white/90 rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base"
         >
           <Image
@@ -23,7 +54,7 @@ export const LoginWithGoogle = ({
             width={26}
             height={26}
           />
-          Continue with Google
+          {loading ? "logging..." : "Continue with Google"}
         </Button>
       </div>
     </div>

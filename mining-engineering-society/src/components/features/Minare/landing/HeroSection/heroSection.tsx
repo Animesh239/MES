@@ -2,10 +2,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+// import { UserFormInterface } from "@/config/Minare/Registration/type";
 // import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
+// import { Profile } from "./profile";
 // import { useEffect } from "react";
 
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
@@ -15,6 +17,7 @@ export const Hero = () => {
   const handleRegister = () => {
     router.push("minare/registration");
   };
+
   return (
     <motion.div>
       <section className="mt-64 md:mt-4 md:h-screen h-auto w-full overflow-hidden">

@@ -11,7 +11,7 @@ export const RegistrationFormData = [
     label: "Phone Number",
     type: "text",
     id: "phonenumber",
-    placeholder: "Enter your password",
+    placeholder: "Enter your Phone Number",
     className: "w-full",
     zod: "number"
   },

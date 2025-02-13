@@ -12,6 +12,7 @@ import {
   Lato,
   Roboto
 } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -81,6 +82,20 @@ export default function RootLayout({
         className={`${geistSans.variable} ${roboto.variable} ${lato.variable} ${pd.variable} ${raleway.variable} ${bebas.variable} ${rajdhani.variable} ${orbitron.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            className: "",
+            style: {
+              border: "1px solid #ffffff",
+              // padding: "16px",
+              borderColor: "rgb(216 180 254 / 0.5)",
+              backgroundColor: "rgb(255 255 255 / 0.2)",
+              backdropFilter: "blur(4px)",
+              color: "rgb(233 213 255 / var(--tw-text-opacity, 1))"
+            }
+          }}
+        />
         <Navbar />
         {children}
         <Footer />

@@ -18,9 +18,12 @@ import { z } from "zod";
 // import { useRouter } from "next/navigation";
 // import { signInWithGoogle } from "@/lib/firebase/signinwithgoogle";
 import { useForm } from "react-hook-form";
-import { generateZodSchema } from "@/config/Registration/RegistrationFormSchema";
-import { RegistrationFormData } from "@/config/Registration/RegistrationFormData";
-import { UserFormInterface } from "@/config/Registration/type";
+
+import { useState } from "react";
+import { generateZodSchema } from "@/config/Minare/Registration/RegistrationFormSchema";
+import { RegistrationFormData } from "@/config/Minare/Registration/RegistrationFormData";
+import { UserFormInterface } from "@/config/Minare/Registration/type";
+import { UpdateData } from "@/lib/firebase/updateData";
 // import { signInWithEmail } from "@/lib/firebase/signinwithemail";
 
 export const RegistrationForm = ({
@@ -35,7 +38,7 @@ export const RegistrationForm = ({
     branch: "",
     graduationyear: ""
   };
-  //   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const schema = generateZodSchema(RegistrationFormData);
   //   const [isModalOpen, setIsModalOpen] = useState(false);
   //   const router = useRouter();
@@ -57,6 +60,7 @@ export const RegistrationForm = ({
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
     console.log(data);
+    setLoading(!loading);
     FormData = {
       fullname: data.fullname,
       phonenumber: data.phonenumber,
@@ -64,7 +68,10 @@ export const RegistrationForm = ({
       graduationyear: data.graduationyear,
       branch: data.branch
     };
-    console.log("yy", FormData);
+    // console.log("yy", FormData);
+    const result = await UpdateData(FormData);
+    if (result) setLoading(!loading);
+
     onFormSubmitButtonClick();
 
     //     try {
@@ -143,10 +150,9 @@ export const RegistrationForm = ({
           <Button
             type="submit"
             className="w-full h-10 sm:h-12 bg-white font-normal font-roboto text-[#211330] hover:bg-white/90 rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base"
-            //   disabled={loading}
+            disabled={loading}
           >
-            submit
-            {/* {loading ? "Authenticating..." : "Authenticate"} */}
+            {loading ? "submitting..." : "submit"}/
           </Button>
         </div>
       </form>
