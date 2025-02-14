@@ -2,17 +2,26 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+// import { UserFormInterface } from "@/config/Minare/Registration/type";
+// import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
+// import Link from "next/link";
+import { useRouter } from "next/navigation";
+// import { Profile } from "./profile";
 // import { useEffect } from "react";
 
-// const title = "MINARE'25".split("");
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
 
 export const Hero = () => {
+  const router = useRouter();
+  const handleRegister = () => {
+    router.push("minare/registration");
+  };
+
   return (
     <motion.div>
-      <section className="mt-60 md:mt-0 md:h-screen h-auto w-full bg-black overflow-hidden">
-        <div className="  flex flex-col items-center justify-center h-full text-center">
+      <section className="mt-64 md:mt-4 md:h-screen h-auto w-full overflow-hidden">
+        <div className="flex select-none flex-col items-center justify-center h-full text-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -26,7 +35,7 @@ export const Hero = () => {
             }}
           >
             <div className="overflow-y-hidden"></div>
-            <h1 className="text-7xl font-Bebas md:text-9xl font-bold mb-6 text-white">
+            <h1 className="text-6xl sm:text-7xl font-playfair_dispaly md:text-9xl font-bold mb-6 text-white">
               MINARE&apos;25
             </h1>
           </motion.div>
@@ -55,16 +64,20 @@ export const Hero = () => {
                   }
                 }}
               >
-                <div className="inline-block mr-3 leading-relaxed font-orbitron">
-                  <span className="bg-gradient-to-r text-[18px] sm:text-[24px] md:text-[28px] from-gray-300 to-white bg-clip-text text-transparent">
+                <div className="inline-block mr-3 leading-relaxed ">
+                  <span className="bg-gradient-to-r text-[18px] font-lato font-[400] sm:text-[24px] md:text-[28px] from-gray-300 to-white bg-clip-text text-transparent">
                     {subtitle}
                   </span>
                 </div>
               </motion.span>
-              {/* ))} */}
             </div>
-          </motion.div>{" "}
-          <Button variant="default" className="font-semibold cursor-pointer">
+          </motion.div>
+
+          <Button
+            variant="default"
+            onClick={() => handleRegister()}
+            className="font-semibold z-0 cursor-pointer"
+          >
             Register
           </Button>
         </div>
