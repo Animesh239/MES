@@ -39,26 +39,6 @@ export const CurrentStakeHolders = [
     position: "General Secretary",
     imgUrl: "https://picsum.photos/200/300",
   },
-  {
-    name: "Animesh Barik",
-    position: "General Secretary",
-    imgUrl: "https://picsum.photos/200/300",
-  },
-  {
-    name: "Animesh Barik",
-    position: "General Secretary",
-    imgUrl: "https://picsum.photos/200/300",
-  },
-  {
-    name: "Animesh Barik",
-    position: "General Secretary",
-    imgUrl: "https://picsum.photos/200/300",
-  },
-  {
-    name: "Animesh Barik",
-    position: "General Secretary",
-    imgUrl: "https://picsum.photos/200/300",
-  },
 ];
 
 export const PastStakeHolders = [
