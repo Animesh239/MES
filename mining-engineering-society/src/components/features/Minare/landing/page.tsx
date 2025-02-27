@@ -67,6 +67,7 @@ export const LandingPage = () => {
     };
   }, [isLoading]);
 
+
   return (
     <div className=" h-auto p-[16px] relative flex flex-col gap-32">
       <div className="star-container fixed inset-0 -z-10 overflow-hidden"></div>

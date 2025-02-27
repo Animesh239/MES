@@ -1,3 +1,4 @@
+
 "use client";
 import MinareNavbar from "@/components/layout/minareMarginals/MinareHeader";
 import { initializeAuthListener } from "@/lib/firebase/authListener";
@@ -13,7 +14,7 @@ export default function MinareLayout({
   }, []);
   return (
     <div>
-      <MinareNavbar />
+      {/* <MinareNavbar /> */}
       <main>{children}</main>
     </div>
   );
