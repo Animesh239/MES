@@ -97,7 +97,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-black fixed w-full z-10 border-b border-gray-700 top-0 bg-opacity-100">
+    <nav className="bg-black fixed w-full border-b border-gray-700 top-0 bg-opacity-100 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center justify-between flex-1">
@@ -127,7 +127,7 @@ export default function Navbar() {
             <div className="hidden md:block flex-1">
               <div className="flex items-baseline justify-center space-x-4 xl:space-x-7">
                 <NavItem href="/">Home</NavItem>
-                <NavItem href="/aboutus">About Us</NavItem>
+                {/* <NavItem href="/aboutus">About Us</NavItem> */}
 
                 <div className="relative" ref={membersDropdownRef}>
                   <button
@@ -171,9 +171,9 @@ export default function Navbar() {
                       >
                         Upcoming
                       </DropdownItem>
-                      <DropdownItem href="/events/past" onClick={closeDropdown}>
+                      {/* <DropdownItem href="/events/past" onClick={closeDropdown}>
                         Past Events
-                      </DropdownItem>
+                      </DropdownItem> */}
                       <DropdownItem
                         href="/events/eventgallery"
                         onClick={closeDropdown}
@@ -223,22 +223,19 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden h-screen flex items-center justify-center -mt-12">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 items-center flex flex-col">
+        <div className="md:hidden h-screen flex items-start justify-center mt-32">
+          <div className="px-2 pt-2 pb-3 space-y-4 sm:px-3 items-center flex flex-col">
             <NavItem href="/" onClick={closeNavbar}>
               Home
             </NavItem>
-            <NavItem href="/aboutus" onClick={closeNavbar}>
+            {/* <NavItem href="/aboutus" onClick={closeNavbar}>
               About
-            </NavItem>
+            </NavItem> */}
             <NavItem href="/members/stakeholders" onClick={closeNavbar}>
-              Members
+              Stakeholders
             </NavItem>
             <NavItem href="/members/alumni" onClick={closeNavbar}>
               Alumni
-            </NavItem>
-            <NavItem href="/events/upcoming" onClick={closeNavbar}>
-              Upcoming Events
             </NavItem>
             <NavItem href="/events/past" onClick={closeNavbar}>
               Past Events
@@ -247,7 +244,7 @@ export default function Navbar() {
               Event Gallery
             </NavItem>
             <NavItem href="/contactus" onClick={closeNavbar}>
-              Contact
+              Contact Us
             </NavItem>
             <NavItem2 href="/minerva" onClick={closeNavbar}>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-2xl transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">

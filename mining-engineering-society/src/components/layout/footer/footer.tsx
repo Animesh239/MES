@@ -11,10 +11,10 @@ export default function Footer() {
 
   return (
     <footer className="bg-black text-white border-t-[0.5px] border-gray-700">
-      <div className="container mx-auto px-4 py-8 md:mr-20 2xl:mr-24">
+      <div className="container mx-auto px-4 pt-8 pb-4 md:mr-20 2xl:mr-24">
         <div className="flex flex-wrap justify-between items-start">
           {/* Social Links and Logos Section */}
-          <div className="w-full lg:w-1/3 mb-6 lg:mb-0">
+          <div className="w-full lg:px-6 lg:w-1/3 mb-6 lg:mb-0">
             <div className="flex justify-center lg:justify-start space-x-4 mb-3">
               <Link
                 href="https://facebook.com"
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Linkedin className="text-white hover:text-gray-300" />
               </Link>
             </div>
-            <div className="flex justify-center items-center lg:mr-28">
+            <div className="flex justify-center lg:justify-start items-center ">
               <span className="relative z-5 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-3xl font-semibold text-center xsm:text-start">
                 Mining Engineering Society
               </span>
@@ -133,13 +133,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row items-center mt-8">
-          <div className="mb-2 text-gray-400">
-            Copyright and All rights reserved 2025
+        <div className="flex flex-col lg:flex-row items-center lg:justify-between mt-8 border-t-2 border-gray-800">
+          
+          <div className=" text-gray-400">
+          &copy; <u><a href="https://mes.nitrkl.ac.in"></a>MES</u> , All rights reserved 2025
           </div>
-          <div className="w-[750px]"></div>
-          <div className="mb-2 text-gray-400">
-            Made by Mining Engineering Society NITRKL
+          <div className=" text-gray-400">
+            Made by Mining Engineering Society, NIT Rourkela
           </div>
         </div>
       </div>
