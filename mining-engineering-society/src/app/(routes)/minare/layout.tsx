@@ -1,6 +1,6 @@
 
 "use client";
-import MinareNavbar from "@/components/layout/minareMarginals/MinareHeader";
+// import MinareNavbar from "@/components/layout/minareMarginals/MinareHeader";
 import { initializeAuthListener } from "@/lib/firebase/authListener";
 import { useEffect } from "react";
 

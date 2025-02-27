@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import NavbarSwitcher from "@/components/layout/navbarSwitcher/NavbarSwitcher";
+// import NavbarSwitcher from "@/components/layout/navbarSwitcher/NavbarSwitcher";
 import Footer from "@/components/layout/footer/footer";
 import {
   Bebas_Neue,
@@ -13,6 +13,7 @@ import {
   Roboto
 } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/layout/navbar/navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
