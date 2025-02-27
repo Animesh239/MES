@@ -29,7 +29,7 @@ export const LandingPage = () => {
   return (
     <div className="h-auto p-[16px] relative flex flex-col gap-32">
       {/* Star Container: Fixed and covers full screen */}
-      <div className="star-container fixed inset-0  overflow-hidden">
+      <div className="star-container fixed inset-0 overflow-hidden">
         {/* Stars generated dynamically */}
       </div>
 
