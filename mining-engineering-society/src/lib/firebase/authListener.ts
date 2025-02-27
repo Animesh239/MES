@@ -18,8 +18,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 export const initializeAuthListener = () => {
   const auth = getAuth();
 
-  onAuthStateChanged(auth, (user) => {
-    console.log(user);
+  onAuthStateChanged(auth, () => {
     useAuthStore.setState({ isLoading: false, isInitialized: true });
   });
 };

@@ -8,4 +8,5 @@ export interface UserFormInterface {
   photoURL?: string;
   uid?: string;
   paymentProofImgURL?: string;
+  profileSubmitted?: boolean;
 }

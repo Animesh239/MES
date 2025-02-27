@@ -152,7 +152,7 @@ export const RegistrationForm = ({
             className="w-full h-10 sm:h-12 bg-white font-normal font-roboto text-[#211330] hover:bg-white/90 rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base"
             disabled={loading}
           >
-            {loading ? "submitting..." : "submit"}/
+            {loading ? "submitting..." : "submit"}
           </Button>
         </div>
       </form>

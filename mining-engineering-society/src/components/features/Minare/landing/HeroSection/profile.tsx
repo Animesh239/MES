@@ -21,7 +21,7 @@ export const Profile = ({ userData }: { userData: UserFormInterface }) => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="absolute top-28 right-8 z-50 w-16 h-16 rounded-full bg-white/40 hover:bg-white/10 transition-all duration-300 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-lg shadow-black/20"
+          className="fixed top-28 right-8 z-50 w-16 h-16 rounded-full bg-white/10 hover:bg-white/5 hover:scale-105 transition-all duration-300 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-lg shadow-black/20"
         >
           {<UserCircle2 className="w-8 h-8 text-white/70" />}
         </button>
@@ -34,8 +34,8 @@ export const Profile = ({ userData }: { userData: UserFormInterface }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40">
-              <div className="fixed inset-y-0 right-0 w-[20%] min-w-[340px] z-50">
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm h-screen z-40">
+              <div className="fixed inset-y-0 right-0 w-[20%] h-screen min-w-[340px] z-50">
                 <motion.div
                   initial={{ x: "100%" }}
                   animate={{ x: 0 }}

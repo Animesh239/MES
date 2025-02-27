@@ -49,8 +49,7 @@ export const LandingPage = () => {
     const fetchUserData = async () => {
       if (!isLoading) {
         const result = await GetUserDetail();
-        console.log(result.data);
-        if (result.success && result.data) {
+        if (result.success && result.data?.profileSubmitted) {
           setUserData(result.data);
           setIsLogin(true);
         }
@@ -69,7 +68,7 @@ export const LandingPage = () => {
   }, [isLoading]);
 
   return (
-    <div className="h-auto p-[16px] relative flex flex-col gap-32">
+    <div className=" h-auto p-[16px] relative flex flex-col gap-32">
       <div className="star-container fixed inset-0 -z-10 overflow-hidden"></div>
       <div
         className="absolute inset-0 -z-10 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"

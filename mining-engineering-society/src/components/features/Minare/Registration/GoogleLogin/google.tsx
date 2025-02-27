@@ -3,7 +3,6 @@ import { signInWithGoogle } from "@/lib/firebase/signinwithgoogle";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 export const LoginWithGoogle = ({
   onGoogleButtonClick
@@ -26,12 +25,6 @@ export const LoginWithGoogle = ({
       // }
       if (user?.userExists) {
         router.push("/minare/");
-        toast.success("Successfully signed in!", {
-          style: {
-            backgroundColor: "black",
-            color: "white"
-          }
-        });
       } else onGoogleButtonClick();
     } catch (error) {
       console.error("Google Login Error:", error);

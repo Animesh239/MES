@@ -21,7 +21,6 @@ interface DbResponse {
   id?: string;
 }
 
-// Type guard to check if data matches UserFormInterface
 function isUserFormData(data: DocumentData): data is UserFormInterface {
   return (
     "fullname" in data &&

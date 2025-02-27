@@ -28,7 +28,6 @@ export const GetUserDetail = async () => {
     }
 
     const result = await getDocument("users", currentUser.uid);
-    console.log("Fetch result:", result);
 
     if (!result.success || !result.data) {
       throw new Error(result.error || "Failed to fetch user data");

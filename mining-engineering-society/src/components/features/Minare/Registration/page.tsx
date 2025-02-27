@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import { RegistrationForm } from "./Form/form";
 import { CheckCircle2 } from "lucide-react";
-// import { UserFormInterface } from "@/config/Registration/type";
-// import { Button } from "@/components/ui/button";
 import { PaymentDeatails } from "./PaymentDetails/Details";
 import { PaymentProof } from "./PaymentProof/proof";
 import { LoginWithGoogle } from "./GoogleLogin/google";
 import { useRouter } from "next/navigation";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useAuthStore } from "@/lib/firebase/authListener";
 
 const steps = [
   { id: 1, name: "Google Login", status: "complete" },
@@ -18,8 +18,8 @@ const steps = [
 
 export const RegistrationPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  // const [formData, setFormData] = useState({});
   const router = useRouter();
+  const { setInitialized, setLoading } = useAuthStore();
 
   useEffect(() => {
     const createStars = () => {
@@ -41,12 +41,26 @@ export const RegistrationPage = () => {
     createStars();
   }, []);
 
+  useEffect(() => {
+    if (currentStep === 4) {
+      const auth = getAuth();
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        console.log(user);
+        setLoading(false);
+        setInitialized(true);
+      });
+
+      return () => unsubscribe();
+    }
+  }, [currentStep, setInitialized, setLoading]);
+
   const handleStepStateChange = () => {
     if (currentStep === 4) {
       router.push("/minare/");
       setCurrentStep(1);
+    } else {
+      setCurrentStep(currentStep + 1);
     }
-    setCurrentStep(currentStep + 1);
   };
 
   return (
