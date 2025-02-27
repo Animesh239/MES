@@ -1,4 +1,4 @@
-import MinareNavbar from "@/components/layout/minareMarginals/MinareHeader";
+// import MinareNavbar from "@/components/layout/minareMarginals/MinareHeader";
 
 export default function MinareLayout({
   children,
@@ -7,7 +7,7 @@ export default function MinareLayout({
 }) {
   return (
     <div>
-      <MinareNavbar />
+      {/* <MinareNavbar /> */}
       <main>{children}</main>
     </div>
   );
