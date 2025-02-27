@@ -22,9 +22,9 @@ export const Statistics = () => {
   useEffect(() => {
     if (isInView) {
       const targetCounts = {
-        faculties: 14,
-        students: 351,
-        alumni: 10000,
+        faculties: 200,
+        students: 300,
+        alumni: 1000
       };
 
       let facultiesStart = 0;
@@ -36,7 +36,7 @@ export const Statistics = () => {
           const updated = { ...prev };
 
           if (facultiesStart < targetCounts.faculties) {
-            facultiesStart += 1;
+            facultiesStart += 5;
             updated.faculties = facultiesStart;
           }
           if (studentsStart < targetCounts.students) {
@@ -44,7 +44,7 @@ export const Statistics = () => {
             updated.students = studentsStart;
           }
           if (alumniStart < targetCounts.alumni) {
-            alumniStart += 500;
+            alumniStart += 50;
             updated.alumni = alumniStart;
           }
 
@@ -58,9 +58,9 @@ export const Statistics = () => {
         ) {
           clearInterval(interval);
           setStatistics({
-            faculties: "14",
-            students: "351*",
-            alumni: "10000+"
+            faculties: "200+",
+            students: "300+",
+            alumni: "1000+"
           });
         }
       }, 50);

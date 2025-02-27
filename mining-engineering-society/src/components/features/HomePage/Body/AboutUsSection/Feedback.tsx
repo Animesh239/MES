@@ -3,30 +3,30 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+
+// import "./swiper.css";
+// import { Autoplay } from "swiper/modules";
 import { Feedbackdata } from "@/config/Homepage/HomePagedata";
 import Image from "next/image";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
+// import { SubHeadingText } from "@/components/typography/LandingPage";
 
 export const Feedback = () => {
   return (
-    <div className="rounded-lg relative">
-      <Swiper
-        spaceBetween={"16px"}
-        slidesPerView={1}
-        centeredSlides={true}
-        loop={true}
-        modules={[Pagination, Autoplay, Navigation]}
-        pagination={true}
-        navigation={{
-          nextEl: ".feedback-button-next",
-          prevEl: ".feedback-button-prev",
-        }}
-        autoplay={{ delay: 5000 }}
-        className="mySwiper"
-      >
-        {Feedbackdata.map((items, index) => (
-          <SwiperSlide key={index}>
+    <>
+      <div className="rounded-lg">
+        <Swiper
+          spaceBetween={"16px"}
+          slidesPerView={1}
+          centeredSlides={true}
+          loop={true}
+          modules={[Pagination, Autoplay]}
+          pagination={true}
+          autoplay={{ delay: 5000 }}
+          className="mySwiper"
+        >
+          {Feedbackdata.map((items, index) => (
+            <SwiperSlide key={index}>
               <div className=" relative flex flex-col justify-center items-center p-4 pb-10 xsm:p-8 sm:p-12 md:p-16 md:pt-28 w-full max-sm:pb-20 h-auto sm:h-[70vh] bg-white/[0.06] border-2 border-white/[0.1] rounded-xl">
                 <div className="h-auto flex flex-col justify-center items-center">
                   <Image
@@ -46,6 +46,7 @@ export const Feedback = () => {
                     alt="bb"
                     className="md:absolute right-5 xsm:right-7 sm:right-10 top-5 xsm:top-7 sm:top-[50%] lg:top-[40%] w-16 h-16 xsm:w-[72px] xsm:h-[72px] sm:w-20 sm:h-20"
                   />
+                </div>
                 <div className="flex justify-center  gap-6 items-center">
                   <Image
                     src={items.imgUrl}
@@ -70,45 +71,11 @@ export const Feedback = () => {
                     ))}
                   </div>
                 </div>
-                </div>
               </div>
-              </SwiperSlide>
-        ))}
-      </Swiper>
-      
-      {/* Navigation buttons */}
-      <div className="feedback-button-next absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer bg-white/10 p-2 rounded-full hover:bg-white/20 transition-all">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-      <div className="feedback-button-prev absolute top-1/2 -translate-y-1/2 left-4 z-10 cursor-pointer bg-white/10 p-2 rounded-full hover:bg-white/20 transition-all">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </div>
-    </div>
+    </>
   );
 };

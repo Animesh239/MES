@@ -7,14 +7,14 @@ export default function MemberCard({
 }: MemberCardProps) {
   return (
     <div className="p-[2px] bg-gradient-to-r from-blue-400 to-purple-600 rounded-2xl transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-      <Card className="py-4 px-3 bg-black border-none max-w-[400px] rounded-2xl ">
+      <Card className="py-4 px-3 bg-black border-none max-w-[260px] rounded-2xl ">
         <CardBody className="overflow-visible py-2 justify-center items-center">
           <Image
             alt="Card background"
             className="object-cover rounded-full opacity-100"
             src={imgURL}
-            width={250}
-            height={250}
+            width={200}
+            height={200}
           />
           <CardHeader className="pb-0 pt-4 px-4 flex-col text-white text-center">
             <p className="text-2xl uppercase font-bold">{name}</p>

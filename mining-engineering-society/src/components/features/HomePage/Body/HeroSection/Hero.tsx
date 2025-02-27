@@ -24,10 +24,9 @@ export const Body = () => {
     };
   }, []);
 
-
   return (
     <>
-      <div className="bg-[#000000] relative overflow-hidden pt-[5vh] h-auto md:px-[5vw] z-0">
+      <div className="bg-[#000000] relative overflow-hidden pt-[10vh] h-auto md:px-[5vw] -z-10">
         <VerticalLine leftPosition="11vw" delay="0" topPostion="" />
 
         <VerticalLine leftPosition="89vw" delay="0.6" topPostion="" />
@@ -74,9 +73,9 @@ export const Body = () => {
             </div>
           </div>
         ))}
-        <div className="lg:flex hidden justify-center items-center py-16" onClick={() => window.scrollTo({ top: 900, behavior: "smooth" })}>
+        <div className="flex justify-center items-center py-16">
           <Button variant="default" size="default">
-            Explore
+            get Started
           </Button>
         </div>
       </div>
