@@ -27,8 +27,8 @@ export const Hero = () => {
               visible: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 1, ease: easeIn }
-              }
+                transition: { duration: 1, ease: easeIn },
+              },
             }}
           >
             <div className="overflow-y-hidden"></div>
@@ -43,9 +43,9 @@ export const Hero = () => {
               visible: {
                 transition: {
                   staggerChildren: 0.08,
-                  delayChildren: 0.5
-                }
-              }
+                  delayChildren: 0.5,
+                },
+              },
             }}
           >
             <div className="text-xl sm-text-2xl md:text-3xl font-light tracking-widest text-gray-400 max-w-2xl mx-auto mb-8">
@@ -57,8 +57,8 @@ export const Hero = () => {
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.5, ease: easeIn }
-                  }
+                    transition: { duration: 1.5, ease: easeIn },
+                  },
                 }}
               >
                 <div className="inline-block mr-3 leading-relaxed ">
