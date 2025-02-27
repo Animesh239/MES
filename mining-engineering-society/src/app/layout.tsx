@@ -3,7 +3,16 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavbarSwitcher from "@/components/layout/navbarSwitcher/NavbarSwitcher";
 import Footer from "@/components/layout/footer/footer";
-import { Bebas_Neue, Orbitron, Rajdhani, Raleway } from "next/font/google";
+import {
+  Bebas_Neue,
+  Orbitron,
+  Rajdhani,
+  Raleway,
+  Playfair_Display,
+  Lato,
+  Roboto
+} from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,6 +24,24 @@ const bebas = Bebas_Neue({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-Bebas_Neue",
+});
+
+const pd = Playfair_Display({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-Playfair_Display"
+});
+
+const roboto = Roboto({
+  weight: ["100", "400", "500", "700", "300", "900"],
+  subsets: ["latin"],
+  variable: "--font-Roboto"
+});
+
+const lato = Lato({
+  weight: ["400", "700", "900", "100", "300"],
+  subsets: ["latin"],
+  variable: "--font-Lato"
 });
 const raleway = Raleway({
   weight: ["400", "500", "700", "600"],
@@ -52,10 +79,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${raleway.variable} ${bebas.variable} ${rajdhani.variable} ${orbitron.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${roboto.variable} ${lato.variable} ${pd.variable} ${raleway.variable} ${bebas.variable} ${rajdhani.variable} ${orbitron.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <NavbarSwitcher />
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            className: "",
+            style: {
+              border: "1px solid #ffffff",
+              // padding: "16px",
+              borderColor: "rgb(216 180 254 / 0.5)",
+              backgroundColor: "rgb(255 255 255 / 0.2)",
+              backdropFilter: "blur(4px)",
+              color: "rgb(233 213 255 / var(--tw-text-opacity, 1))"
+            }
+          }}
+        />
+        <Navbar />
+
+
         {children}
         <Footer />
       </body>
