@@ -8,7 +8,7 @@ const googleProvider = new GoogleAuthProvider();
 
 interface FirestoreUser extends UserFormInterface {
   paymentProofImgURL?: string;
-  formSubmitted?: string;
+  // profileSubmitted?: string;
 }
 
 export const signInWithGoogle = async () => {
@@ -28,11 +28,13 @@ export const signInWithGoogle = async () => {
     };
 
     const existingUser = await getDocument("users", result.user.uid);
+    // console.log("tt", existingUser);
 
-    if (existingUser.success && existingUser.data) {
+    if (existingUser.success) {
       const userData = existingUser.data as FirestoreUser;
+      // console.log(existingUser);
 
-      if (userData.formSubmitted) {
+      if (userData.profileSubmitted) {
         toast.success("Already Profile Submitted! Successfully Logging!!", {
           style: {
             backgroundColor: "black",

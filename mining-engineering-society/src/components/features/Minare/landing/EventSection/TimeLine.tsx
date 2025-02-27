@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { easeIn, motion, useScroll } from "framer-motion";
 import { RefObject, useEffect, useRef, useState } from "react";
 
@@ -108,6 +109,9 @@ const Timeline = () => {
                   <p className="text-sm font-normal text-white/80">
                     {event.description}
                   </p>
+                  <Button className="w-full mt-7 h-10 sm:h-12 bg-white font-normal font-roboto text-[#211330] hover:bg-white/90 rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base">
+                    Register
+                  </Button>
                 </div>
               </div>
             </div>

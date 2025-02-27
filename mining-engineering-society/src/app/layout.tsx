@@ -13,17 +13,18 @@ import {
   Roboto
 } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+// import Navbar from "@/components/layout/navbar/navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "100 900",
+  weight: "100 900"
 });
 
 const bebas = Bebas_Neue({
   weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-Bebas_Neue",
+  variable: "--font-Bebas_Neue"
 });
 
 const pd = Playfair_Display({
@@ -46,33 +47,33 @@ const lato = Lato({
 const raleway = Raleway({
   weight: ["400", "500", "700", "600"],
   subsets: ["latin"],
-  variable: "--font-Raleway",
+  variable: "--font-Raleway"
 });
 
 const orbitron = Orbitron({
   subsets: ["latin"],
-  variable: "--font-Orbitron",
+  variable: "--font-Orbitron"
 });
 
 const rajdhani = Rajdhani({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-Rajdhani",
+  variable: "--font-Rajdhani"
 });
 
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  weight: "100 900",
+  weight: "100 900"
 });
 
 export const metadata: Metadata = {
   title: "MES NIT Rourkela",
-  description: "Mining Engineering Society, NIT Rourkela",
+  description: "Mining Engineering Society, NIT Rourkela"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -96,8 +97,7 @@ export default function RootLayout({
             }
           }}
         />
-        <Navbar />
-
+        <NavbarSwitcher />
 
         {children}
         <Footer />
