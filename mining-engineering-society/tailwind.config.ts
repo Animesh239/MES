@@ -14,6 +14,9 @@ export default {
           "linear-gradient(to bottom, #ffffff 0%, #d4d4d4 50%, #a3a3a3 100%)"
       },
       animation: {
+        twinkle: "twinkle 3s ease-in-out infinite",
+        float: "float 15s ease-in-out infinite",
+        "float-delayed": "float-delayed 18s ease-in-out infinite",
         "rainbow-shadow": "rainbowShadow 5s linear infinite"
       },
       keyframes: {
@@ -91,7 +94,10 @@ export default {
         Bebas: "var(--font-Bebas_Neue)",
         orbitron: "var(--font-Orbitron)",
         rajdhani: "var(--font-Rajdhani)",
-        raleway: "var(--font-Raleway)"
+        raleway: "var(--font-Raleway)",
+        playfair_dispaly: "var(--font-Playfair_Display)",
+        lato: "var(--font-Lato)",
+        roboto: "var(--font-Roboto)"
       },
       backdropBlur: {
         xs: "2px"
