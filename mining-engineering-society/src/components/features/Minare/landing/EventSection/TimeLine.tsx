@@ -10,6 +10,7 @@ import {
   useAuthStore
 } from "@/lib/firebase/authListener";
 import { GetUserDetail } from "@/lib/firebase/getUserData";
+import toast from "react-hot-toast";
 // import toast from "react-hot-toast";
 
 const Timeline = () => {
@@ -20,6 +21,7 @@ const Timeline = () => {
   const [registeredEventIds, setRegisteredEventIds] = useState<number[]>([]);
   const [loadingEventId, setLoadingEventId] = useState<number | null>(null);
   const isLoading = useAuthStore((state) => state.isLoading);
+  const [isLogin, setislogin] = useState(false);
 
   useEffect(() => {
     initializeAuthListener();
@@ -29,6 +31,7 @@ const Timeline = () => {
         const result = await GetUserDetail();
         if (result.success && result.data?.participatedEventTitles) {
           setRegisteredEventsTitle(result.data.participatedEventTitles);
+          setislogin(true);
         }
       }
     };
@@ -88,6 +91,7 @@ const Timeline = () => {
       }
     } catch (error) {
       console.error("Error registering for event:", error);
+      if (!isLogin) toast("Register before Registering for an Event");
     } finally {
       setLoadingEventId(null);
     }
