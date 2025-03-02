@@ -9,4 +9,5 @@ export interface UserFormInterface {
   uid?: string;
   paymentProofImgURL?: string;
   profileSubmitted?: boolean;
+  participatedEventTitles?: string[];
 }
