@@ -47,3 +47,15 @@ export const GalleryData = [
       "https://res.cloudinary.com/dehegwbs0/image/upload/v1734128156/poevruoltbhyyk8bleax.jpg"
   }
 ];
+
+export const events = [
+  { id: 1, title: "Event 1", date: "2023", description: "Description 1" },
+  { id: 2, title: "Event 2", date: "2024", description: "Description 2" },
+  { id: 3, title: "Event 3", date: "2025", description: "Description 3" },
+  { id: 4, title: "Event 4", date: "2026", description: "Description 4" },
+  { id: 5, title: "Event 5", date: "2027", description: "Description 5" },
+  { id: 6, title: "Event 6", date: "2028", description: "Description 6" },
+  { id: 7, title: "Event 7", date: "2029", description: "Description 7" },
+  { id: 8, title: "Event 8", date: "2030", description: "Description 8" },
+  { id: 9, title: "Event 9", date: "2031", description: "Description 9" }
+];

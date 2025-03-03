@@ -16,7 +16,7 @@ import { UserFormInterface } from "@/config/Minare/Registration/type";
 
 interface DbResponse {
   success: boolean;
-  data?: UserFormInterface | UserFormInterface[];
+  data?: UserFormInterface;
   error?: string;
   id?: string;
 }

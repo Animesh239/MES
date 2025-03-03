@@ -1,45 +1,104 @@
 import { Button } from "@/components/ui/button";
+import { UpdateData } from "@/lib/firebase/updateData";
 import { easeIn, motion, useScroll } from "framer-motion";
 import { RefObject, useEffect, useRef, useState } from "react";
-
-const events = [
-  { id: 1, title: "Event 1", date: "2023", description: "Description 1" },
-  { id: 2, title: "Event 2", date: "2024", description: "Description 2" },
-  { id: 3, title: "Event 3", date: "2025", description: "Description 3" },
-  { id: 4, title: "Event 4", date: "2026", description: "Description 4" },
-  { id: 5, title: "Event 5", date: "2027", description: "Description 5" },
-  { id: 6, title: "Event 6", date: "2028", description: "Description 6" },
-  { id: 7, title: "Event 7", date: "2029", description: "Description 7" },
-  { id: 8, title: "Event 8", date: "2030", description: "Description 8" },
-  { id: 9, title: "Event 9", date: "2031", description: "Description 9" }
-];
+import { getAuth } from "firebase/auth";
+import { getDocument } from "@/lib/firebase/dbOperation";
+import { events } from "@/config/Minare/landingpagedata";
+import {
+  initializeAuthListener,
+  useAuthStore
+} from "@/lib/firebase/authListener";
+import { GetUserDetail } from "@/lib/firebase/getUserData";
+import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 const Timeline = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [registeredEventsTitle, setRegisteredEventsTitle] = useState<string[]>(
+    []
+  );
+  const [registeredEventIds, setRegisteredEventIds] = useState<number[]>([]);
+  const [loadingEventId, setLoadingEventId] = useState<number | null>(null);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  const [isLogin, setislogin] = useState(false);
 
   useEffect(() => {
+    initializeAuthListener();
+
+    const fetchUserData = async () => {
+      if (!isLoading) {
+        const result = await GetUserDetail();
+        if (result.success && result.data?.participatedEventTitles) {
+          setRegisteredEventsTitle(result.data.participatedEventTitles);
+          setislogin(true);
+        }
+      }
+    };
+
     const updateScreenSize = () => setIsMobile(window.innerWidth < 900);
     updateScreenSize();
     window.addEventListener("resize", updateScreenSize);
+
+    fetchUserData();
     return () => window.removeEventListener("resize", updateScreenSize);
-  }, []);
+  }, [isLoading]);
+
+  useEffect(() => {
+    const registeredIds = events
+      .filter((event) => registeredEventsTitle.includes(event.title))
+      .map((event) => event.id);
+
+    setRegisteredEventIds(registeredIds);
+  }, [registeredEventsTitle]);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef as RefObject<HTMLElement>,
     offset: ["start start", "end end"]
   });
+
   function xOrientation(index: number) {
-    if (isMobile) {
-      return 100;
-    } else {
-      if (index % 2 === 0) {
-        return -100;
-      } else return 100;
-    }
+    return isMobile ? 100 : index % 2 === 0 ? -100 : 100;
   }
 
+  const eventRegisterationHandler = async (
+    eventId: number,
+    eventTitle: string
+  ) => {
+    if (registeredEventIds.includes(eventId)) return;
+
+    setLoadingEventId(eventId);
+
+    try {
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+      if (!currentUser?.uid) throw new Error("No user is currently logged in");
+
+      const userData = await getDocument("users", currentUser.uid);
+      const previousEvents = userData?.data?.participatedEventTitles || [];
+
+      const updatedEvents = [...previousEvents, eventTitle];
+
+      const reqdResult = await UpdateData({
+        participatedEventTitles: updatedEvents
+      });
+
+      if (reqdResult.success) {
+        setRegisteredEventsTitle(updatedEvents);
+      } else {
+        console.error("Failed to register:", reqdResult.error);
+      }
+    } catch (error) {
+      console.error("Error registering for event:", error);
+      if (!isLogin) toast("Register before Registering for an Event");
+    } finally {
+      setLoadingEventId(null);
+    }
+  };
+
   return (
-    <div className="relative min-h-screen overflow-y-hidden ">
+    <div className="relative min-h-screen overflow-y-hidden">
       <motion.div style={{ scaleX: scrollYProgress }}>
         <div className="fixed top-0 left-0 right-0 h-1 bg-white/20 z-50"></div>
       </motion.div>
@@ -50,10 +109,7 @@ const Timeline = () => {
         {events.map((event, index) => (
           <motion.div
             key={event.id}
-            initial={{
-              opacity: 0,
-              x: xOrientation(index)
-            }}
+            initial={{ opacity: 0, x: xOrientation(index) }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, type: "tween", ease: easeIn }}
@@ -73,9 +129,9 @@ const Timeline = () => {
                 transition={{ duration: 0.5, ease: easeIn }}
               >
                 <div
-                  className={`absolute lg:left-1/2 left-8 -translate-x-1/2 top-6 h-6 w-6 
+                  className="absolute lg:left-1/2 left-8 -translate-x-1/2 top-6 h-6 w-6 
                     rounded-full border-2 border-white/50 bg-black/80
-                    flex items-center justify-center `}
+                    flex items-center justify-center"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
@@ -109,8 +165,21 @@ const Timeline = () => {
                   <p className="text-sm font-normal text-white/80">
                     {event.description}
                   </p>
-                  <Button className="w-full mt-7 h-10 sm:h-12 bg-white font-normal font-roboto text-[#211330] hover:bg-white/90 rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base">
-                    Register
+                  <Button
+                    onClick={() =>
+                      eventRegisterationHandler(event.id, event.title)
+                    }
+                    className={`w-full z-50 mt-7 h-10  font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
+                    disabled={
+                      registeredEventIds.includes(event.id) ||
+                      loadingEventId === event.id
+                    }
+                  >
+                    {registeredEventIds.includes(event.id)
+                      ? "Registered"
+                      : loadingEventId === event.id
+                      ? "Registering..."
+                      : "Register"}
                   </Button>
                 </div>
               </div>
