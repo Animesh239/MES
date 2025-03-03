@@ -6,7 +6,6 @@ import { updateDocument } from "./dbOperation";
 
 export const UpdateData = async (formData: Partial<UserFormInterface>) => {
   try {
-    // Get current user
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
@@ -24,13 +23,13 @@ export const UpdateData = async (formData: Partial<UserFormInterface>) => {
     );
     const result = await updateDocument("users", currentUser.uid, cleanedData);
 
-    console.log("Update result:", result);
+    // console.log("Update result:", result);
 
     if (!result.success) {
       throw new Error(result.error || "Failed to submit profile");
     }
 
-    toast.success("Profile submitted successfully!", {
+    toast.success(`Data submitted successfully!`, {
       style: {
         backgroundColor: "black",
         color: "white"
