@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
 export default function Footer() {
@@ -17,28 +17,28 @@ export default function Footer() {
           <div className="w-full lg:px-6 lg:w-1/3 mb-6 lg:mb-0">
             <div className="flex justify-center lg:justify-start space-x-4 mb-3">
               <Link
-                href="https://facebook.com"
+                href="https://www.facebook.com/minare.nitr/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Facebook className="text-white hover:text-gray-300" />
               </Link>
-              <Link
+              {/* <Link
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Twitter className="text-white hover:text-gray-300" />
-              </Link>
+              </Link> */}
               <Link
-                href="https://instagram.com"
+                href="https://www.instagram.com/minare.nitr/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Instagram className="text-white hover:text-gray-300" />
               </Link>
               <Link
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/mining-engineering-society-nit-rourkela/about/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -71,13 +71,13 @@ export default function Footer() {
             <div className="w-full lg:w-1/3 mb-6 lg:mb-0 text-center lg:text-left">
               <h3 className="text-xl font-bold mb-2">Call Us</h3>
               <p className="mb-1">
-                <Link href="tel:+1234567890" className="hover:underline">
-                  +1 (234) 567-890
+                <Link href="tel:+918260900261" className="hover:underline">
+                +91 82609 00261
                 </Link>
               </p>
               <p className="mb-1">
-                <Link href="tel:+1987654321" className="hover:underline">
-                  +1 (987) 654-321
+                <Link href="tel:+917827500393" className="hover:underline">
+                +91 78275 00393
                 </Link>
               </p>
             </div>
@@ -86,18 +86,18 @@ export default function Footer() {
               <h3 className="text-xl font-bold mb-2">Email Us</h3>
               <p className="mb-1">
                 <Link
-                  href="mailto:info@example.com"
+                  href="mailto:minare@nitrkl.ac.in"
                   className="hover:underline"
                 >
-                  info@example.com
+                  minare@nitrkl.ac.in
                 </Link>
               </p>
               <p className="mb-1">
                 <Link
-                  href="mailto:support@example.com"
+                  href="mailto:animeshbarik239@gmail.com"
                   className="hover:underline"
                 >
-                  support@example.com
+                  animeshbarik239@gmail.com
                 </Link>
               </p>
             </div>
@@ -106,12 +106,12 @@ export default function Footer() {
               <h3 className="text-xl font-bold mb-2">Quick Links</h3>
               <p className="mb-1">
                 <Link
-                  href="https://www.nitrkl.ac.in/"
-                  target="_blank"
+                  href="/minare"
+                  target="_self"
                   rel="noopener noreferrer"
                   className="hover:underline"
                 >
-                  NIT Rourkela Website
+                  Minare
                 </Link>
               </p>
               <p className="mb-1">
@@ -136,7 +136,7 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-center lg:justify-between mt-8 border-t-2 border-gray-800">
           
           <div className=" text-gray-400">
-          &copy; <u><a href="https://mes.nitrkl.ac.in"></a>MES</u> , All rights reserved 2025
+          &copy; <a href="https://mes.nitrkl.ac.in"><u>MES</u></a> , All rights reserved 2025
           </div>
           <div className=" text-gray-400">
             Made by Mining Engineering Society, NIT Rourkela

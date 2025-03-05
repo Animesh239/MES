@@ -21,10 +21,10 @@ export default function ContactDetails() {
               Any issues or suggestions? Mail us at
             </p>
             <Link
-              href="mailto:anc.nitr@gmail.com"
+              href="mailto:animeshbarik239@gmail.com@gmail.com"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"
             >
-              mesnitr@gmail.com
+              animeshbarik239@gmail.com
             </Link>
           </div>
         </div>
@@ -39,16 +39,16 @@ export default function ContactDetails() {
             </p>
             <div className="space-y-1">
               <Link
-                href="tel:+917978414351"
+                href="tel:+918260900261"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
-                +91-333333333 (Animesh Barik)
+                +91-82609-00261 (Animesh Barik)
               </Link>
               <Link
                 href="tel:+918340153562"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
-                +91-4398598573498 (Animesh Barik)
+                +91-78275-00393 (Rahul Kumar Das)
               </Link>
             </div>
           </div>
