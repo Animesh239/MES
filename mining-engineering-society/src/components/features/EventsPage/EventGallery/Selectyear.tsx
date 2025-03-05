@@ -24,7 +24,7 @@ export const SelectYear = ({
   return (
     <Select onValueChange={handleSelectChange}>
       <SelectTrigger className="w-[180px] border-[2px] font-[600] tracking-wider text-white h-[60px] ">
-        <SelectValue placeholder="Select Year" />
+        <SelectValue placeholder="2024" />
       </SelectTrigger>
       <SelectContent>
         {YearsData.map((data, idx) => (

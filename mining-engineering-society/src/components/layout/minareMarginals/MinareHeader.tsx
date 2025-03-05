@@ -23,23 +23,23 @@ const NavItem = ({
   </Link>
 );
 
-const NavItem2 = ({
-  href,
-  children,
-  onClick,
-}: {
-  href: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-}) => (
-  <Link
-    href={href}
-    className="px-3 py-2 rounded-md text-lg font-semibold hover:scale-105 transition-all"
-    onClick={onClick}
-  >
-    {children}
-  </Link>
-);
+// const NavItem2 = ({
+//   href,
+//   children,
+//   onClick,
+// }: {
+//   href: string;
+//   children: React.ReactNode;
+//   onClick?: () => void;
+// }) => (
+//   <Link
+//     href={href}
+//     className="px-3 py-2 rounded-md text-lg font-semibold hover:scale-105 transition-all"
+//     onClick={onClick}
+//   >
+//     {children}
+//   </Link>
+// );
 
 export default function MinareNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,11 +84,11 @@ export default function MinareNavbar() {
                 <NavItem href="/minare/team">Members</NavItem>
                 <NavItem href="/minare/gallery">Gallery</NavItem>
                 <NavItem href="/minare/sponsors">Sponsors</NavItem>
-                <NavItem2 href="/minerva">
+                {/* <NavItem2 href="/minerva">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl p-2 transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">
                     Minerva
                   </span>
-                </NavItem2>
+                </NavItem2> */}
               </div>
             </div>
           </div>
@@ -135,11 +135,11 @@ export default function MinareNavbar() {
             <NavItem href="/minare/sponsors" onClick={closeNavbar}>
               Sponsors
             </NavItem>
-            <NavItem2 href="/minerva" onClick={closeNavbar}>
+            {/* <NavItem2 href="/minerva" onClick={closeNavbar}>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-2xl transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">
                 Minerva
               </span>
-            </NavItem2>
+            </NavItem2> */}
             <div className="md:block">
               <Link href="/">
                 <button className="px-6 py-3 mt-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">

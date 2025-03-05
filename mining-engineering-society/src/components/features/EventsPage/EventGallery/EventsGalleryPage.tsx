@@ -4,7 +4,7 @@ import { SelectYear } from "./Selectyear";
 import { YearEventGallery } from "./YearEventGallery";
 
 export const EventsGalleryPage = () => {
-  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedYear, setSelectedYear] = useState("2024");
 
   const handleSelectYear = (year: string) => {
     setSelectedYear(year);
