@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
 
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
+const dates = "22ⁿᵈ - 23ʳᵈ March 2025"
 
 export const Hero = () => {
   const router = useRouter();
@@ -67,6 +68,11 @@ export const Hero = () => {
                 <div className="inline-block mr-3 leading-relaxed ">
                   <span className="bg-gradient-to-r text-[18px] font-lato font-[400] sm:text-[24px] md:text-[28px] from-gray-300 to-white bg-clip-text text-transparent">
                     {subtitle}
+                  </span>
+                </div>
+                <div className="inline-block mr-3 leading-relaxed ">
+                  <span className="bg-gradient-to-r text-[22px] font-lato font-bold sm:text-[28px] md:text-[32px] from-gray-300 to-white bg-clip-text text-transparent">
+                    {dates}
                   </span>
                 </div>
               </motion.span>

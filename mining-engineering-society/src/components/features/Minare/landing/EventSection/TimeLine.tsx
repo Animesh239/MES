@@ -149,20 +149,20 @@ const Timeline = () => {
                     background:
                       "linear-gradient(180deg, #ffffff 0%, #000000 100%)",
                     boxShadow:
-                      "0px 10px 50px rgba(0, 0, 0, 0.3), 0px 5px 15px rgba(0, 0, 0, 0.6)"
+                      "-10px 10px 50px rgba(0, 0, 0, 0.3), 0px 5px 15px rgba(0, 0, 0, 0.6)"
                   }}
-                  className="w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[416px] 
-                    flex flex-col justify-center items-center p-6 
+                  className="w-full min-h-[300px] sm:min-h-[400px] lg:min-h-[516px] 
+                    flex flex-col justify-end items-center p-6 
                     text-[20px] sm:text-[24px] font-bold leading-relaxed 
-                    break-words text-center rounded-3xl"
+                    break-words text-center rounded-3xl "
                 >
                   <h3 className="text-xl font-bold text-white mb-4">
                     {event.title}
                   </h3>
-                  <p className="text-base font-normal text-white/60 mb-2">
+                  {/* <p className="text-base font-normal text-white/60 mb-2">
                     {event.date}
-                  </p>
-                  <p className="text-sm font-normal text-white/80">
+                  </p> */}
+                  <p className="text-base font-normal text-white/80">
                     {event.description}
                   </p>
                   <Button
