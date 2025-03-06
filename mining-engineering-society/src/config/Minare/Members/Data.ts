@@ -13,7 +13,7 @@ export const members = [
   },
   {
     id: 3,
-    name: "Suvendu Sekhar Sahoo",
+    name: "Suvendu Sahoo",
     designation: "Event Management Head",
     image: "https://picsum.photos/200/300",
   },
@@ -21,11 +21,11 @@ export const members = [
     id: 4,
     name: "Sushrut Panda",
     designation: "Publicity Head",
-    image: "https://picsum.photos/200/300",
+    image: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741171271/t8j3cxqt6d1cf1qp3dbr.jpg",
   },
   {
     id: 5,
-    name: "Rakesh Kumar Yadav",
+    name: "Rakesh Ku. Yadav",
     designation: "Sponsorship Head",
     image: "https://picsum.photos/200/300",
   },
@@ -37,7 +37,7 @@ export const members = [
   },
   {
     id: 7,
-    name: "Swayam Prajna Behera",
+    name: "Swayam Pr. Behera",
     designation: "Registration Head",
     image: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741119245/minare/kpct1qw4c37hlrm5wjig.jpg",
   },
@@ -45,13 +45,13 @@ export const members = [
     id: 8,
     name: "Krishnarjun Rana",
     designation: "Accomodation Head",
-    image: "https://picsum.photos/200/300",
+    image: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741171143/jmwxeh2vx9lcomtdwmgu.jpg",
   },
   {
     id: 9,
-    name: "Satya Prakash Behera",
+    name: "Satya Pr. Behera",
     designation: "Decoration Head",
-    image: "https://picsum.photos/200/300",
+    image: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741171217/s7uduuwk4fruhitiigkd.jpg",
   },
   // {
   //   id: 10,

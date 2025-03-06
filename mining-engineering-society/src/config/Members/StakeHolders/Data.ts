@@ -42,7 +42,7 @@ export const CurrentStakeHolders = [
   {
     name: "Rahul Rout",
     position: "Literary Secretary",
-    imgUrl: "https://picsum.photos/200/300",
+    imgUrl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741171091/vwv8jsyrgimjmi8uhly0.jpg",
   },
   {
     name: "M.P. Divyajyoti",
