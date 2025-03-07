@@ -21,7 +21,7 @@ export function RulesDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[90vw] h-screen md:max-w-[800px] bg-black/95 backdrop-blur-xl border border-white/20 shadow-2xl shadow-white/10">
-        <DialogHeader className="pb-6">
+        <DialogHeader className="pb-4 mt-3">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 shadow-inner shadow-white/5">
               <BookOpen className="w-6 h-6 text-white" />
@@ -35,7 +35,7 @@ export function RulesDialog({
           </div>
         </DialogHeader>
 
-        <ScrollArea className="h-[70vh] md:h-[70vh] pr-4">
+        <ScrollArea className="h-[65vh] sm:h-[70vh] pr-4">
           <div className="space-y-10">
             {RulesAndRegulations.map((event) => (
               <div key={event.id} className="space-y-5 relative">
@@ -127,7 +127,7 @@ export function RulesDialog({
           </div>
         </ScrollArea>
 
-        <DialogFooter className="mt-5">
+        <DialogFooter className="mt-5 mb-4">
           <Button
             onClick={() => setOpen(false)}
             className="w-full sm:w-auto bg-gradient-to-r from-white to-white/90 text-black hover:from-white/95 hover:to-white/85 transition-all font-medium"
