@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { RulesDialog } from "./rulesAndRegulation";
+// import { useState } from "react";
+// import { RulesDialog } from "./rulesAndRegulation";
+// import { RulesAndRegulations } from "@/config/Minare/landingpagedata";
 // import { Profile } from "./profile";
 // import { useEffect } from "react";
 
@@ -16,7 +17,6 @@ const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
 const dates = "22ⁿᵈ - 23ʳᵈ March 2025";
 
 export const Hero = () => {
-  const [open, setOpen] = useState(false);
   const router = useRouter();
   const handleRegister = () => {
     router.push("minare/registration");
@@ -81,23 +81,14 @@ export const Hero = () => {
               </motion.span>
             </div>
           </motion.div>
-          <div className="flex flex-col sm:flex-row gap-5">
-            <Button
-              variant="default"
-              onClick={() => handleRegister()}
-              className="font-roboto w-full xxsm:w-40 max-w-sm:text-[16px]    z-0 cursor-pointer"
-            >
-              Register
-            </Button>
-            <Button
-              variant="default"
-              onClick={() => setOpen(true)}
-              className="font-roboto max-w-sm:text-[16px] w-full xxsm:w-40 sm:w-auto hover:bg-white bg-white/[0.15] border-white hover:text-black backdrop-blur-md border-2 text-white z-0 cursor-pointer"
-            >
-              Rules & regulation
-            </Button>
-            <RulesDialog open={open} setOpen={setOpen} />
-          </div>
+
+          <Button
+            variant="default"
+            onClick={() => handleRegister()}
+            className="font-roboto w-full xxsm:w-40 max-w-sm:text-[14px]    z-0 cursor-pointer"
+          >
+            Register
+          </Button>
         </div>
       </section>
     </motion.div>

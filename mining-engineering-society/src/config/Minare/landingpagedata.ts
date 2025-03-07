@@ -119,7 +119,7 @@ export const events = [
 export const RulesAndRegulations = [
   {
     id: 1,
-    name: "Rock On Pap",
+    name: "Rock-On-Pap",
     description:
       "A technical paper presentation event where participants submit abstracts for review. Selected participants present their papers using slides and provide copies to the jury. Winners are chosen based on jury scores.",
     rules: [
@@ -194,7 +194,7 @@ export const RulesAndRegulations = [
   },
   {
     id: 4,
-    name: "Case Oriented",
+    name: "Case-Ore-inted",
     description:
       "A team-based case study event where participants analyze and present solutions, followed by a jury Q&A session.",
     rules: [
@@ -262,7 +262,7 @@ export const RulesAndRegulations = [
   },
   {
     id: 6,
-    name: "Podcast",
+    name: "Mining Podcast",
     description:
       "An exclusive podcast session featuring a renowned personality from the mining sector, covering trends, innovations, and insights."
   }
