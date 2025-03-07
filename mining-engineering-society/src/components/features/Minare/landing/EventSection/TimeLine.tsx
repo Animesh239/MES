@@ -11,6 +11,9 @@ import {
 } from "@/lib/firebase/authListener";
 import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
+import Image from "next/image";
+import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
+import { Calendar, Clock } from "lucide-react";
 // import toast from "react-hot-toast";
 
 const Timeline = () => {
@@ -22,6 +25,34 @@ const Timeline = () => {
   const [loadingEventId, setLoadingEventId] = useState<number | null>(null);
   const isLoading = useAuthStore((state) => state.isLoading);
   const [isLogin, setislogin] = useState(false);
+
+  const [expandedSections, setExpandedSections] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  useEffect(() => {
+    const updateScreenSize = () => setIsMobile(window.innerWidth < 600);
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
+
+  const toggleDescription = (sectionId: number) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }));
+  };
+
+  const truncateDescription = (text: string, sectionId: number) => {
+    const words = text.split(" ");
+    const isExpanded = expandedSections[sectionId];
+
+    if (isExpanded) return text;
+
+    const truncatedText = words.slice(0, 20).join(" ");
+    return words.length > 20 ? `${truncatedText}...` : truncatedText;
+  };
 
   useEffect(() => {
     initializeAuthListener();
@@ -36,12 +67,7 @@ const Timeline = () => {
       }
     };
 
-    const updateScreenSize = () => setIsMobile(window.innerWidth < 900);
-    updateScreenSize();
-    window.addEventListener("resize", updateScreenSize);
-
     fetchUserData();
-    return () => window.removeEventListener("resize", updateScreenSize);
   }, [isLoading]);
 
   useEffect(() => {
@@ -103,8 +129,11 @@ const Timeline = () => {
         <div className="fixed top-0 left-0 right-0 h-1 bg-white/20 z-50"></div>
       </motion.div>
 
-      <div className="relative mx-auto max-w-7xl p-4 sm:p-8" ref={containerRef}>
-        <div className="absolute lg:left-1/2 left-8 h-full w-0.5 lg:-translate-x-1/2 transform bg-white/30" />
+      <div
+        className="relative mx-auto max-w-7xl p-0 xxsm:p-8"
+        ref={containerRef}
+      >
+        <div className="absolute lg:left-1/2 left-3 xxsm:left-8 h-full w-0.5 lg:-translate-x-1/2 transform bg-white/30" />
 
         {events.map((event, index) => (
           <motion.div
@@ -151,25 +180,63 @@ const Timeline = () => {
                     boxShadow:
                       "-10px 10px 50px rgba(0, 0, 0, 0.3), 0px 5px 15px rgba(0, 0, 0, 0.6)"
                   }}
-                  className="w-full min-h-[300px] sm:min-h-[400px] lg:min-h-[516px] 
-                    flex flex-col justify-end items-center p-6 
-                    text-[20px] sm:text-[24px] font-bold leading-relaxed 
-                    break-words text-center rounded-3xl "
+                  className="w-full h-auto 
+                    flex flex-col justify-end gap-3 items-center p-3 xxsm:p-6 pb-10
+                    text-[20px] sm:text-[24px] font-roboto font-bold leading-relaxed 
+                    break-words text-center rounded-xl "
                 >
-                  <h3 className="text-xl font-bold text-white mb-4">
+                  <div className="w-full h-44 relative">
+                    <Image
+                      src={MiningDeptImgUrl}
+                      alt="event image"
+                      layout="fill"
+                      objectFit="cover"
+                      className="z-20  grayscale rounded-xl hover:grayscale-0 hover:scale-105 duration-300 cursor-pointer"
+                    />
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white ">
                     {event.title}
                   </h3>
-                  {/* <p className="text-base font-normal text-white/60 mb-2">
-                    {event.date}
-                  </p> */}
-                  <p className="text-base font-normal text-white/80">
-                    {event.description}
-                  </p>
+
+                  <div className="text-base font-normal text-center text-white/80">
+                    {isMobile ? (
+                      <>
+                        {truncateDescription(event.description, event.id)}
+                        {event.description.split(" ").length > 42 && (
+                          <button
+                            onClick={() => toggleDescription(event.id)}
+                            className=" text-blue-300 hover:text-blue-500 transition-colors"
+                          >
+                            {expandedSections[event.id]
+                              ? "Show Less"
+                              : "Show More"}
+                          </button>
+                        )}
+                      </>
+                    ) : (
+                      event.description
+                    )}
+                  </div>
+                  <div className="flex gap-4 justify-center w-full">
+                    <div className="text-base font-normal flex items-center gap-2  text-white/60 mb-2">
+                      <Clock className="size-6 text-white/[0.7] font-semibold" />
+                      <div className="text-white/[0.7] font-semibold font-roboto">
+                        {event.time}
+                      </div>
+                    </div>
+                    <div className="text-base font-normal flex items-center gap-2  text-white/60 mb-2">
+                      <Calendar className="size-6 text-white/[0.7] font-semibold" />
+                      <div className="text-white/[0.7] font-semibold font-roboto">
+                        {event.date}
+                      </div>
+                    </div>
+                  </div>
                   <Button
                     onClick={() =>
                       eventRegisterationHandler(event.id, event.title)
                     }
-                    className={`w-full z-50 mt-7 h-10  font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
+                    className={`w-full z-50 mb-0 xxsm:mb-8 h-10 font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
                     disabled={
                       registeredEventIds.includes(event.id) ||
                       loadingEventId === event.id
