@@ -1,3 +1,4 @@
+// Timeline.tsx
 import { Button } from "@/components/ui/button";
 import { UpdateData } from "@/lib/firebase/updateData";
 import { easeIn, motion, useScroll } from "framer-motion";
@@ -14,9 +15,10 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
 import { Calendar, Clock } from "lucide-react";
-// import toast from "react-hot-toast";
+import { RulesDialog } from "../HeroSection/rulesAndRegulation";
 
 const Timeline = () => {
+  const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [registeredEventsTitle, setRegisteredEventsTitle] = useState<string[]>(
     []
@@ -25,6 +27,7 @@ const Timeline = () => {
   const [loadingEventId, setLoadingEventId] = useState<number | null>(null);
   const isLoading = useAuthStore((state) => state.isLoading);
   const [isLogin, setislogin] = useState(false);
+  const [selectedEventTitle, setSelectedEventTitle] = useState<string>("");
 
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
@@ -77,6 +80,11 @@ const Timeline = () => {
 
     setRegisteredEventIds(registeredIds);
   }, [registeredEventsTitle]);
+
+  const handleOpenRules = (title: string) => {
+    setSelectedEventTitle(title);
+    setOpen(true);
+  };
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -191,7 +199,7 @@ const Timeline = () => {
                       alt="event image"
                       layout="fill"
                       objectFit="cover"
-                      className="z-20  grayscale rounded-xl hover:grayscale-0 hover:scale-105 duration-300 cursor-pointer"
+                      className="z-20 grayscale rounded-xl hover:grayscale-0 hover:scale-105 duration-300 cursor-pointer"
                     />
                   </div>
 
@@ -219,41 +227,53 @@ const Timeline = () => {
                     )}
                   </div>
                   <div className="flex gap-4 justify-center w-full">
-                    <div className="text-base font-normal flex items-center gap-2  text-white/60 mb-2">
+                    <div className="text-base font-normal flex items-center gap-2 text-white/60 mb-2">
                       <Clock className="size-6 text-white/[0.7] font-semibold" />
                       <div className="text-white/[0.7] font-semibold font-roboto">
                         {event.time}
                       </div>
                     </div>
-                    <div className="text-base font-normal flex items-center gap-2  text-white/60 mb-2">
+                    <div className="text-base font-normal flex items-center gap-2 text-white/60 mb-2">
                       <Calendar className="size-6 text-white/[0.7] font-semibold" />
                       <div className="text-white/[0.7] font-semibold font-roboto">
                         {event.date}
                       </div>
                     </div>
                   </div>
-                  <Button
-                    onClick={() =>
-                      eventRegisterationHandler(event.id, event.title)
-                    }
-                    className={`w-full z-50 mb-0 xxsm:mb-8 h-10 font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
-                    disabled={
-                      registeredEventIds.includes(event.id) ||
-                      loadingEventId === event.id
-                    }
-                  >
-                    {registeredEventIds.includes(event.id)
-                      ? "Registered"
-                      : loadingEventId === event.id
-                      ? "Registering..."
-                      : "Register"}
-                  </Button>
+                  <div className="w-full flex flex-col sm:flex-row gap-0 sm:gap-5">
+                    <Button
+                      onClick={() =>
+                        eventRegisterationHandler(event.id, event.title)
+                      }
+                      className={`w-full z-50 mb-2 xxsm:mb-4 h-10 font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
+                      disabled={
+                        registeredEventIds.includes(event.id) ||
+                        loadingEventId === event.id
+                      }
+                    >
+                      {registeredEventIds.includes(event.id)
+                        ? "Registered"
+                        : loadingEventId === event.id
+                        ? "Registering..."
+                        : "Register"}
+                    </Button>
+                    <Button
+                      variant="default"
+                      onClick={() => handleOpenRules(event.title)}
+                      className={`w-full z-50 mb-0 xxsm:mb-8 h-10 font-normal font-roboto text-white bg-white/[0.05] border-white border-[2px] rounded-lg transition-all hover:bg-white hover:text-black duration-200 disabled:opacity-50 text-sm sm:text-base`}
+                    >
+                      Rules
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* Rules Dialog Component */}
+      <RulesDialog title={selectedEventTitle} open={open} setOpen={setOpen} />
     </div>
   );
 };

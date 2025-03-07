@@ -1,3 +1,5 @@
+// rulesAndRegulation.tsx
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -7,17 +9,38 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { BookOpen, ChevronRight } from "lucide-react";
 import { RulesAndRegulations } from "@/config/Minare/landingpagedata";
+import { useEffect, useState } from "react";
+import { EventData } from "@/config/Minare/type";
 
 export function RulesDialog({
   open,
-  setOpen
+  setOpen,
+  title
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
 }) {
+  const [eventData, setEventData] = useState<EventData | undefined>();
+
+  useEffect(() => {
+    if (open && title) {
+      console.log("Looking for rules for event:", title);
+      const foundEvent = RulesAndRegulations.find(
+        (item) => item.name === title
+      );
+      if (foundEvent) {
+        console.log("Found rules data for:", title);
+        setEventData(foundEvent);
+      } else {
+        console.log("No rules found for:", title);
+        setEventData(undefined);
+      }
+    }
+  }, [title, open]);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[90vw] h-screen md:max-w-[800px] bg-black/95 backdrop-blur-xl border border-white/20 shadow-2xl shadow-white/10">
@@ -27,7 +50,7 @@ export function RulesDialog({
               <BookOpen className="w-6 h-6 text-white" />
             </div>
             <DialogTitle className="text-2xl md:text-3xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-              MINARE 2025
+              {title || "MINARE 2025"}
               <span className="block text-base md:text-lg font-medium text-white/60 mt-1">
                 Rules and Regulations
               </span>
@@ -37,32 +60,32 @@ export function RulesDialog({
 
         <ScrollArea className="h-[65vh] sm:h-[70vh] pr-4">
           <div className="space-y-10">
-            {RulesAndRegulations.map((event) => (
-              <div key={event.id} className="space-y-5 relative">
+            {eventData ? (
+              <div className="space-y-5 relative">
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20 text-sm font-semibold text-white shrink-0">
-                      {event.id}
+                      {eventData.id}
                     </span>
                     <div>
                       <h3 className="text-xl md:text-2xl font-bold text-white">
-                        {event.name}
+                        {eventData.name}
                       </h3>
                       <p className="text-sm md:text-base text-white/70 leading-relaxed mt-2">
-                        {event.description}
+                        {eventData.description}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {event.rules && (
+                {eventData.rules && (
                   <div className="space-y-4 ml-11">
                     <h4 className="text-lg font-semibold text-white/90 flex items-center gap-2">
                       <ChevronRight className="w-4 h-4" />
                       Rules
                     </h4>
                     <ul className="grid gap-3 text-sm md:text-base text-white/70">
-                      {event.rules.map((rule, index) => (
+                      {eventData.rules.map((rule, index) => (
                         <li key={index} className="flex gap-3 items-start">
                           <span className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-medium text-white/40 shrink-0">
                             {index + 1}
@@ -74,9 +97,9 @@ export function RulesDialog({
                   </div>
                 )}
 
-                {event.stages && (
+                {eventData.stages && (
                   <div className="space-y-6 ml-11">
-                    {event.stages.map((stage, index) => (
+                    {eventData.stages.map((stage, index) => (
                       <div key={index} className="space-y-4">
                         <h4 className="text-lg font-semibold text-white/90 flex items-center gap-2">
                           <ChevronRight className="w-4 h-4" />
@@ -100,14 +123,14 @@ export function RulesDialog({
                   </div>
                 )}
 
-                {event.additionalRules && (
+                {eventData.additionalRules && (
                   <div className="space-y-4 ml-11">
                     <h4 className="text-lg font-semibold text-white/90 flex items-center gap-2">
                       <ChevronRight className="w-4 h-4" />
                       Additional Rules
                     </h4>
                     <ul className="grid gap-3 text-sm md:text-base text-white/70">
-                      {event.additionalRules.map((rule, index) => (
+                      {eventData.additionalRules.map((rule, index) => (
                         <li key={index} className="flex gap-3 items-start">
                           <span className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-medium text-white/40 shrink-0">
                             {index + 1}
@@ -118,12 +141,16 @@ export function RulesDialog({
                     </ul>
                   </div>
                 )}
-
-                {event.id !== RulesAndRegulations.length && (
-                  <Separator className="my-8 bg-white/10" />
-                )}
               </div>
-            ))}
+            ) : (
+              <div className="flex flex-col items-center justify-center py-10">
+                <p className="text-white/70 text-center">
+                  {title
+                    ? `No rules found for "${title}". wait till events to be added`
+                    : "Please select an event to view its rules and regulations."}
+                </p>
+              </div>
+            )}
           </div>
         </ScrollArea>
 
