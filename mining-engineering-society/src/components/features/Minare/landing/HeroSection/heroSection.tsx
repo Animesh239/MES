@@ -7,13 +7,16 @@ import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { RulesDialog } from "./rulesAndRegulation";
 // import { Profile } from "./profile";
 // import { useEffect } from "react";
 
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
-const dates = "22ⁿᵈ - 23ʳᵈ March 2025"
+const dates = "22ⁿᵈ - 23ʳᵈ March 2025";
 
 export const Hero = () => {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const handleRegister = () => {
     router.push("minare/registration");
@@ -31,8 +34,8 @@ export const Hero = () => {
               visible: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 1, ease: easeIn },
-              },
+                transition: { duration: 1, ease: easeIn }
+              }
             }}
           >
             <div className="overflow-y-hidden"></div>
@@ -47,9 +50,9 @@ export const Hero = () => {
               visible: {
                 transition: {
                   staggerChildren: 0.08,
-                  delayChildren: 0.5,
-                },
-              },
+                  delayChildren: 0.5
+                }
+              }
             }}
           >
             <div className="text-xl sm-text-2xl md:text-3xl font-light tracking-widest text-gray-400 max-w-2xl mx-auto mb-8">
@@ -61,8 +64,8 @@ export const Hero = () => {
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.5, ease: easeIn },
-                  },
+                    transition: { duration: 1.5, ease: easeIn }
+                  }
                 }}
               >
                 <div className="inline-block mr-3 leading-relaxed ">
@@ -78,14 +81,23 @@ export const Hero = () => {
               </motion.span>
             </div>
           </motion.div>
-
-          <Button
-            variant="default"
-            onClick={() => handleRegister()}
-            className="font-semibold z-0 cursor-pointer"
-          >
-            Register
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-5">
+            <Button
+              variant="default"
+              onClick={() => handleRegister()}
+              className="font-roboto w-full xxsm:w-40 max-w-sm:text-[16px]    z-0 cursor-pointer"
+            >
+              Register
+            </Button>
+            <Button
+              variant="default"
+              onClick={() => setOpen(true)}
+              className="font-roboto max-w-sm:text-[16px] w-full xxsm:w-40 sm:w-auto hover:bg-white bg-white/[0.15] border-white hover:text-black backdrop-blur-md border-2 text-white z-0 cursor-pointer"
+            >
+              Rules & regulation
+            </Button>
+            <RulesDialog open={open} setOpen={setOpen} />
+          </div>
         </div>
       </section>
     </motion.div>

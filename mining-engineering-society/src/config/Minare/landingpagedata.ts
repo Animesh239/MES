@@ -115,3 +115,155 @@ export const events = [
   }
   // { id: 9, title: "Event 9", description: "Description 9" }
 ];
+
+export const RulesAndRegulations = [
+  {
+    id: 1,
+    name: "Rock On Pap",
+    description:
+      "A technical paper presentation event where participants submit abstracts for review. Selected participants present their papers using slides and provide copies to the jury. Winners are chosen based on jury scores.",
+    rules: [
+      "Each team (2-3 members) or individual must submit a technical paper abstract in advance for screening.",
+      "The chosen candidate presents the paper via PowerPoint and provides hard copies to the jury.",
+      "Each team has 6-8 minutes for their presentation and 5 minutes for Q&A.",
+      "Exceeding the time limit will lead to negative scores.",
+      "Results will be declared based on jury scores."
+    ]
+  },
+  {
+    id: 2,
+    name: "Mine Forge: Managerial Challenge",
+    description:
+      "A strategic event where teams manage a fictional mining company, bid for coal blocks, plan operations, and ensure compliance with mining regulations.",
+    stages: [
+      {
+        name: "Bidding",
+        details: [
+          "Teams (2-4 members) will be randomly assigned a company name by drawing lots.",
+          "Teams receive details about their company's production targets, capital investment, and other factors.",
+          "The competition is based on a fictional coal belt with six coal blocks available for auction.",
+          "Each coal block's composition will be provided."
+        ]
+      },
+      {
+        name: "Planning and Development",
+        details: [
+          "Guidelines on mechanization and procurement costs will be provided.",
+          "Teams must strategize the composition of their machinery fleet within budget limits.",
+          "Strict adherence to Mine Rules, 1955 (Sections 30, 33, 43, and 64) is mandatory.",
+          "Non-compliance results in penalties."
+        ]
+      },
+      {
+        name: "Production and DGMS Inspection",
+        details: [
+          "Teams must prepare a cash flow statement and meet production targets.",
+          "DGMS will inspect compliance with regulations.",
+          "Penalties apply for rule violations or failure to meet targets."
+        ]
+      },
+      {
+        name: "Reclamation and Rehabilitation",
+        details: [
+          "Teams present a detailed Reclamation & Rehabilitation (R&R) plan, addressing environmental, ecological, and socio-economic aspects.",
+          "The plan must include afforestation, soil rehabilitation, and community development within a fixed budget.",
+          "Bonus points are awarded for innovative sustainability ideas.",
+          "Judges will evaluate feasibility, sustainability, and innovation."
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    name: "Mine Matrix",
+    description:
+      "A problem-solving event where teams sequentially solve questions, unlocking codes with each correct answer. Accuracy and speed determine the winners.",
+    rules: [
+      "Teams (1-3 members) must be from the same institute.",
+      "Participants must carry their own laptops and accessories.",
+      "Each team draws a ballot for their first question.",
+      "Correct answers reveal the next question number.",
+      "The final combined code must be submitted in the correct order.",
+      "The fastest correct submission wins; ties are broken by incorrect attempt count.",
+      "An invigilator will monitor teams for fairness.",
+      "Use of external internet resources is prohibited unless explicitly allowed.",
+      "No communication between teams is allowed.",
+      "Submissions are final; no corrections allowed.",
+      "Organizers' decisions are final."
+    ]
+  },
+  {
+    id: 4,
+    name: "Case Oriented",
+    description:
+      "A team-based case study event where participants analyze and present solutions, followed by a jury Q&A session.",
+    rules: [
+      "Case study topics will be shared 10 days before the event.",
+      "Teams (2-3 members) must designate a leader.",
+      "Presentations are 6-8 minutes, followed by a 5-minute Q&A.",
+      "Exceeding the time limit leads to point deductions.",
+      "Jury scores determine final rankings.",
+      "At least 6 participants (teams or individuals) must register for the event to proceed.",
+      "Participants must submit their strategy and proposed solution before the deadline."
+    ]
+  },
+  {
+    id: 5,
+    name: "Oracle Quest",
+    description:
+      "A mining-related quiz competition featuring MCQs, image-based questions, and rapid-fire rounds. The team with the highest score wins.",
+    stages: [
+      {
+        name: "Prelims",
+        details: [
+          "Teams (2-4 members) must qualify to participate.",
+          "The prelims include 20 mining-related questions.",
+          "Asterisk-marked questions carry +2 points but -1 for incorrect answers.",
+          "Unanswered questions receive no points.",
+          "Prelims will be conducted online via the Unstop platform.",
+          "In case of a tie, time taken will be the deciding factor."
+        ]
+      },
+      {
+        name: "Round 1 - MCQs",
+        details: [
+          "Each team gets 5 mining-related MCQs in a cyclical format.",
+          "Unanswered questions pass to the next team.",
+          "Correct answers: +10 points, incorrect: -5 points.",
+          "Passed questions: +5 points for correct answers, no penalty for incorrect ones."
+        ]
+      },
+      {
+        name: "Round 2 - Image-Based Questions",
+        details: [
+          "Each team gets 4 mining-related image questions.",
+          "Passing is not allowed in this round.",
+          "Correct answers: +20 points, incorrect: -5 points.",
+          "Teams can use external help (professor or friend) once."
+        ]
+      },
+      {
+        name: "Round 3 - Rapid Fire",
+        details: [
+          "Each team gets 7 rapid-fire questions.",
+          "No passing allowed.",
+          "Correct answers: +5 points, no penalties for incorrect answers.",
+          "Teams must answer within 5 seconds."
+        ]
+      }
+    ],
+    additionalRules: [
+      "Bonus questions at the end of each round give +5 points with no penalty for wrong answers.",
+      "At least 6 teams must participate for the event to proceed.",
+      "Tie-breakers involve a sudden-death question.",
+      "During Round 2, teams may use an 'Audience Poll' lifeline once.",
+      "Teams with creative mining-related names get +2 bonus points."
+    ]
+  },
+  {
+    id: 6,
+    name: "Podcast",
+    description:
+      "An exclusive podcast session featuring a renowned personality from the mining sector, covering trends, innovations, and insights."
+  }
+];
