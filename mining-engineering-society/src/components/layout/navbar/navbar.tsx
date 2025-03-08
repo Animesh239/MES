@@ -197,7 +197,7 @@ export default function Navbar() {
 
           <div className="hidden md:block">
             <a href="/minare">
-              <button className="px-6 py-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
+              <button className="px-6 py-2 text-white text-xl font-bold rounded-2xl bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
                 <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
                   MINARE
                 </span>
@@ -223,7 +223,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden h-screen flex items-start justify-center mt-32">
+        <div className="md:hidden h-screen flex items-start justify-center mt-20">
           <div className="px-2 pt-2 pb-3 space-y-4 sm:px-3 items-center flex flex-col">
             <NavItem href="/" onClick={closeNavbar}>
               Home
@@ -253,7 +253,7 @@ export default function Navbar() {
             </NavItem2>
             <div className="md:block">
               <Link href="/minare">
-                <button className="px-6 py-3 mt-2 text-white text-xl font-bold rounded-full bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
+                <button className="px-6 py-3 mt-2 text-white text-xl font-bold rounded-2xl bg-black border border-white shadow-[0_0_5px_#fff,inset_0_0_2px_#fff,0_0_2px_#08f] transition-all duration-300 hover:scale-105">
                   <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl">
                     MINARE
                   </span>

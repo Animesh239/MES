@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
 
 export default function MemberCard({
   name,
@@ -6,20 +6,34 @@ export default function MemberCard({
   imgURL,
 }: MemberCardProps) {
   return (
-    <div className="p-[2px] bg-gradient-to-r from-blue-400 to-purple-600 rounded-2xl transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-      <Card className="py-4 px-3 bg-black border-none max-w-[300px] rounded-2xl ">
-        <CardBody className="overflow-visible py-2 justify-center items-center">
-          <Image
-            alt="Card background"
-            className="object-cover rounded-full opacity-100"
-            src={imgURL}
-            width={250}
-            height={250}
-          />
-          <CardHeader className="pb-0 pt-4 px-4 flex-col text-white text-center">
-            <p className="text-2xl uppercase font-bold">{name}</p>
-            <h4 className="font-bold text-large text-gray-400">{position}</h4>
-          </CardHeader>
+    <div className="relative w-[300px] h-[400px] transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <Card
+        className="py-4 px-3 bg-black border-2 border-transparent bg-clip-padding rounded-2xl h-full flex flex-col"
+        style={{
+          backgroundImage:
+            "linear-gradient(black, black), linear-gradient(to right, #60a5fa, #a78bfa)",
+          backgroundOrigin: "border-box",
+          backgroundClip: "padding-box, border-box",
+        }}
+      >
+        <CardBody className="py-2 flex flex-col h-full">
+          <div className="flex-1 flex items-center justify-center">
+            <Image
+              alt={`${name}'s photo`}
+              className="object-cover rounded-full opacity-100"
+              src={imgURL}
+              width={220}
+              height={220}
+            />
+          </div>
+          <div className="mt-4 text-center">
+            <p className="text-2xl uppercase font-bold text-white break-words">
+              {name}
+            </p>
+            <p className="font-bold text-large text-gray-400 mt-1">
+              {position}
+            </p>
+          </div>
         </CardBody>
       </Card>
     </div>

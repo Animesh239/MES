@@ -13,7 +13,15 @@ export default function MemberCard({
 }: MemberCardProps) {
   return (
     <div className="w-full max-w-[270px] mx-auto">
-      <div className="relative rounded-xl overflow-hidden shadow-lg border-4 border-white transition-all duration-300 hover:shadow-[0_0_15px_5px_rgba(255,255,255,0.5)] hover:scale-105">
+      <div
+        className="relative rounded-xl overflow-hidden shadow-lg border-4 border-transparent bg-clip-padding transition-all duration-300 hover:shadow-[0_0_15px_5px_rgba(255,255,255,0.3)] hover:scale-105"
+        style={{
+          backgroundImage:
+            "linear-gradient(black, black), linear-gradient(to right, #60a5fa, #a78bfa)",
+          backgroundOrigin: "border-box",
+          backgroundClip: "padding-box, border-box",
+        }}
+      >
         <div className="relative">
           <Image
             src={image || "/placeholder.svg?height=200"}
