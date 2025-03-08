@@ -13,7 +13,7 @@ import {
 import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
 import Image from "next/image";
-import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
+// import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
 import { Calendar, Clock } from "lucide-react";
 import { RulesDialog } from "../HeroSection/rulesAndRegulation";
 
@@ -195,7 +195,7 @@ const Timeline = () => {
                 >
                   <div className="w-full h-44 relative">
                     <Image
-                      src={MiningDeptImgUrl}
+                      src={event.imgurl}
                       alt="event image"
                       layout="fill"
                       objectFit="cover"

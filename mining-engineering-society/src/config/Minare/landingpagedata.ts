@@ -54,6 +54,7 @@ export const events = [
     time: "2pm",
     title: "Case-Ore-inted",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112995/minare/MINARE%202024%20PHOTOS/Minare/xc8js5m7wfwigergsngi.jpg",
     description:
       "Case ore-iented is a dynamic event challenging participants with speculative mining scenarios to spark analytical thinking. Armed with the latest industry trends and expert guidance, attendees are set to uncover groundbreaking strategies, turning challenges into opportunities. Embark on this intellectual journey to reshape the future of mining."
   },
@@ -62,6 +63,7 @@ export const events = [
     time: "2pm",
     title: "Geobotics Challenge",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112962/minare/MINARE%202024%20PHOTOS/Minare/qqw2seni1cppdwstxjkb.jpg",
     description:
       "Geobotics Challenge tests the robot-building skill of contestants. The bots will need to prove themselves on various mining-related challenges, decided by the judges. With the increase in the use of robots in the mining industry, this event tests the participants on their robot construction expertise."
   },
@@ -70,6 +72,7 @@ export const events = [
     time: "2pm",
     title: "Rock-On-Pap",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112958/minare/MINARE%202024%20PHOTOS/Minare/gqymne2cqfysmj21x71l.jpg",
     description:
       "Rock on Pap is an insightful paper presentation event where scholars present their technical research on mining-related topics. The event promotes showcasing innovations, methodologies, and research findings, advancing sustainable mining while fostering idea exchange and collaboration for academic and professional growth."
   },
@@ -78,6 +81,7 @@ export const events = [
     time: "2pm",
     title: "Ore-Acle-Quest",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112955/minare/MINARE%202024%20PHOTOS/Minare/rqhjgqoc6fjlvmw9i3d9.jpg",
     description:
       "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner."
   },
@@ -86,6 +90,7 @@ export const events = [
     time: "2pm",
     title: "Surveyor’s Node",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112917/minare/MINARE%202024%20PHOTOS/v04hw4yvpgaa4s1cqpys.jpg",
     description:
       "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner."
   },
@@ -94,6 +99,7 @@ export const events = [
     time: "2pm",
     title: "Mine Workshop",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112888/minare/MINARE%202024%20PHOTOS/trbfk7ixvzf8g6e6xqyp.jpg",
     description:
       "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with in-depth knowledge on cutting-edge tools and techniques."
   },
@@ -102,6 +108,7 @@ export const events = [
     time: "2pm",
     title: "Group Discussion",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112888/minare/MINARE%202024%20PHOTOS/trbfk7ixvzf8g6e6xqyp.jpg",
     description:
       "Participate to showcase your critical thinking, communication, and teamwork skills. Teams of two will engage in a dynamic discussion on a topic announced 15 minutes before Round 1. The top four teams will advance to the final round, where the best team will emerge victorious."
   },
@@ -110,6 +117,7 @@ export const events = [
     time: "2pm",
     title: "Mining Podcast",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112888/minare/MINARE%202024%20PHOTOS/trbfk7ixvzf8g6e6xqyp.jpg",
     description:
       "Dive into the world of mining with an exclusive podcast session featuring a renowned personality from the mining sector. This event offers an unparalleled opportunity to explore the latest trends, innovations, and challenges shaping the industry. Gain firsthand knowledge and insights directly from a leading figure with years of expertise in the field."
   }
