@@ -1,4 +1,4 @@
-import MemberCard from "@/components/ui/card";
+import MemberCard from "@/components/typography/card";
 import { CurrentStakeHolders } from "@/config/Members/StakeHolders/Data";
 import PastStakeHolderCarousel from "@/components/features/Members/StakeHolders/Carousel";
 

@@ -24,7 +24,12 @@ export const GetUserDetail = async () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser?.uid) {
-      throw new Error("No user is currently logged in");
+      // throw new Error("you are not currently logged in");
+      return {
+        success: false,
+        error: "you are not currently logged in",
+        data: null
+      };
     }
 
     const result = await getDocument("users", currentUser.uid);

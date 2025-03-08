@@ -22,12 +22,12 @@ export const CurrentStakeHolders = [
   {
     name: "Rahul Ranjan Dash",
     position: "Vice-President",
-    imgUrl: "https://picsum.photos/200/300",
+    imgUrl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741434486/minare/ktg2o19hoplyzk2yykay.png",
   },
   {
     name: "Animesh Barik",
     position: "General Secretary",
-    imgUrl: "https://picsum.photos/200/300",
+    imgUrl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741434564/minare/y2fq3p6pqjf9t0fthrjx.jpg",
   },
   {
     name: "Rocky Roshan Behera",

@@ -83,6 +83,7 @@ export default {
       },
       screens: {
         xsm: "475px",
+        xxxsm: "345px",
         xxsm: "390px"
       },
       borderRadius: {

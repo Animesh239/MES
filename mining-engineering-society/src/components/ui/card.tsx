@@ -1,3 +1,4 @@
+
 import { Card, CardBody, Image } from "@nextui-org/react";
 
 export default function MemberCard({
@@ -45,3 +46,4 @@ interface MemberCardProps {
   position: string;
   imgURL: string;
 }
+

@@ -7,11 +7,14 @@ import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
+// import { useState } from "react";
+// import { RulesDialog } from "./rulesAndRegulation";
+// import { RulesAndRegulations } from "@/config/Minare/landingpagedata";
 // import { Profile } from "./profile";
 // import { useEffect } from "react";
 
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
-const dates = "22ⁿᵈ - 23ʳᵈ March 2025"
+const dates = "22ⁿᵈ - 23ʳᵈ March 2025";
 
 export const Hero = () => {
   const router = useRouter();
@@ -31,8 +34,8 @@ export const Hero = () => {
               visible: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 1, ease: easeIn },
-              },
+                transition: { duration: 1, ease: easeIn }
+              }
             }}
           >
             <div className="overflow-y-hidden"></div>
@@ -47,9 +50,9 @@ export const Hero = () => {
               visible: {
                 transition: {
                   staggerChildren: 0.08,
-                  delayChildren: 0.5,
-                },
-              },
+                  delayChildren: 0.5
+                }
+              }
             }}
           >
             <div className="text-xl sm-text-2xl md:text-3xl font-light tracking-widest text-gray-400 max-w-2xl mx-auto mb-8">
@@ -61,8 +64,8 @@ export const Hero = () => {
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.5, ease: easeIn },
-                  },
+                    transition: { duration: 1.5, ease: easeIn }
+                  }
                 }}
               >
                 <div className="inline-block mr-3 leading-relaxed ">
@@ -82,7 +85,7 @@ export const Hero = () => {
           <Button
             variant="default"
             onClick={() => handleRegister()}
-            className="font-semibold z-0 cursor-pointer"
+            className="font-roboto w-full xxsm:w-40 max-w-sm:text-[14px]    z-0 cursor-pointer"
           >
             Register
           </Button>

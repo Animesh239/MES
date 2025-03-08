@@ -58,7 +58,7 @@ export const GalleryCard = () => {
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   style={{ backgroundImage: `url(${item.imgUrl})` }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60 hover:bg-none" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform transition-transform duration-300 translate-y-6 group-hover:translate-y-0">
                   {/* <h3 className="text-2xl font-bold mb-2">Event {item.id}</h3> */}
                   {/* <p className="text-sm text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
