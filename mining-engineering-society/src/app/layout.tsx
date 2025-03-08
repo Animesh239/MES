@@ -90,10 +90,10 @@ export default function RootLayout({
             style: {
               border: "1px solid #ffffff",
               // padding: "16px",
-              borderColor: "rgb(216 180 254 / 0.5)",
+              borderColor: "black",
               backgroundColor: "rgb(255 255 255 / 0.2)",
               backdropFilter: "blur(4px)",
-              color: "rgb(233 213 255 / var(--tw-text-opacity, 1))"
+              color: "white"
             }
           }}
         />

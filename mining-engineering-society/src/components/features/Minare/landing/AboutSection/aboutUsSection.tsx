@@ -56,14 +56,14 @@ export const About = () => {
                   <div className="mb-16">
                     <Header label={section.header.title} />
                   </div>
-                  <p className="text-gray-100 text-center font-roboto leading-[30px] sm:leading-[40px] text-lg md:text-[27px] tracking-wider font-[300]">
+                  <p className="text-gray-100 text-center font-roboto leading-[30px] sm:leading-[40px]  text-lg md:text-[27px] tracking-wider font-[300]">
                     {isMobile ? (
                       <>
                         {truncateDescription(section.description, section.id)}
-                        {section.description.split(" ").length > 42 && (
+                        {section.description.split(" ").length > 50 && (
                           <button
                             onClick={() => toggleDescription(section.id)}
-                            className=" text-blue-300 hover:text-blue-500 transition-colors"
+                            className=" text-blue-300 hover:text-blue-500 text-justify transition-colors"
                           >
                             {expandedSections[section.id]
                               ? "Show Less"
