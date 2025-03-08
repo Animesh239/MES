@@ -61,7 +61,7 @@ export default function ContactDetails() {
             <h3 className="text-xl font-medium text-gray-200">NIT Rourkela</h3>
             <p className="text-gray-400 text-lg">Visit us in person!</p>
             <Link
-              href="https://goo.gl/maps/Hqf6mqsjVdv4j4LY6"
+              href="https://maps.app.goo.gl/fVtz8E5NGFabwEqr9"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"
