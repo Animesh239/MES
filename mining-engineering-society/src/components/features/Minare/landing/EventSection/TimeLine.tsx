@@ -14,7 +14,7 @@ import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
 import Image from "next/image";
 // import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
-import { Calendar, Clock } from "lucide-react";
+// import { Calendar, Clock } from "lucide-react";
 import { RulesDialog } from "../HeroSection/rulesAndRegulation";
 
 const Timeline = () => {
@@ -193,13 +193,12 @@ const Timeline = () => {
                     text-[20px] sm:text-[24px] font-roboto font-bold leading-relaxed 
                     break-words text-center rounded-xl "
                 >
-                  <div className="w-full h-44 relative">
+                  <div className="w-full h-56  md:h-80 relative">
                     <Image
                       src={event.imgurl}
                       alt="event image"
                       layout="fill"
-                      objectFit="cover"
-                      className="z-20 grayscale rounded-xl hover:grayscale-0 hover:scale-105 duration-300 cursor-pointer"
+                      className="z-20 rounded-xl hover:scale-105 duration-300 cursor-pointer"
                     />
                   </div>
 
@@ -226,7 +225,7 @@ const Timeline = () => {
                       event.description
                     )}
                   </div>
-                  <div className="flex gap-4 justify-center w-full">
+                  {/* <div className="flex gap-4 justify-center w-full">
                     <div className="text-base font-normal flex items-center gap-2 text-white/60 mb-2">
                       <Clock className="size-6 text-white/[0.7] font-semibold" />
                       <div className="text-white/[0.7] font-semibold font-roboto">
@@ -239,7 +238,7 @@ const Timeline = () => {
                         {event.date}
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="w-full flex flex-col sm:flex-row gap-0 sm:gap-5">
                     <Button
                       onClick={() =>
