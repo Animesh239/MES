@@ -1,7 +1,7 @@
 // import { AboutMiningDept } from "./AboutminingDept";
 import { AboutMiningDept } from "./AboutMiningDept";
 import { CardWrapper } from "./CardWrapper";
-import { Feedback } from "./Feedback";
+// import { Feedback } from "./Feedback";
 import { Heading } from "./Heading";
 import { Statistics } from "./Statistics";
 import { YoutubeVideo } from "./youtubeVideo";
@@ -14,7 +14,7 @@ export const AboutUsMain = () => {
       <CardWrapper />
       <Statistics />
       <YoutubeVideo />
-      <Feedback />
+      {/* <Feedback /> */}
     </div>
   );
 };
