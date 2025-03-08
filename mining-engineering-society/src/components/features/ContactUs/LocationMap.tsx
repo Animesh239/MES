@@ -17,7 +17,7 @@ export default function LocationMap() {
       <div className="aspect-w-16 aspect-h-9">
         <Suspense fallback={<Loading />}>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.6576948447!2d84.89992661495637!3d22.25340798534676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a201f72bbd561c3%3A0xab5c70e76a7b5a!2sNational%20Institute%20of%20Technology%2C%20Rourkela!5e0!3m2!1sen!2sin!4v1679901309304!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.6445808124536!2d84.89853458012789!3d22.253560127430106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a201e7f53cd73ab%3A0xf3a32aef5a80d24b!2sMining%20Department%2C%20National%20Institute%20of%20Technology%2C%20Sector%201%2C%20Rourkela%2C%20Odisha%20769008!5e0!3m2!1sen!2sin!4v1741447384971!5m2!1sen!2sin"
             width="100%"
             height="500vh"
             style={{ border: 0 }}

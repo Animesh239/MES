@@ -39,7 +39,17 @@ export default function Sponsorship() {
         />
       </div>
 
-      <div className="flex justify-center mt-12 mb-12">
+      <div className="my-8">
+        <Image
+          src={bankDetails || "/placeholder.svg"}
+          alt="Past sponsors"
+          width={1200}
+          height={500}
+          className="w-full h-auto"
+        />
+      </div>
+
+      {/* <div className="flex justify-center mt-12 mb-12">
         <div className="border-2 border-white rounded-lg p-6 max-w-md w-full bg-gray-900 shadow-lg">
           <h2 className="text-2xl lg:text-3xl font-semibold mb-6 text-center underline">
             Bank Details
@@ -59,7 +69,7 @@ export default function Sponsorship() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
