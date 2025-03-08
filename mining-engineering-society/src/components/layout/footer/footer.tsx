@@ -72,12 +72,12 @@ export default function Footer() {
               <h3 className="text-xl font-bold mb-2">Call Us</h3>
               <p className="mb-1">
                 <Link href="tel:+918260900261" className="hover:underline">
-                +91 82609 00261
+                  +91 82609 00261
                 </Link>
               </p>
               <p className="mb-1">
                 <Link href="tel:+917827500393" className="hover:underline">
-                +91 78275 00393
+                  +91 78275 00393
                 </Link>
               </p>
             </div>
@@ -133,10 +133,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row items-center lg:justify-between mt-8 border-t-2 border-gray-800">
-          
-          <div className=" text-gray-400">
-          &copy; <a href="https://mes.nitrkl.ac.in"><u>MES</u></a> , All rights reserved 2025
+        <div className="flex flex-col lg:flex-row items-center lg:justify-between mt-8 border-t-2 border-gray-800 ">
+          <div className=" text-gray-400 mt-4">
+            &copy;{" "}
+            <a href="https://mes.nitrkl.ac.in">
+              <u>MES</u>
+            </a>{" "}
+            , All rights reserved 2025
           </div>
           <div className=" text-gray-400">
             Made by Mining Engineering Society, NIT Rourkela
