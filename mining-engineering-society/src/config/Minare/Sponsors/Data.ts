@@ -7,5 +7,5 @@ export const sponsorshipData = {
   pastSponsorsImage:
     "https://res.cloudinary.com/dh4qhdszo/image/upload/v1710264427/minare/zyo2mufuexo0khg089at.png",
   bankDetails:
-    "https://res.cloudinary.com/dhv234qct/image/upload/t_scale-1/mes/my3znkspfftpsyd3pnjo",
+    "https://res.cloudinary.com/dhv234qct/image/upload/e_upscale/mes/my3znkspfftpsyd3pnjo",
 };

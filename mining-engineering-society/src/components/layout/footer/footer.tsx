@@ -94,10 +94,10 @@ export default function Footer() {
               </p>
               <p className="mb-1">
                 <Link
-                  href="mailto:animeshbarik239@gmail.com"
+                  href="mailto:122mn0699@nitrkl.ac.in"
                   className="hover:underline"
                 >
-                  animeshbarik239@gmail.com
+                  122mn0699@nitrkl.ac.in
                 </Link>
               </p>
             </div>

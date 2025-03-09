@@ -21,10 +21,10 @@ export default function ContactDetails() {
               Any issues or suggestions? Mail us at
             </p>
             <Link
-              href="mailto:animeshbarik239@gmail.com@gmail.com"
+              href="mailto:122mn0699@nitrkl.ac.in"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"
             >
-              animeshbarik239@gmail.com
+              122mn0699@nitrkl.ac.in
             </Link>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default function ContactDetails() {
                 href="tel:+918340153562"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
-                +91-78275-00393 (Rahul Kumar Das)
+                +91-78275-00393 (Rahul Ranjan Das)
               </Link>
             </div>
           </div>
