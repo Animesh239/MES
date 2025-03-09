@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import { getDocument } from "./dbOperation";
 import { UserFormInterface } from "@/config/Minare/Registration/type";
 import { useAuthStore } from "./authListener";
@@ -40,15 +40,6 @@ export const GetUserDetail = async () => {
     };
   } catch (error) {
     console.error("Error fetching user data:", error);
-    toast.error(
-      error instanceof Error ? error.message : "Failed to fetch user data",
-      {
-        style: {
-          backgroundColor: "black",
-          color: "white"
-        }
-      }
-    );
     return {
       success: false,
       error:

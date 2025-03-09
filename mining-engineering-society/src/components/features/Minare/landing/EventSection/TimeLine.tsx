@@ -92,10 +92,6 @@ const Timeline = () => {
     offset: ["start start", "end end"]
   });
 
-  function xOrientation(index: number) {
-    return isMobile ? 100 : index % 2 === 0 ? -100 : 100;
-  }
-
   const eventRegisterationHandler = async (
     eventId: number,
     eventTitle: string
@@ -146,8 +142,8 @@ const Timeline = () => {
         {events.map((event, index) => (
           <motion.div
             key={event.id}
-            initial={{ opacity: 0, x: xOrientation(index) }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, type: "tween", ease: easeIn }}
           >
