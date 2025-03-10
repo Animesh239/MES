@@ -13,11 +13,9 @@ import {
 import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
 import Image from "next/image";
-// import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
-// import { Calendar, Clock } from "lucide-react";
 import { RulesDialog } from "../HeroSection/rulesAndRegulation";
 
-const Timeline = () => {
+export const Timeline = () => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [registeredEventsTitle, setRegisteredEventsTitle] = useState<string[]>(
@@ -92,10 +90,6 @@ const Timeline = () => {
     offset: ["start start", "end end"]
   });
 
-  function xOrientation(index: number) {
-    return isMobile ? 100 : index % 2 === 0 ? -100 : 100;
-  }
-
   const eventRegisterationHandler = async (
     eventId: number,
     eventTitle: string
@@ -146,8 +140,8 @@ const Timeline = () => {
         {events.map((event, index) => (
           <motion.div
             key={event.id}
-            initial={{ opacity: 0, x: xOrientation(index) }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, type: "tween", ease: easeIn }}
           >
@@ -182,14 +176,14 @@ const Timeline = () => {
 
               <div className="relative w-full max-w-md">
                 <div
-                  style={{
-                    background:
-                      "linear-gradient(180deg, #ffffff 0%, #000000 100%)",
-                    boxShadow:
-                      "-10px 10px 50px rgba(0, 0, 0, 0.3), 0px 5px 15px rgba(0, 0, 0, 0.6)"
-                  }}
-                  className="w-full h-auto 
-                    flex flex-col justify-end gap-3 items-center p-3 xxsm:p-6 pb-10
+                  // style={{
+                  //   background:
+                  //     "linear-gradient(180deg, #ffffff 0%, #000000 100%)",
+                  //   boxShadow:
+                  //     "-10px 10px 50px rgba(0, 0, 0, 0.3), 0px 5px 15px rgba(0, 0, 0, 0.6)"
+                  // }}
+                  className="w-full h-auto bg-white/10
+                    flex flex-col justify-end gap-3 items-center p-3 xxsm:p-6 sm:pb-10
                     text-[20px] sm:text-[24px] font-roboto font-bold leading-relaxed 
                     break-words text-center rounded-xl "
                 >
@@ -213,7 +207,7 @@ const Timeline = () => {
                         {event.description.split(" ").length > 42 && (
                           <button
                             onClick={() => toggleDescription(event.id)}
-                            className=" text-blue-300 hover:text-blue-500 transition-colors"
+                            className=" text-white/30 hover:text-white/50 transition-colors"
                           >
                             {expandedSections[event.id]
                               ? "Show Less"
@@ -225,26 +219,13 @@ const Timeline = () => {
                       event.description
                     )}
                   </div>
-                  {/* <div className="flex gap-4 justify-center w-full">
-                    <div className="text-base font-normal flex items-center gap-2 text-white/60 mb-2">
-                      <Clock className="size-6 text-white/[0.7] font-semibold" />
-                      <div className="text-white/[0.7] font-semibold font-roboto">
-                        {event.time}
-                      </div>
-                    </div>
-                    <div className="text-base font-normal flex items-center gap-2 text-white/60 mb-2">
-                      <Calendar className="size-6 text-white/[0.7] font-semibold" />
-                      <div className="text-white/[0.7] font-semibold font-roboto">
-                        {event.date}
-                      </div>
-                    </div>
-                  </div> */}
-                  <div className="w-full flex flex-col sm:flex-row gap-0 sm:gap-5">
+
+                  <div className="w-full mt-2 flex flex-col sm:flex-row gap-3 sm:gap-5">
                     <Button
                       onClick={() =>
                         eventRegisterationHandler(event.id, event.title)
                       }
-                      className={`w-full z-50 mb-2 xxsm:mb-4 h-10 font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
+                      className={`w-full z-50  h-10 font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
                       disabled={
                         registeredEventIds.includes(event.id) ||
                         loadingEventId === event.id
@@ -259,7 +240,7 @@ const Timeline = () => {
                     <Button
                       variant="default"
                       onClick={() => handleOpenRules(event.title)}
-                      className={`w-full z-50 mb-0 xxsm:mb-8 h-10 font-normal font-roboto text-white bg-white/[0.05] border-white border-[2px] rounded-lg transition-all hover:bg-white hover:text-black duration-200 disabled:opacity-50 text-sm sm:text-base`}
+                      className={`w-full z-50 mb-0 h-10 font-normal font-roboto text-white bg-white/[0.05] border-white border-[2px] rounded-lg transition-all hover:bg-white hover:text-black duration-200 disabled:opacity-50 text-sm sm:text-base`}
                     >
                       Rules
                     </Button>
@@ -276,5 +257,3 @@ const Timeline = () => {
     </div>
   );
 };
-
-export default Timeline;

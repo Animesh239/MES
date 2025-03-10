@@ -1,5 +1,5 @@
 import { Header } from "../header";
-import Timeline from "./TimeLine";
+import { Timeline } from "./TimeLine";
 
 export const Event = () => {
   return (
