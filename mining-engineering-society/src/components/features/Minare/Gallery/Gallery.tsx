@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { galleryData } from "@/config/Minare/Gallery/Data";
 import { Header } from "../landing/header";
+// import { useEffect } from "react";
+// import { initializeAuthListener } from "@/lib/firebase/authListener";
 
 export default function Gallery() {
   return (

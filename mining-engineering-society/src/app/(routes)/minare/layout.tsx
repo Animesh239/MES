@@ -1,6 +1,7 @@
 "use client";
-// import MinareNavbar from "@/components/layout/minareMarginals/MinareHeader";
-import { initializeAuthListener } from "@/lib/firebase/authListener";
+
+import { useAuthStore } from "@/lib/firebase/authListener";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function MinareLayout({
@@ -8,9 +9,20 @@ export default function MinareLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   useEffect(() => {
-    initializeAuthListener();
-  }, []);
+    if (pathname !== "/") {
+      useAuthStore.setState({ isLoading: false, isInitialized: true });
+    } else {
+      import("@/lib/firebase/authListener").then(
+        ({ initializeAuthListener }) => {
+          initializeAuthListener();
+        }
+      );
+    }
+  }, [pathname]);
+
   return (
     <div>
       {/* <MinareNavbar /> */}
