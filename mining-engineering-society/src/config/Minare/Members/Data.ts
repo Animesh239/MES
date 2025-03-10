@@ -13,9 +13,9 @@ export const members = [
   },
   {
     id: 3,
-    name: "Suvendu Sahoo",
+    name: "Sanskar Mahore",
     designation: "Event Management Head",
-    image: "https://picsum.photos/200/300",
+    image: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741514617/minare/MINARE%202024%20PHOTOS/w5zx7daygg6z87olbzrs.jpg",
   },
   {
     id: 4,
@@ -27,7 +27,7 @@ export const members = [
     id: 5,
     name: "Rakesh Ku. Yadav",
     designation: "Sponsorship Head",
-    image: "https://picsum.photos/200/300",
+    image: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741514562/minare/MINARE%202024%20PHOTOS/ydhnjjgcrydvbt5unzsl.jpg",
   },
   {
     id: 6,

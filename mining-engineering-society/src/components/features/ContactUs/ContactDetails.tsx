@@ -21,10 +21,10 @@ export default function ContactDetails() {
               Any issues or suggestions? Mail us at
             </p>
             <Link
-              href="mailto:animeshbarik239@gmail.com@gmail.com"
+              href="mailto:122mn0699@nitrkl.ac.in"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"
             >
-              animeshbarik239@gmail.com
+              122mn0699@nitrkl.ac.in
             </Link>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default function ContactDetails() {
                 href="tel:+918340153562"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
-                +91-78275-00393 (Rahul Kumar Das)
+                +91-78275-00393 (Rahul Ranjan Das)
               </Link>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function ContactDetails() {
             <h3 className="text-xl font-medium text-gray-200">NIT Rourkela</h3>
             <p className="text-gray-400 text-lg">Visit us in person!</p>
             <Link
-              href="https://goo.gl/maps/Hqf6mqsjVdv4j4LY6"
+              href="https://maps.app.goo.gl/fVtz8E5NGFabwEqr9"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"

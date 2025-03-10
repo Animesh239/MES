@@ -6,46 +6,46 @@ export const AboutUsData = [
     header: {
       title: "About Minare'25",
       iconClass: "text-white drop-shadow-[0_0_12px_rgba(0,0,0,0.4)]",
-      titleGradient: ""
+      titleGradient: "",
     },
     description:
       "MINARE 25 is the annual Geo-Mining festival of the National Institute of Technology (NIT) Rourkela, showcasing the pinnacle of technical excellence in mining engineering. As the flagship event, it unites innovative minds, industry leaders, and aspiring engineers to explore the latest advancements in mining technology and sustainable practices. The festival features a diverse range of technical events, including mining robotics, case studies, workshops, and guest lectures, providing a platform for professionals to exchange knowledge, discuss emerging trends, and collaborate on solutions that drive the future of mining. Attendees gain insights into cutting-edge technologies, sustainable practices, and the evolving landscape of the mining industry. MINARE 25 exemplifies NIT Rourkela's commitment to fostering innovation and excellence in mining engineering.",
     boxClasses:
-      "group space-y-8 p-10 bg-gradient-to-br from-gray-900/80 via-gray-900/50 to-gray-900/80 backdrop-blur-sm rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.1)] hover:shadow-[0_0_80px_rgba(0,0,0,0.2)] transition-all duration-700"
-  }
+      "group space-y-8 p-10 bg-gradient-to-br from-gray-900/80 via-gray-900/50 to-gray-900/80 backdrop-blur-sm rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.1)] hover:shadow-[0_0_80px_rgba(0,0,0,0.2)] transition-all duration-700",
+  },
 ];
 
 export const GalleryData = [
   {
     id: "1",
     imgUrl:
-      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112921/minare/MINARE%202024%20PHOTOS/ha2gb3ngjhef7wqo8ukg.jpg"
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112995/minare/MINARE%202024%20PHOTOS/Minare/xc8js5m7wfwigergsngi.jpg",
   },
   {
     id: "2",
     imgUrl:
-      "https://res.cloudinary.com/dehegwbs0/image/upload/v1734215912/rgskhynr2ktg5iqxtpfi.jpg"
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112962/minare/MINARE%202024%20PHOTOS/Minare/qqw2seni1cppdwstxjkb.jpg",
   },
   {
     id: "3",
     imgUrl:
-      "https://res.cloudinary.com/dehegwbs0/image/upload/v1734128156/poevruoltbhyyk8bleax.jpg"
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112958/minare/MINARE%202024%20PHOTOS/Minare/gqymne2cqfysmj21x71l.jpg",
   },
   {
     id: "4",
     imgUrl:
-      "https://res.cloudinary.com/dhv234qct/image/upload/v1733771631/mes/xac8wdivrcpuag1qt6gu.svg"
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112955/minare/MINARE%202024%20PHOTOS/Minare/rqhjgqoc6fjlvmw9i3d9.jpg",
   },
   {
     id: "5",
     imgUrl:
-      "https://res.cloudinary.com/dehegwbs0/image/upload/v1734215912/rgskhynr2ktg5iqxtpfi.jpg"
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112917/minare/MINARE%202024%20PHOTOS/v04hw4yvpgaa4s1cqpys.jpg",
   },
   {
     id: "6",
     imgUrl:
-      "https://res.cloudinary.com/dehegwbs0/image/upload/v1734128156/poevruoltbhyyk8bleax.jpg"
-  }
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741112888/minare/MINARE%202024%20PHOTOS/trbfk7ixvzf8g6e6xqyp.jpg",
+  },
 ];
 
 export const events = [
@@ -54,6 +54,7 @@ export const events = [
     time: "2pm",
     title: "Case-Ore-inted",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432856/minare/j9dkxxxcanzrbor4ynqa.png",
     description:
       "Case ore-iented is a dynamic event challenging participants with speculative mining scenarios to spark analytical thinking. Armed with the latest industry trends and expert guidance, attendees are set to uncover groundbreaking strategies, turning challenges into opportunities. Embark on this intellectual journey to reshape the future of mining."
   },
@@ -62,6 +63,7 @@ export const events = [
     time: "2pm",
     title: "Geobotics Challenge",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432770/minare/dpvjdldb1jm85hnjf1ac.png",
     description:
       "Geobotics Challenge tests the robot-building skill of contestants. The bots will need to prove themselves on various mining-related challenges, decided by the judges. With the increase in the use of robots in the mining industry, this event tests the participants on their robot construction expertise."
   },
@@ -70,6 +72,7 @@ export const events = [
     time: "2pm",
     title: "Rock-On-Pap",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432716/minare/vx4m6x3zbcksov05u0yo.png",
     description:
       "Rock on Pap is an insightful paper presentation event where scholars present their technical research on mining-related topics. The event promotes showcasing innovations, methodologies, and research findings, advancing sustainable mining while fostering idea exchange and collaboration for academic and professional growth."
   },
@@ -78,14 +81,16 @@ export const events = [
     time: "2pm",
     title: "Ore-Acle-Quest",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432883/minare/l02lvpxuldxhnsc8xolj.png",
     description:
-      "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner."
+      "Ore-acle is a quiz quest where participants dive into the depths of the mining industry's core. This event challenges their industry knowledge and Contestants will navigate through intricate questions, sharpening their understanding and showcasing their expertise. A journey of intellect and discovery awaits in this engaging exploration of mining wisdom."
   },
   {
     id: 5,
     time: "2pm",
     title: "Surveyor’s Node",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433035/minare/l0xphe1lzqnfx6p6gqum.png",
     description:
       "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner."
   },
@@ -94,6 +99,7 @@ export const events = [
     time: "2pm",
     title: "Mine Workshop",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432984/minare/icjnqz4x7jmn0rniigpi.png",
     description:
       "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with in-depth knowledge on cutting-edge tools and techniques."
   },
@@ -102,6 +108,7 @@ export const events = [
     time: "2pm",
     title: "Group Discussion",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433009/minare/uo60penz813dludn1e31.png",
     description:
       "Participate to showcase your critical thinking, communication, and teamwork skills. Teams of two will engage in a dynamic discussion on a topic announced 15 minutes before Round 1. The top four teams will advance to the final round, where the best team will emerge victorious."
   },
@@ -110,9 +117,11 @@ export const events = [
     time: "2pm",
     title: "Mining Podcast",
     date: "2 nov",
+    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433690/minare/vaxdpbfw3zpx4l8btt1j.png",
     description:
       "Dive into the world of mining with an exclusive podcast session featuring a renowned personality from the mining sector. This event offers an unparalleled opportunity to explore the latest trends, innovations, and challenges shaping the industry. Gain firsthand knowledge and insights directly from a leading figure with years of expertise in the field."
   }
+
   // { id: 9, title: "Event 9", description: "Description 9" }
 ];
 
@@ -132,68 +141,6 @@ export const RulesAndRegulations = [
   },
   {
     id: 2,
-    name: "Mine Forge: Managerial Challenge",
-    description:
-      "A strategic event where teams manage a fictional mining company, bid for coal blocks, plan operations, and ensure compliance with mining regulations.",
-    stages: [
-      {
-        name: "Bidding",
-        details: [
-          "Teams (2-4 members) will be randomly assigned a company name by drawing lots.",
-          "Teams receive details about their company's production targets, capital investment, and other factors.",
-          "The competition is based on a fictional coal belt with six coal blocks available for auction.",
-          "Each coal block's composition will be provided."
-        ]
-      },
-      {
-        name: "Planning and Development",
-        details: [
-          "Guidelines on mechanization and procurement costs will be provided.",
-          "Teams must strategize the composition of their machinery fleet within budget limits.",
-          "Strict adherence to Mine Rules, 1955 (Sections 30, 33, 43, and 64) is mandatory.",
-          "Non-compliance results in penalties."
-        ]
-      },
-      {
-        name: "Production and DGMS Inspection",
-        details: [
-          "Teams must prepare a cash flow statement and meet production targets.",
-          "DGMS will inspect compliance with regulations.",
-          "Penalties apply for rule violations or failure to meet targets."
-        ]
-      },
-      {
-        name: "Reclamation and Rehabilitation",
-        details: [
-          "Teams present a detailed Reclamation & Rehabilitation (R&R) plan, addressing environmental, ecological, and socio-economic aspects.",
-          "The plan must include afforestation, soil rehabilitation, and community development within a fixed budget.",
-          "Bonus points are awarded for innovative sustainability ideas.",
-          "Judges will evaluate feasibility, sustainability, and innovation."
-        ]
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: "Mine Matrix",
-    description:
-      "A problem-solving event where teams sequentially solve questions, unlocking codes with each correct answer. Accuracy and speed determine the winners.",
-    rules: [
-      "Teams (1-3 members) must be from the same institute.",
-      "Participants must carry their own laptops and accessories.",
-      "Each team draws a ballot for their first question.",
-      "Correct answers reveal the next question number.",
-      "The final combined code must be submitted in the correct order.",
-      "The fastest correct submission wins; ties are broken by incorrect attempt count.",
-      "An invigilator will monitor teams for fairness.",
-      "Use of external internet resources is prohibited unless explicitly allowed.",
-      "No communication between teams is allowed.",
-      "Submissions are final; no corrections allowed.",
-      "Organizers' decisions are final."
-    ]
-  },
-  {
-    id: 4,
     name: "Case-Ore-inted",
     description:
       "A team-based case study event where participants analyze and present solutions, followed by a jury Q&A session.",
@@ -208,8 +155,8 @@ export const RulesAndRegulations = [
     ]
   },
   {
-    id: 5,
-    name: "Oracle Quest",
+    id: 3,
+    name: "Ore-Acle-Quest",
     description:
       "A mining-related quiz competition featuring MCQs, image-based questions, and rapid-fire rounds. The team with the highest score wins.",
     stages: [
@@ -261,9 +208,68 @@ export const RulesAndRegulations = [
     ]
   },
   {
-    id: 6,
+    id: 4,
     name: "Mining Podcast",
     description:
       "An exclusive podcast session featuring a renowned personality from the mining sector, covering trends, innovations, and insights."
+  },
+  {
+    id: 5,
+    name: "Geobotics Challenge",
+    description:
+      "A robot-building event where participants construct bots to complete mining-related challenges.",
+    rules: [
+      "Team size should be between 2-3 members each." ,
+      "Team should adhere by the rules and regulation at any point of time.  The context of challenge will be notified to each team beforehand. ",
+      "Marking of points will be given by the judges and will be held as final decision.", 
+      "Points will be given on the basis of efficiency of bot’s performance in particular domain of challenge.",
+      "Each team will get 20 minutes for completing the challenge. Team which will get highest score on the basis on efficient performance will be declared as winner."
+    ]      
+  },
+  {
+    id: 6,
+    name: "Mine Workshop",
+    description:
+      "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with a in-depth knowledge on cutting-edge tools and techniques."
+  },
+  {
+    id: 7,
+    name: "Group Discussion",
+    description:
+      "A team-based discussion event to showcase critical thinking, communication, and teamwork skills.",
+    rules: [
+      "Each team will consist of two members.",
+      "The topic for discussion will be revealed 15 minutes before the start of Round 1.",
+      "Each participant should express their points clearly and concisely within the allotted time.",
+      "Inclusion of the both the members in the discussion will fetch better score.",
+      "Unique and valid points can increase your winning chances.",
+      "The use of mobile phones, notes, or other aids during the discussion is prohibited.",
+      "Judges’ decisions regarding selection and scoring will be final and binding."
+    ]
+  },
+  {
+    id: 8,
+    name: "Surveyor’s Node",
+    description:
+      "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner. Prepare for an engaging test of problem-solving and technical skills!",
+      rules: [
+        "Each team must consist of 4 to 5 members.",
+        "All members must belong to the same institute.",
+        "A problem statement will be revealed 15 minutes before the event begins.",
+        "Teams must solve the problem using practical surveying techniques, including but not limited to: Total Station, Level Survey.",
+        "Teams must bring their own basic stationery and calculators; specific equipment for surveying will be provided at the venue.",
+        "All activities will be closely monitored by technical assistants to ensure accurate execution of methods and adherence to rules.",
+        "Teams will be evaluated on: Accuracy of measurements and calculations, adherence to proper surveying techniques, and time taken to complete the task.",
+        "The technical assistants’ judgment will be final and binding.",
+        "Teams must adhere to the safety guidelines provided at the start of the event.",
+        "Any misuse of equipment or failure to follow instructions will lead to penalties or disqualification.",
+        "Teams are prohibited from consulting other teams during the event.",
+        "Each step of the solution must be recorded and presented to the technical assistants for verification.",
+      ],
+      additionalRules: [
+        "Participants are encouraged to clarify any doubts during the problem statement briefing.",
+        "In case of a tie, the decision will be based on the efficiency of methods and team presentation."
+      ]
+
   }
 ];

@@ -64,13 +64,13 @@ export function RulesDialog({
               <div className="space-y-5 relative">
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20 text-sm font-semibold text-white shrink-0">
+                    {/* <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20 text-sm font-semibold text-white shrink-0">
                       {eventData.id}
-                    </span>
+                    </span> */}
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-white">
+                      {/* <h3 className="text-xl md:text-2xl font-bold text-white">
                         {eventData.name}
-                      </h3>
+                      </h3> */}
                       <p className="text-sm md:text-base text-white/70 leading-relaxed mt-2">
                         {eventData.description}
                       </p>

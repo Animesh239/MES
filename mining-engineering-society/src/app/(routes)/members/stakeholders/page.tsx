@@ -1,4 +1,4 @@
-import MemberCard from "@/components/typography/card";
+import MemberCard from "@/components/ui/card";
 import { CurrentStakeHolders } from "@/config/Members/StakeHolders/Data";
 import PastStakeHolderCarousel from "@/components/features/Members/StakeHolders/Carousel";
 
@@ -9,7 +9,7 @@ export default function StakeholdersPage() {
         Our Stakeholders
       </div>
       <div
-        className="mt-12 mb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6
+        className="mt-12 mb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6
       gap-y-12 justify-items-center"
       >
         {CurrentStakeHolders.map((stakeholder, index) => (

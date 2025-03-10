@@ -13,8 +13,6 @@ import {
 import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
 import Image from "next/image";
-import { MiningDeptImgUrl } from "@/config/Homepage/HomePagedata";
-// import { Calendar, Clock } from "lucide-react";
 import { RulesDialog } from "../HeroSection/rulesAndRegulation";
 
 export const Timeline = () => {
@@ -189,13 +187,12 @@ export const Timeline = () => {
                     text-[20px] sm:text-[24px] font-roboto font-bold leading-relaxed 
                     break-words text-center rounded-xl "
                 >
-                  <div className="w-full h-44 relative">
+                  <div className="w-full h-56  md:h-80 relative">
                     <Image
-                      src={MiningDeptImgUrl}
+                      src={event.imgurl}
                       alt="event image"
                       layout="fill"
-                      objectFit="cover"
-                      className="z-20 grayscale rounded-xl hover:grayscale-0 hover:scale-105 duration-300 cursor-pointer"
+                      className="z-20 rounded-xl hover:scale-105 duration-300 cursor-pointer"
                     />
                   </div>
 

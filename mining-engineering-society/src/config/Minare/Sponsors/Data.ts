@@ -6,9 +6,6 @@ export const sponsorshipData = {
     "https://res.cloudinary.com/dh4qhdszo/image/upload/v1710264432/minare/qrynoulone2j54wa60vr.png",
   pastSponsorsImage:
     "https://res.cloudinary.com/dh4qhdszo/image/upload/v1710264427/minare/zyo2mufuexo0khg089at.png",
-  bankDetails: {
-    accountName: "MS MINING ENGG SOCIETY",
-    accountNumber: "10138951149",
-    ifscCode: "SBIN0002109",
-  },
+  bankDetails:
+    "https://res.cloudinary.com/dhv234qct/image/upload/e_upscale/mes/my3znkspfftpsyd3pnjo",
 };

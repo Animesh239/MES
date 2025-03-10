@@ -1,79 +1,49 @@
-import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { Card, CardBody, Image } from "@nextui-org/react";
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
-Card.displayName = "Card"
+export default function MemberCard({
+  name,
+  position,
+  imgURL,
+}: MemberCardProps) {
+  return (
+    <div className="relative w-[300px] h-[400px] transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <Card
+        className="py-4 px-3 bg-black border-2 border-transparent bg-clip-padding rounded-2xl h-full flex flex-col"
+        style={{
+          backgroundImage:
+            "linear-gradient(black, black), linear-gradient(to right, #60a5fa, #a78bfa)",
+          backgroundOrigin: "border-box",
+          backgroundClip: "padding-box, border-box",
+        }}
+      >
+        <CardBody className="py-2 flex flex-col h-full">
+          <div className="flex-1 flex items-center justify-center">
+            <Image
+              alt={`${name}'s photo`}
+              className="object-cover rounded-full opacity-100"
+              src={imgURL}
+              width={220}
+              height={220}
+            />
+          </div>
+          <div className="mt-4 text-center">
+            <p className="text-2xl uppercase font-bold text-white break-words">
+              {name}
+            </p>
+            <p className="font-bold text-large text-gray-400 mt-1">
+              {position}
+            </p>
+          </div>
+        </CardBody>
+      </Card>
+    </div>
+  );
+}
 
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
-    {...props}
-  />
-))
-CardHeader.displayName = "CardHeader"
+interface MemberCardProps {
+  name: string;
+  position: string;
+  imgURL: string;
+}
 
-const CardTitle = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
-      className
-    )}
-    {...props}
-  />
-))
-CardTitle.displayName = "CardTitle"
-
-const CardDescription = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-))
-CardDescription.displayName = "CardDescription"
-
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-))
-CardContent.displayName = "CardContent"
-
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
-    {...props}
-  />
-))
-CardFooter.displayName = "CardFooter"
-
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

@@ -18,19 +18,19 @@ export const YearWiseEventsData = [
           "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741151117/Badminton-2024/tcddjhqi2549dst8gnik.jpg",
         ]
       },
-      {
-        eventName: "Poster Design Competition",
-        eventImageUrl: [
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
-          "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png"
-        ]
-      }
+      // {
+      //   eventName: "Poster Design Competition",
+      //   eventImageUrl: [
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png",
+      //     "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png"
+      //   ]
+      // }
     ]
   },
   // {
