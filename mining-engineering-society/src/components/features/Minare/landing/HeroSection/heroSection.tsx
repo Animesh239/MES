@@ -85,7 +85,7 @@ export const Hero = () => {
           <Button
             variant="default"
             onClick={() => handleRegister()}
-            className="font-roboto w-full xxsm:w-40 max-w-sm:text-[14px]    z-0 cursor-pointer"
+            className="font-roboto w-40 max-w-sm:text-[14px]    z-0 cursor-pointer"
           >
             Register
           </Button>
