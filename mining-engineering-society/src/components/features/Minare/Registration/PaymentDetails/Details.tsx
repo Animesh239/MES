@@ -15,7 +15,7 @@ export const PaymentDeatails = ({
           <div className="space-y-2">
             <h3 className="font-semibold text-white/30">Registration Fee</h3>
             <p className="text-gray-300">
-              ₹400 /- (No additional charges for events)
+              ₹500 /- (No additional charges for events)
             </p>
           </div>
           <div className="space-y-2">
