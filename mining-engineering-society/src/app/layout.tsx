@@ -84,7 +84,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Toaster
-          position="bottom-center"
+          position="top-center"
           toastOptions={{
             className: "",
             style: {
