@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { BookOpen, ChevronRight } from "lucide-react";
+import { BookOpen, ChevronRight, Download } from "lucide-react";
 import { RulesAndRegulations } from "@/config/Minare/landingpagedata";
 import { useEffect, useState } from "react";
 import { EventData } from "@/config/Minare/type";
+import toast from "react-hot-toast";
 
 export function RulesDialog({
   open,
@@ -27,6 +28,7 @@ export function RulesDialog({
 
   useEffect(() => {
     if (open && title) {
+      console.log("tt", title);
       console.log("Looking for rules for event:", title);
       const foundEvent = RulesAndRegulations.find(
         (item) => item.name === title
@@ -64,13 +66,13 @@ export function RulesDialog({
               <div className="space-y-5 relative">
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    {/* <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20 text-sm font-semibold text-white shrink-0">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20 text-sm font-semibold text-white shrink-0">
                       {eventData.id}
-                    </span> */}
+                    </span>
                     <div>
-                      {/* <h3 className="text-xl md:text-2xl font-bold text-white">
+                      <h3 className="text-xl md:text-2xl font-bold text-white">
                         {eventData.name}
-                      </h3> */}
+                      </h3>
                       <p className="text-sm md:text-base text-white/70 leading-relaxed mt-2">
                         {eventData.description}
                       </p>
@@ -154,13 +156,26 @@ export function RulesDialog({
           </div>
         </ScrollArea>
 
-        <DialogFooter className="mt-5 mb-4">
+        <DialogFooter className="flex gap-3 mt-5 mb-4">
           <Button
             onClick={() => setOpen(false)}
             className="w-full sm:w-auto bg-gradient-to-r from-white to-white/90 text-black hover:from-white/95 hover:to-white/85 transition-all font-medium"
           >
             Close
           </Button>
+          {(title === "Rock-On-Pap" ||
+            title === "Group Discussion" ||
+            title === "Case-Ore-inted") && (
+            <Button
+              onClick={() => {
+                toast.success("The PDF will be available soon!!");
+              }}
+              className="w-full sm:w-auto bg-gradient-to-r from-white to-white/90 text-black hover:from-white/95 hover:to-white/85 transition-all font-medium flex items-center gap-2"
+            >
+              <Download className="w-4 h-4" />
+              Download PDF
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>
