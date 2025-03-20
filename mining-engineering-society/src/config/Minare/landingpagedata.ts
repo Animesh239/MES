@@ -54,73 +54,81 @@ export const events = [
     time: "2pm",
     title: "Case-Ore-inted",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432856/minare/j9dkxxxcanzrbor4ynqa.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432856/minare/j9dkxxxcanzrbor4ynqa.png",
     description:
-      "Case ore-iented is a dynamic event challenging participants with speculative mining scenarios to spark analytical thinking. Armed with the latest industry trends and expert guidance, attendees are set to uncover groundbreaking strategies, turning challenges into opportunities. Embark on this intellectual journey to reshape the future of mining."
+      "Case ore-iented is a dynamic event challenging participants with speculative mining scenarios to spark analytical thinking. Armed with the latest industry trends and expert guidance, attendees are set to uncover groundbreaking strategies, turning challenges into opportunities. Embark on this intellectual journey to reshape the future of mining.",
   },
   {
     id: 2,
     time: "2pm",
     title: "Geobotics Challenge",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432770/minare/dpvjdldb1jm85hnjf1ac.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432770/minare/dpvjdldb1jm85hnjf1ac.png",
     description:
-      "Geobotics Challenge tests the robot-building skill of contestants. The bots will need to prove themselves on various mining-related challenges, decided by the judges. With the increase in the use of robots in the mining industry, this event tests the participants on their robot construction expertise."
+      "Geobotics Challenge tests the robot-building skill of contestants. The bots will need to prove themselves on various mining-related challenges, decided by the judges. With the increase in the use of robots in the mining industry, this event tests the participants on their robot construction expertise.",
   },
   {
     id: 3,
     time: "2pm",
     title: "Rock-On-Pap",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432716/minare/vx4m6x3zbcksov05u0yo.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432716/minare/vx4m6x3zbcksov05u0yo.png",
     description:
-      "Rock on Pap is an insightful paper presentation event where scholars present their technical research on mining-related topics. The event promotes showcasing innovations, methodologies, and research findings, advancing sustainable mining while fostering idea exchange and collaboration for academic and professional growth."
+      "Rock on Pap is an insightful paper presentation event where scholars present their technical research on mining-related topics. The event promotes showcasing innovations, methodologies, and research findings, advancing sustainable mining while fostering idea exchange and collaboration for academic and professional growth.",
   },
   {
     id: 4,
     time: "2pm",
     title: "Ore-Acle-Quest",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432883/minare/l02lvpxuldxhnsc8xolj.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432883/minare/l02lvpxuldxhnsc8xolj.png",
     description:
-      "Ore-acle is a quiz quest where participants dive into the depths of the mining industry's core. This event challenges their industry knowledge and Contestants will navigate through intricate questions, sharpening their understanding and showcasing their expertise. A journey of intellect and discovery awaits in this engaging exploration of mining wisdom."
+      "Ore-acle is a quiz quest where participants dive into the depths of the mining industry's core. This event challenges their industry knowledge and Contestants will navigate through intricate questions, sharpening their understanding and showcasing their expertise. A journey of intellect and discovery awaits in this engaging exploration of mining wisdom.",
   },
   {
     id: 5,
     time: "2pm",
     title: "Surveyor’s Node",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433035/minare/l0xphe1lzqnfx6p6gqum.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433035/minare/l0xphe1lzqnfx6p6gqum.png",
     description:
-      "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner."
+      "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner.",
   },
   {
     id: 6,
     time: "2pm",
     title: "Mine Workshop",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432984/minare/icjnqz4x7jmn0rniigpi.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741432984/minare/icjnqz4x7jmn0rniigpi.png",
     description:
-      "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with in-depth knowledge on cutting-edge tools and techniques."
+      "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with in-depth knowledge on cutting-edge tools and techniques.",
   },
   {
     id: 7,
     time: "2pm",
     title: "Group Discussion",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433009/minare/uo60penz813dludn1e31.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433009/minare/uo60penz813dludn1e31.png",
     description:
-      "Participate to showcase your critical thinking, communication, and teamwork skills. Teams of two will engage in a dynamic discussion on a topic announced 15 minutes before Round 1. The top four teams will advance to the final round, where the best team will emerge victorious."
+      "Participate to showcase your critical thinking, communication, and teamwork skills. Teams of two will engage in a dynamic discussion on a topic announced 15 minutes before Round 1. The top four teams will advance to the final round, where the best team will emerge victorious.",
   },
   {
     id: 8,
     time: "2pm",
     title: "Mining Podcast",
     date: "2 nov",
-    imgurl: "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433690/minare/vaxdpbfw3zpx4l8btt1j.png",
+    imgurl:
+      "https://res.cloudinary.com/dh4qhdszo/image/upload/v1741433690/minare/vaxdpbfw3zpx4l8btt1j.png",
     description:
-      "Dive into the world of mining with an exclusive podcast session featuring a renowned personality from the mining sector. This event offers an unparalleled opportunity to explore the latest trends, innovations, and challenges shaping the industry. Gain firsthand knowledge and insights directly from a leading figure with years of expertise in the field."
-  }
+      "Dive into the world of mining with an exclusive podcast session featuring a renowned personality from the mining sector. This event offers an unparalleled opportunity to explore the latest trends, innovations, and challenges shaping the industry. Gain firsthand knowledge and insights directly from a leading figure with years of expertise in the field.",
+  },
 
   // { id: 9, title: "Event 9", description: "Description 9" }
 ];
@@ -136,8 +144,9 @@ export const RulesAndRegulations = [
       "The chosen candidate presents the paper via PowerPoint and provides hard copies to the jury.",
       "Each team has 6-8 minutes for their presentation and 5 minutes for Q&A.",
       "Exceeding the time limit will lead to negative scores.",
-      "Results will be declared based on jury scores."
-    ]
+      "Results will be declared based on jury scores.",
+    ],
+    pdf: "https://drive.google.com/file/d/1fPKEndzZ2-EmdyEYOtKEFlTFjY1p-Qgw/view?usp=sharing",
   },
   {
     id: 2,
@@ -151,8 +160,9 @@ export const RulesAndRegulations = [
       "Exceeding the time limit leads to point deductions.",
       "Jury scores determine final rankings.",
       "At least 6 participants (teams or individuals) must register for the event to proceed.",
-      "Participants must submit their strategy and proposed solution before the deadline."
-    ]
+      "Participants must submit their strategy and proposed solution before the deadline.",
+    ],
+    pdf: "https://drive.google.com/file/d/1U_vffsrTz2xwkLuPrpdhNguje5xNB3pQ/view?usp=sharing",
   },
   {
     id: 3,
@@ -168,8 +178,8 @@ export const RulesAndRegulations = [
           "Asterisk-marked questions carry +2 points but -1 for incorrect answers.",
           "Unanswered questions receive no points.",
           "Prelims will be conducted online via the Unstop platform.",
-          "In case of a tie, time taken will be the deciding factor."
-        ]
+          "In case of a tie, time taken will be the deciding factor.",
+        ],
       },
       {
         name: "Round 1 - MCQs",
@@ -177,8 +187,8 @@ export const RulesAndRegulations = [
           "Each team gets 5 mining-related MCQs in a cyclical format.",
           "Unanswered questions pass to the next team.",
           "Correct answers: +10 points, incorrect: -5 points.",
-          "Passed questions: +5 points for correct answers, no penalty for incorrect ones."
-        ]
+          "Passed questions: +5 points for correct answers, no penalty for incorrect ones.",
+        ],
       },
       {
         name: "Round 2 - Image-Based Questions",
@@ -186,8 +196,8 @@ export const RulesAndRegulations = [
           "Each team gets 4 mining-related image questions.",
           "Passing is not allowed in this round.",
           "Correct answers: +20 points, incorrect: -5 points.",
-          "Teams can use external help (professor or friend) once."
-        ]
+          "Teams can use external help (professor or friend) once.",
+        ],
       },
       {
         name: "Round 3 - Rapid Fire",
@@ -195,23 +205,23 @@ export const RulesAndRegulations = [
           "Each team gets 7 rapid-fire questions.",
           "No passing allowed.",
           "Correct answers: +5 points, no penalties for incorrect answers.",
-          "Teams must answer within 5 seconds."
-        ]
-      }
+          "Teams must answer within 5 seconds.",
+        ],
+      },
     ],
     additionalRules: [
       "Bonus questions at the end of each round give +5 points with no penalty for wrong answers.",
       "At least 6 teams must participate for the event to proceed.",
       "Tie-breakers involve a sudden-death question.",
       "During Round 2, teams may use an 'Audience Poll' lifeline once.",
-      "Teams with creative mining-related names get +2 bonus points."
-    ]
+      "Teams with creative mining-related names get +2 bonus points.",
+    ],
   },
   {
     id: 4,
     name: "Mining Podcast",
     description:
-      "An exclusive podcast session featuring a renowned personality from the mining sector, covering trends, innovations, and insights."
+      "An exclusive podcast session featuring a renowned personality from the mining sector, covering trends, innovations, and insights.",
   },
   {
     id: 5,
@@ -219,18 +229,18 @@ export const RulesAndRegulations = [
     description:
       "A robot-building event where participants construct bots to complete mining-related challenges.",
     rules: [
-      "Team size should be between 2-3 members each." ,
+      "Team size should be between 2-3 members each.",
       "Team should adhere by the rules and regulation at any point of time.  The context of challenge will be notified to each team beforehand. ",
-      "Marking of points will be given by the judges and will be held as final decision.", 
+      "Marking of points will be given by the judges and will be held as final decision.",
       "Points will be given on the basis of efficiency of bot’s performance in particular domain of challenge.",
-      "Each team will get 20 minutes for completing the challenge. Team which will get highest score on the basis on efficient performance will be declared as winner."
-    ]      
+      "Each team will get 20 minutes for completing the challenge. Team which will get highest score on the basis on efficient performance will be declared as winner.",
+    ],
   },
   {
     id: 6,
     name: "Mine Workshop",
     description:
-      "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with a in-depth knowledge on cutting-edge tools and techniques."
+      "Join us for an insightful workshop on emerging technologies in the mining sector. This workshop will showcase the latest innovations and technologies transforming the mining industry, providing participants with a in-depth knowledge on cutting-edge tools and techniques.",
   },
   {
     id: 7,
@@ -244,32 +254,32 @@ export const RulesAndRegulations = [
       "Inclusion of the both the members in the discussion will fetch better score.",
       "Unique and valid points can increase your winning chances.",
       "The use of mobile phones, notes, or other aids during the discussion is prohibited.",
-      "Judges’ decisions regarding selection and scoring will be final and binding."
-    ]
+      "Judges’ decisions regarding selection and scoring will be final and binding.",
+    ],
+    pdf: "https://docs.google.com/document/d/1g79qr6A25A145bsczWfrKRgeu4Z9F2ou/edit?usp=sharing&ouid=105236020383261808284&rtpof=true&sd=true",
   },
   {
     id: 8,
     name: "Surveyor’s Node",
     description:
       "The Surveyor's Node Challenge is an exciting event where teams of 4-5 members compete to complete a survey task using the instruments provided. The performance will be judged based on efficiency, accuracy, and adherence to instructions. The team with the highest score, determined by the judges, will be crowned the winner. Prepare for an engaging test of problem-solving and technical skills!",
-      rules: [
-        "Each team must consist of 4 to 5 members.",
-        "All members must belong to the same institute.",
-        "A problem statement will be revealed 15 minutes before the event begins.",
-        "Teams must solve the problem using practical surveying techniques, including but not limited to: Total Station, Level Survey.",
-        "Teams must bring their own basic stationery and calculators; specific equipment for surveying will be provided at the venue.",
-        "All activities will be closely monitored by technical assistants to ensure accurate execution of methods and adherence to rules.",
-        "Teams will be evaluated on: Accuracy of measurements and calculations, adherence to proper surveying techniques, and time taken to complete the task.",
-        "The technical assistants’ judgment will be final and binding.",
-        "Teams must adhere to the safety guidelines provided at the start of the event.",
-        "Any misuse of equipment or failure to follow instructions will lead to penalties or disqualification.",
-        "Teams are prohibited from consulting other teams during the event.",
-        "Each step of the solution must be recorded and presented to the technical assistants for verification.",
-      ],
-      additionalRules: [
-        "Participants are encouraged to clarify any doubts during the problem statement briefing.",
-        "In case of a tie, the decision will be based on the efficiency of methods and team presentation."
-      ]
-
-  }
+    rules: [
+      "Each team must consist of 4 to 5 members.",
+      "All members must belong to the same institute.",
+      "A problem statement will be revealed 15 minutes before the event begins.",
+      "Teams must solve the problem using practical surveying techniques, including but not limited to: Total Station, Level Survey.",
+      "Teams must bring their own basic stationery and calculators; specific equipment for surveying will be provided at the venue.",
+      "All activities will be closely monitored by technical assistants to ensure accurate execution of methods and adherence to rules.",
+      "Teams will be evaluated on: Accuracy of measurements and calculations, adherence to proper surveying techniques, and time taken to complete the task.",
+      "The technical assistants’ judgment will be final and binding.",
+      "Teams must adhere to the safety guidelines provided at the start of the event.",
+      "Any misuse of equipment or failure to follow instructions will lead to penalties or disqualification.",
+      "Teams are prohibited from consulting other teams during the event.",
+      "Each step of the solution must be recorded and presented to the technical assistants for verification.",
+    ],
+    additionalRules: [
+      "Participants are encouraged to clarify any doubts during the problem statement briefing.",
+      "In case of a tie, the decision will be based on the efficiency of methods and team presentation.",
+    ],
+  },
 ];

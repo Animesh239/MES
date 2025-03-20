@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 export function RulesDialog({
   open,
   setOpen,
-  title
+  title,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -163,18 +163,27 @@ export function RulesDialog({
           >
             Close
           </Button>
-          {(title === "Rock-On-Pap" ||
-            title === "Group Discussion" ||
-            title === "Case-Ore-inted") && (
+          {eventData?.pdf ? (
             <Button
               onClick={() => {
-                toast.success("The PDF will be available soon!!");
+                window.open(eventData.pdf, "_blank");
               }}
               className="w-full sm:w-auto bg-gradient-to-r from-white to-white/90 text-black hover:from-white/95 hover:to-white/85 transition-all font-medium flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download PDF
             </Button>
+          ) : (
+            (title === "Rock-On-Pap" ||
+              title === "Group Discussion" ||
+              title === "Case-Ore-inted") && (
+              <Button
+                onClick={() => {
+                  toast.success("The PDF will be available soon!!");
+                }}
+                className="w-full sm:w-auto bg-gradient-to-r from-white to-white/90 text-black hover:from-white/95 hover:to-white/85 transition-all font-medium flex items-center gap-2"
+              ></Button>
+            )
           )}
         </DialogFooter>
       </DialogContent>

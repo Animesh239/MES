@@ -5,6 +5,7 @@ export interface EventData {
   rules?: string[];
   stages?: Stage[];
   additionalRules?: string[];
+  pdf?: string;
 }
 
 export interface Stage {

@@ -8,7 +8,7 @@ import { getDocument } from "@/lib/firebase/dbOperation";
 import { events } from "@/config/Minare/landingpagedata";
 import {
   initializeAuthListener,
-  useAuthStore
+  useAuthStore,
 } from "@/lib/firebase/authListener";
 import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
@@ -41,7 +41,7 @@ export const Timeline = () => {
   const toggleDescription = (sectionId: number) => {
     setExpandedSections((prev) => ({
       ...prev,
-      [sectionId]: !prev[sectionId]
+      [sectionId]: !prev[sectionId],
     }));
   };
 
@@ -87,7 +87,7 @@ export const Timeline = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef as RefObject<HTMLElement>,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
 
   const eventRegisterationHandler = async (
@@ -109,7 +109,7 @@ export const Timeline = () => {
       const updatedEvents = [...previousEvents, eventTitle];
 
       const reqdResult = await UpdateData({
-        participatedEventTitles: updatedEvents
+        participatedEventTitles: updatedEvents,
       });
 
       if (reqdResult.success) {
@@ -252,7 +252,6 @@ export const Timeline = () => {
         ))}
       </div>
 
-      {/* Rules Dialog Component */}
       <RulesDialog title={selectedEventTitle} open={open} setOpen={setOpen} />
     </div>
   );
