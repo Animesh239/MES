@@ -178,7 +178,7 @@ export default function Navbar() {
                         href="/events/eventgallery"
                         onClick={closeDropdown}
                       >
-                        Event Gallery
+                        Past Events
                       </DropdownItem>
                     </div>
                   )}

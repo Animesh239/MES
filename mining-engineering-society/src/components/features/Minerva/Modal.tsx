@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ReactConfetti from "react-confetti";
 // Import types from framer-motion
@@ -13,7 +12,6 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose }: ModalProps) => {
-  const router = useRouter();
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -94,18 +92,23 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                   e.stopPropagation()
                 }
               >
-                <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-[70vh] mb-4 sm:mb-6 overflow-hidden rounded-lg">
+                <div className="relative w-full h-[90vh] mb-4 sm:mb-6 overflow-hidden rounded-lg">
                   <Image
-                    src="https://picsum.photos/400/800"
+                    src="https://res.cloudinary.com/dhv234qct/image/upload/v1742501375/lizq0jojfjieuxdldexs.png"
                     alt="Random Minerva Image"
                     layout="fill"
-                    objectFit="cover"
+                    objectFit="contain"
                   />
                 </div>
                 <div className="flex justify-center">
                   <button
                     className="bg-black text-white hover:scale-105 transition-all duration-300 p-2 border-2 border-white rounded-xl"
-                    onClick={() => router.push("/read-more")}
+                    onClick={() => {
+                      onClose();
+                      window.open(
+                        "https://drive.google.com/file/d/17yTQUbTBWKm1zwK1lbQ8Sh6uRzJkw7UD/view?usp=sharing"
+                      );
+                    }}
                   >
                     <span className="text-lg sm:text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
                       Explore Minerva
