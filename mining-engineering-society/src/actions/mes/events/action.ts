@@ -1,3 +1,5 @@
+'use server';
+
 import { eventsTable } from "@/db/schema";
 import { DB_Connection } from "@/lib/db_connection";
 import { eq } from "drizzle-orm";

@@ -37,6 +37,14 @@ export const minervaTable = pgTable("minerva", {
   coverImageLink: varchar("cover_image_link").notNull(),
 });
 
+// Authentication Table
+export const usersTable = pgTable("users", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  username: varchar("username").notNull().unique(),
+  password: varchar("password").notNull(),
+  createdAt: varchar("created_at").notNull(),
+});
+
 // MINARE Database Schema
 
 // Gallary Table
