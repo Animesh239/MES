@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { stakeholdersTable } from "@/db/schema";
 import { DB_Connection } from "@/lib/db_connection";
