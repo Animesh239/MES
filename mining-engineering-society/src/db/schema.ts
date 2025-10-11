@@ -39,6 +39,24 @@ export const minervaTable = pgTable("minerva", {
   coverImageLink: varchar("cover_image_link").notNull(),
 });
 
+// Poems Table
+export const poemsTable = pgTable("poems", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar("title").notNull(),
+  content: varchar("content").notNull(), // MDX content
+  author: varchar("author").notNull(),
+  publishDate: varchar("publish_date").notNull(),
+});
+
+// Articles Table
+export const articlesTable = pgTable("articles", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar("title").notNull(),
+  content: varchar("content").notNull(), // MDX content
+  author: varchar("author").notNull(),
+  publishDate: varchar("publish_date").notNull(),
+});
+
 // Authentication Table
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
