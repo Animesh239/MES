@@ -10,17 +10,17 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
-      <div className="bg-gray-800 rounded-lg w-full max-w-2xl overflow-hidden">
-        <div className="flex justify-end p-2">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4">
+      <div className="bg-black/90 rounded-2xl border border-gray-700/50 w-full max-w-4xl max-h-[90vh] overflow-hidden backdrop-blur-xl">
+        <div className="flex justify-end p-4">
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
           >
             <X size={24} />
           </button>
         </div>
-        <div className="p-4">{children}</div>
+        <div className="px-6 pb-6 -mt-4">{children}</div>
       </div>
     </div>
   );

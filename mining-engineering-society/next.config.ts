@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["res.cloudinary.com", "picsum.photos"],
+    remotePatterns: [
+      {
+        hostname: "res.cloudinary.com",
+      },
+      {
+        hostname: "picsum.photos",
+      },
+    ],
   },
   async rewrites() {
     return [
