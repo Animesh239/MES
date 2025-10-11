@@ -500,18 +500,6 @@ export default function ArticlesManagement() {
                 __html: renderMDXContent(viewingArticle.content),
               }}
             />
-
-            {/* Raw Content Section (for reference) */}
-            <div className="mt-8 pt-6 border-t border-gray-700/50">
-              <h4 className="text-lg font-semibold text-gray-300 mb-3">
-                Raw MDX Content:
-              </h4>
-              <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700/30">
-                <pre className="text-sm text-gray-400 whitespace-pre-wrap font-mono">
-                  {viewingArticle.content}
-                </pre>
-              </div>
-            </div>
           </div>
         )}
       </Modal>
