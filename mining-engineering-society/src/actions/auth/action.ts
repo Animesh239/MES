@@ -39,6 +39,18 @@ export async function loginAction(formData: FormData) {
 
     redirect("/dashboard");
   } catch (error) {
+    // Check if it's a redirect error (which is expected)
+    if (
+      error &&
+      typeof error === "object" &&
+      "digest" in error &&
+      typeof error.digest === "string" &&
+      error.digest.startsWith("NEXT_REDIRECT")
+    ) {
+      // Re-throw redirect errors as they are expected
+      throw error;
+    }
+
     console.error("Login error:", error);
     return { error: "An error occurred during login" };
   }

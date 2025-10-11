@@ -102,54 +102,106 @@ export default function EventsManagement() {
   };
 
   if (loading) {
-    return <div>Loading events...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading events...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Events Management</h1>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            Events Management
+          </h1>
+          <p className="text-gray-400 mt-2">
+            Manage all Mining Engineering Society events
+          </p>
+        </div>
         <Button
           onClick={() => setShowAddForm(true)}
-          className="bg-blue-600 hover:bg-blue-700"
+          className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200"
         >
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
           Add New Event
         </Button>
       </div>
 
       {/* Add/Edit Form */}
       {showAddForm && (
-        <div className="bg-white p-6 rounded-lg shadow mb-6">
-          <h2 className="text-lg font-semibold mb-4">
-            {editingEvent ? "Edit Event" : "Add New Event"}
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="title">Title</Label>
-              <Input
-                id="title"
-                type="text"
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-                required
-              />
+        <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-2xl">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-white">
+              {editingEvent ? "Edit Event" : "Add New Event"}
+            </h2>
+            <Button
+              onClick={resetForm}
+              variant="outline"
+              className="border-gray-600 text-gray-400 hover:text-white hover:border-white"
+              size="sm"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Button>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="title" className="text-gray-300 font-medium">
+                  Title
+                </Label>
+                <Input
+                  id="title"
+                  type="text"
+                  value={formData.title}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter event title"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="type" className="text-gray-300 font-medium">
+                  Type
+                </Label>
+                <Input
+                  id="type"
+                  type="text"
+                  value={formData.type}
+                  onChange={(e) =>
+                    setFormData({ ...formData, type: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="e.g., Conference, Workshop, Seminar"
+                  required
+                />
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="type">Type</Label>
-              <Input
-                id="type"
-                type="text"
-                value={formData.type}
-                onChange={(e) =>
-                  setFormData({ ...formData, type: e.target.value })
-                }
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="imageLinks">Image Links (comma separated)</Label>
+              <Label htmlFor="imageLinks" className="text-gray-300 font-medium">
+                Image Links
+              </Label>
               <Input
                 id="imageLinks"
                 type="text"
@@ -157,15 +209,25 @@ export default function EventsManagement() {
                 onChange={(e) =>
                   setFormData({ ...formData, imageLinks: e.target.value })
                 }
-                placeholder="https://image1.jpg, https://image2.jpg"
+                className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="https://image1.jpg, https://image2.jpg (comma separated)"
                 required
               />
             </div>
-            <div className="flex space-x-2">
-              <Button type="submit" className="bg-green-600 hover:bg-green-700">
-                {editingEvent ? "Update" : "Add"} Event
+
+            <div className="flex space-x-3 pt-4">
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0 shadow-lg"
+              >
+                {editingEvent ? "Update Event" : "Add Event"}
               </Button>
-              <Button type="button" onClick={resetForm} variant="outline">
+              <Button
+                type="button"
+                onClick={resetForm}
+                variant="outline"
+                className="border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-white/10"
+              >
                 Cancel
               </Button>
             </div>
@@ -174,43 +236,129 @@ export default function EventsManagement() {
       )}
 
       {/* Events List */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold">All Events</h2>
+      <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-800 bg-black/20">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-white">All Events</h2>
+            <div className="text-sm text-gray-400">
+              {events.length} event{events.length !== 1 ? "s" : ""} total
+            </div>
+          </div>
         </div>
-        <div className="divide-y">
+
+        <div className="divide-y divide-gray-800">
           {events.length === 0 ? (
-            <div className="px-6 py-8 text-center text-gray-500">
-              No events found. Add your first event!
+            <div className="px-6 py-12 text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium text-white mb-2">
+                No events found
+              </h3>
+              <p className="text-gray-400 mb-4">
+                Get started by adding your first event!
+              </p>
+              <Button
+                onClick={() => setShowAddForm(true)}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+              >
+                Add Your First Event
+              </Button>
             </div>
           ) : (
             events.map((event) => (
               <div
                 key={event.id}
-                className="px-6 py-4 flex items-center justify-between"
+                className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
               >
-                <div>
-                  <h3 className="font-medium text-gray-900">{event.title}</h3>
-                  <p className="text-sm text-gray-600">Type: {event.type}</p>
-                  <p className="text-sm text-gray-600">
-                    Images: {event.imageLinks.length} file(s)
-                  </p>
-                </div>
-                <div className="flex space-x-2">
-                  <Button
-                    onClick={() => handleEdit(event)}
-                    size="sm"
-                    variant="outline"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    onClick={() => handleDelete(event.title)}
-                    size="sm"
-                    className="bg-red-600 hover:bg-red-700"
-                  >
-                    Delete
-                  </Button>
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-white text-lg mb-1">
+                      {event.title}
+                    </h3>
+                    <div className="flex items-center space-x-4 text-sm text-gray-400">
+                      <div className="flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {event.type}
+                      </div>
+                      <div className="flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {event.imageLinks.length} image
+                        {event.imageLinks.length !== 1 ? "s" : ""}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2 ml-4">
+                    <Button
+                      onClick={() => handleEdit(event)}
+                      size="sm"
+                      variant="outline"
+                      className="border-gray-600 text-gray-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/20"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      </svg>
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => handleDelete(event.title)}
+                      size="sm"
+                      className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"
+                          clipRule="evenodd"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zM12 7a1 1 0 012 0v4a1 1 0 11-2 0V7z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Delete
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))

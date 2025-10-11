@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   getAllStakeholders,
   addStakeholder,
@@ -16,6 +17,7 @@ interface Stakeholder {
   name: string;
   role: string;
   tenure: string;
+  photoUrl: string;
 }
 
 export default function StakeholdersManagement() {
@@ -30,6 +32,7 @@ export default function StakeholdersManagement() {
     name: "",
     role: "",
     tenure: "",
+    photoUrl: "",
   });
 
   useEffect(() => {
@@ -60,7 +63,7 @@ export default function StakeholdersManagement() {
         await addStakeholder(formData);
       }
 
-      setFormData({ name: "", role: "", tenure: "" });
+      setFormData({ name: "", role: "", tenure: "", photoUrl: "" });
       setEditingStakeholder(null);
       setShowAddForm(false);
       loadStakeholders();
@@ -75,6 +78,7 @@ export default function StakeholdersManagement() {
       name: stakeholder.name,
       role: stakeholder.role,
       tenure: stakeholder.tenure,
+      photoUrl: stakeholder.photoUrl,
     });
     setShowAddForm(true);
   };
@@ -91,77 +95,153 @@ export default function StakeholdersManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "", tenure: "" });
+    setFormData({ name: "", role: "", tenure: "", photoUrl: "" });
     setEditingStakeholder(null);
     setShowAddForm(false);
   };
 
   if (loading) {
-    return <div>Loading stakeholders...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading stakeholders...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Stakeholders Management
-        </h1>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            Stakeholders Management
+          </h1>
+          <p className="text-gray-400 mt-2">
+            Manage industry stakeholders and partners
+          </p>
+        </div>
         <Button
           onClick={() => setShowAddForm(true)}
-          className="bg-blue-600 hover:bg-blue-700"
+          className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200"
         >
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
           Add New Stakeholder
         </Button>
       </div>
 
       {/* Add/Edit Form */}
       {showAddForm && (
-        <div className="bg-white p-6 rounded-lg shadow mb-6">
-          <h2 className="text-lg font-semibold mb-4">
-            {editingStakeholder ? "Edit Stakeholder" : "Add New Stakeholder"}
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-              />
+        <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-2xl">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-white">
+              {editingStakeholder ? "Edit Stakeholder" : "Add New Stakeholder"}
+            </h2>
+            <Button
+              onClick={resetForm}
+              variant="outline"
+              className="border-gray-600 text-gray-400 hover:text-white hover:border-white"
+              size="sm"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Button>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <Label htmlFor="name" className="text-gray-300 font-medium">
+                  Name
+                </Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="Enter stakeholder name"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="role" className="text-gray-300 font-medium">
+                  Role
+                </Label>
+                <Input
+                  id="role"
+                  type="text"
+                  value={formData.role}
+                  onChange={(e) =>
+                    setFormData({ ...formData, role: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="e.g., CEO, Director, Manager"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="tenure" className="text-gray-300 font-medium">
+                  Tenure
+                </Label>
+                <Input
+                  id="tenure"
+                  type="text"
+                  value={formData.tenure}
+                  onChange={(e) =>
+                    setFormData({ ...formData, tenure: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="e.g., 2020-2025, Current"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="photoUrl" className="text-gray-300 font-medium">
+                  Photo URL
+                </Label>
+                <Input
+                  id="photoUrl"
+                  type="url"
+                  value={formData.photoUrl}
+                  onChange={(e) =>
+                    setFormData({ ...formData, photoUrl: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="https://example.com/photo.jpg"
+                  required
+                />
+              </div>
             </div>
-            <div>
-              <Label htmlFor="role">Role</Label>
-              <Input
-                id="role"
-                type="text"
-                value={formData.role}
-                onChange={(e) =>
-                  setFormData({ ...formData, role: e.target.value })
-                }
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="tenure">Tenure</Label>
-              <Input
-                id="tenure"
-                type="text"
-                value={formData.tenure}
-                onChange={(e) =>
-                  setFormData({ ...formData, tenure: e.target.value })
-                }
-                required
-              />
-            </div>
-            <div className="flex space-x-2">
-              <Button type="submit" className="bg-green-600 hover:bg-green-700">
-                {editingStakeholder ? "Update" : "Add"} Stakeholder
+
+            <div className="flex space-x-3 pt-4">
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg"
+              >
+                {editingStakeholder ? "Update Stakeholder" : "Add Stakeholder"}
               </Button>
-              <Button type="button" onClick={resetForm} variant="outline">
+              <Button
+                type="button"
+                onClick={resetForm}
+                variant="outline"
+                className="border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-white/10"
+              >
                 Cancel
               </Button>
             </div>
@@ -170,47 +250,141 @@ export default function StakeholdersManagement() {
       )}
 
       {/* Stakeholders List */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold">All Stakeholders</h2>
+      <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-800 bg-black/20">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-white">
+              All Stakeholders
+            </h2>
+            <div className="text-sm text-gray-400">
+              {stakeholders.length} stakeholder
+              {stakeholders.length !== 1 ? "s" : ""} total
+            </div>
+          </div>
         </div>
-        <div className="divide-y">
+
+        <div className="divide-y divide-gray-800">
           {stakeholders.length === 0 ? (
-            <div className="px-6 py-8 text-center text-gray-500">
-              No stakeholders found. Add your first stakeholder!
+            <div className="px-6 py-12 text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium text-white mb-2">
+                No stakeholders found
+              </h3>
+              <p className="text-gray-400 mb-4">
+                Get started by adding your first stakeholder!
+              </p>
+              <Button
+                onClick={() => setShowAddForm(true)}
+                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
+              >
+                Add Your First Stakeholder
+              </Button>
             </div>
           ) : (
             stakeholders.map((stakeholder) => (
               <div
                 key={stakeholder.id}
-                className="px-6 py-4 flex items-center justify-between"
+                className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
               >
-                <div>
-                  <h3 className="font-medium text-gray-900">
-                    {stakeholder.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Role: {stakeholder.role}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Tenure: {stakeholder.tenure}
-                  </p>
-                </div>
-                <div className="flex space-x-2">
-                  <Button
-                    onClick={() => handleEdit(stakeholder)}
-                    size="sm"
-                    variant="outline"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    onClick={() => handleDelete(stakeholder.name)}
-                    size="sm"
-                    className="bg-red-600 hover:bg-red-700"
-                  >
-                    Delete
-                  </Button>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 flex-1">
+                    {/* Stakeholder Photo */}
+                    <div className="flex-shrink-0">
+                      <Image
+                        src={stakeholder.photoUrl}
+                        alt={`${stakeholder.name} photo`}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 rounded-full object-cover border-2 border-gray-600"
+                      />
+                    </div>
+
+                    {/* Stakeholder Info */}
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-white text-lg mb-1">
+                        {stakeholder.name}
+                      </h3>
+                      <div className="flex items-center space-x-4 text-sm text-gray-400">
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {stakeholder.role}
+                        </div>
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {stakeholder.tenure}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2 ml-4">
+                    <Button
+                      onClick={() => handleEdit(stakeholder)}
+                      size="sm"
+                      variant="outline"
+                      className="border-gray-600 text-gray-400 hover:text-white hover:border-purple-500 hover:bg-purple-500/20"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      </svg>
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => handleDelete(stakeholder.name)}
+                      size="sm"
+                      className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"
+                          clipRule="evenodd"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zM12 7a1 1 0 012 0v4a1 1 0 11-2 0V7z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Delete
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))

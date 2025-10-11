@@ -9,6 +9,7 @@ export const alumniTable = pgTable("alumni", {
   graduationYear: varchar("graduation_year").notNull(),
   currentPosition: varchar("current_position").notNull(),
   company: varchar("company").notNull(),
+  photoUrl: varchar("photo_url").notNull(),
   linkedInProfile: varchar("linkedin_profile"),
 });
 
@@ -18,6 +19,7 @@ export const stakeholdersTable = pgTable("stakeholders", {
   name: varchar("name").notNull(),
   role: varchar("role").notNull(),
   tenure: varchar("tenure").notNull(),
+  photoUrl: varchar("photo_url").notNull(),
 });
 
 // Events Table

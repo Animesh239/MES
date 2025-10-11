@@ -10,6 +10,7 @@ export const addStakeholder = async (stakeholderData: {
   name: string;
   role: string;
   tenure: string;
+  photoUrl: string;
 }) => {
   const newStakeholder = await DB_Connection.insert(stakeholdersTable)
     .values(stakeholderData)
@@ -49,6 +50,7 @@ export const updateStakeholder = async (
     name?: string;
     role?: string;
     tenure?: string;
+    photoUrl?: string;
   }
 ) => {
   const updatedStakeholder = await DB_Connection.update(stakeholdersTable)

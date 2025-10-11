@@ -11,6 +11,7 @@ export const addAlumni = async (alumniData: {
   graduationYear: string;
   currentPosition: string;
   company: string;
+  photoUrl: string;
   linkedInProfile?: string;
 }) => {
   const newAlumni = await DB_Connection.insert(alumniTable)
@@ -52,6 +53,7 @@ export const updateAlumni = async (
     graduationYear?: string;
     currentPosition?: string;
     company?: string;
+    photoUrl?: string;
     linkedInProfile?: string;
   }
 ) => {
