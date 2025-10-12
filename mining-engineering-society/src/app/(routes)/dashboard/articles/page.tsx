@@ -6,7 +6,7 @@ import {
   addArticle,
   updateArticle,
   deleteArticle,
-} from "@/actions/mes/minerva/articles/action";
+} from "@/actions/mes/articles/action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

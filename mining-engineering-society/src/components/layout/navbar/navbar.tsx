@@ -186,6 +186,8 @@ export default function Navbar() {
 
                 <NavItem href="/contactus">Contact</NavItem>
 
+                <NavItem href="/publications">Publications</NavItem>
+
                 <NavItem2 href="/minerva">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl p-2 transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">
                     Minerva
@@ -245,6 +247,10 @@ export default function Navbar() {
             </NavItem>
             <NavItem href="/contactus" onClick={closeNavbar}>
               Contact Us
+            </NavItem>
+
+            <NavItem href="/publications" onClick={closeNavbar}>
+              Publications
             </NavItem>
             <NavItem2 href="/minerva" onClick={closeNavbar}>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-2xl transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">
