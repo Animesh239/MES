@@ -70,17 +70,18 @@ export const updateEvent = async (
 };
 
 export const deleteEvent = async (title: string) => {
-  const deletedEvent = await DB_Connection.delete(eventsTable).where(
-    eq(eventsTable.title, title)
-  );
-  if (!deletedEvent) {
+  try {
+    await DB_Connection.delete(eventsTable).where(eq(eventsTable.title, title));
+
+    return {
+      success: true,
+      message: "Event deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting event:", error);
     return {
       success: false,
       message: "Failed to delete event.",
     };
   }
-  return {
-    success: true,
-    message: "Event deleted successfully.",
-  };
 };

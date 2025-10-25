@@ -72,19 +72,20 @@ export const updateStakeholder = async (
 };
 
 export const deleteStakeholder = async (name: string) => {
-  const deletedStakeholder = await DB_Connection.delete(
-    stakeholdersTable
-  ).where(eq(stakeholdersTable.name, name));
+  try {
+    await DB_Connection.delete(stakeholdersTable).where(
+      eq(stakeholdersTable.name, name)
+    );
 
-  if (!deletedStakeholder) {
+    return {
+      success: true,
+      message: "Stakeholder deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting stakeholder:", error);
     return {
       success: false,
       message: "Failed to delete stakeholder.",
     };
   }
-  return {
-    success: true,
-    message: "Stakeholder deleted successfully.",
-    data: deletedStakeholder,
-  };
 };
