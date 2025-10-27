@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { CldUploadButton } from 'next-cloudinary';
 
 interface Stakeholder {
   id: number;
@@ -32,8 +33,8 @@ export default function StakeholdersManagement() {
     name: "",
     role: "",
     tenure: "",
-    photoUrl: "",
   });
+  const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
 
   useEffect(() => {
     loadStakeholders();
@@ -56,14 +57,22 @@ export default function StakeholdersManagement() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const stakeholderData = {
+      name: formData.name,
+      role: formData.role,
+      tenure: formData.tenure,
+      photoUrl: uploadedPhoto,
+    };
+
     try {
       if (editingStakeholder) {
-        await updateStakeholder(editingStakeholder.name, formData);
+        await updateStakeholder(editingStakeholder.name, stakeholderData);
       } else {
-        await addStakeholder(formData);
+        await addStakeholder(stakeholderData);
       }
 
-      setFormData({ name: "", role: "", tenure: "", photoUrl: "" });
+      setFormData({ name: "", role: "", tenure: "" });
+      setUploadedPhoto("");
       setEditingStakeholder(null);
       setShowAddForm(false);
       loadStakeholders();
@@ -78,8 +87,8 @@ export default function StakeholdersManagement() {
       name: stakeholder.name,
       role: stakeholder.role,
       tenure: stakeholder.tenure,
-      photoUrl: stakeholder.photoUrl,
     });
+    setUploadedPhoto(stakeholder.photoUrl);
     setShowAddForm(true);
   };
 
@@ -95,7 +104,8 @@ export default function StakeholdersManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "", tenure: "", photoUrl: "" });
+    setFormData({ name: "", role: "", tenure: "" });
+    setUploadedPhoto("");
     setEditingStakeholder(null);
     setShowAddForm(false);
   };
@@ -211,22 +221,58 @@ export default function StakeholdersManagement() {
                   required
                 />
               </div>
-              <div>
-                <Label htmlFor="photoUrl" className="text-gray-300 font-medium">
-                  Photo URL
-                </Label>
-                <Input
-                  id="photoUrl"
-                  type="url"
-                  value={formData.photoUrl}
-                  onChange={(e) =>
-                    setFormData({ ...formData, photoUrl: e.target.value })
-                  }
-                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                  placeholder="https://example.com/photo.jpg"
-                  required
-                />
+            </div>
+
+            <div>
+              <Label className="text-gray-300 font-medium">
+                Upload Photo
+              </Label>
+              <div className="mt-2 flex items-center space-x-4">
+                <CldUploadButton
+                // @ts-ignore
+                  onSuccess={(result: any) => {
+                    console.log("Upload success:", result);
+                    if (result && result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
+                      console.log("Setting photo URL:", result.info.secure_url);
+                      setUploadedPhoto(result.info.secure_url);
+                    }
+                  }}
+                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-200"
+                  options={{
+                    multiple: false,
+                    maxFiles: 1,
+                  }}
+                >
+                  <svg className="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  </svg>
+                  {uploadedPhoto ? "Replace Photo" : "Upload Photo"}
+                </CldUploadButton>
               </div>
+              
+              {/* Display uploaded photo */}
+              {uploadedPhoto && (
+                <div className="mt-3">
+                  <p className="text-sm text-gray-400 mb-2">Uploaded Photo:</p>
+                  <div className="relative inline-block">
+                    <Image
+                      src={uploadedPhoto}
+                      alt="Uploaded stakeholder photo"
+                      width={128}
+                      height={128}
+                      className="w-32 h-32 object-cover rounded-lg border border-gray-600"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setUploadedPhoto("")}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex space-x-3 pt-4">

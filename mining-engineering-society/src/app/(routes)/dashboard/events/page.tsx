@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { CldUploadButton } from 'next-cloudinary';
 
 interface Event {
   id: number;
@@ -28,8 +29,8 @@ export default function EventsManagement() {
   const [formData, setFormData] = useState({
     title: "",
     type: "",
-    imageLinks: "",
   });
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
   useEffect(() => {
     loadEvents();
@@ -55,7 +56,7 @@ export default function EventsManagement() {
     const eventData = {
       title: formData.title,
       type: formData.type,
-      imageLinks: formData.imageLinks.split(",").map((link) => link.trim()),
+      imageLinks: uploadedImages,
     };
 
     try {
@@ -65,7 +66,8 @@ export default function EventsManagement() {
         await addEvent(eventData);
       }
 
-      setFormData({ title: "", type: "", imageLinks: "" });
+      setFormData({ title: "", type: "" });
+      setUploadedImages([]);
       setEditingEvent(null);
       setShowAddForm(false);
       loadEvents();
@@ -74,13 +76,15 @@ export default function EventsManagement() {
     }
   };
 
+  
+
   const handleEdit = (event: Event) => {
     setEditingEvent(event);
     setFormData({
       title: event.title,
       type: event.type,
-      imageLinks: event.imageLinks.join(", "),
     });
+    setUploadedImages(event.imageLinks || []);
     setShowAddForm(true);
   };
 
@@ -96,9 +100,14 @@ export default function EventsManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ title: "", type: "", imageLinks: "" });
+    setFormData({ title: "", type: "" });
+    setUploadedImages([]);
     setEditingEvent(null);
     setShowAddForm(false);
+  };
+
+  const removeImage = (indexToRemove: number) => {
+    setUploadedImages(uploadedImages.filter((_, index) => index !== indexToRemove));
   };
 
   if (loading) {
@@ -199,20 +208,56 @@ export default function EventsManagement() {
             </div>
 
             <div>
-              <Label htmlFor="imageLinks" className="text-gray-300 font-medium">
-                Image Links
+              <Label className="text-gray-300 font-medium">
+                Upload Images
               </Label>
-              <Input
-                id="imageLinks"
-                type="text"
-                value={formData.imageLinks}
-                onChange={(e) =>
-                  setFormData({ ...formData, imageLinks: e.target.value })
-                }
-                className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                placeholder="https://image1.jpg, https://image2.jpg (comma separated)"
-                required
-              />
+              <div className="mt-2 flex items-center space-x-4">
+                <CldUploadButton
+                // @ts-ignore
+                  onSuccess={(result: any) => {
+                    console.log("Upload success:", result);
+                    if (result && result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
+                      console.log("Adding image URL:", result.info.secure_url);
+                      setUploadedImages((prevImages) => [...prevImages, result.info.secure_url]);
+                    }
+                  }}
+                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-200"
+                  options={{
+                    multiple: true,
+                  }}
+                >
+                  <svg className="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  </svg>
+                  Upload Images ({uploadedImages.length})
+                </CldUploadButton>
+              </div>
+              
+              {/* Display uploaded images */}
+              {uploadedImages.length > 0 && (
+                <div className="mt-3">
+                  <p className="text-sm text-gray-400 mb-2">Uploaded Images ({uploadedImages.length}):</p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {uploadedImages.map((imageUrl, index) => (
+                      <div key={index} className="relative group">
+                        <img 
+                          src={imageUrl} 
+                          alt={`Event image ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg border border-gray-600"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(index)}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors shadow-lg"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex space-x-3 pt-4">
@@ -282,39 +327,60 @@ export default function EventsManagement() {
                 className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-white text-lg mb-1">
-                      {event.title}
-                    </h3>
-                    <div className="flex items-center space-x-4 text-sm text-gray-400">
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
-                            clipRule="evenodd"
+                  <div className="flex items-center space-x-4 flex-1">
+                    {/* Event Images Preview */}
+                    {event.imageLinks && event.imageLinks.length > 0 && (
+                      <div className="flex-shrink-0 flex items-center space-x-2">
+                        {event.imageLinks.slice(0, 3).map((imageUrl, idx) => (
+                          <img 
+                            key={idx}
+                            src={imageUrl} 
+                            alt={`${event.title} - ${idx + 1}`}
+                            className="w-16 h-16 object-cover rounded-lg border border-gray-600"
                           />
-                        </svg>
-                        {event.type}
+                        ))}
+                        {event.imageLinks.length > 3 && (
+                          <div className="w-16 h-16 bg-black/50 border border-gray-600 rounded-lg flex items-center justify-center">
+                            <span className="text-xs text-gray-400">+{event.imageLinks.length - 3}</span>
+                          </div>
+                        )}
                       </div>
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        {event.imageLinks.length} image
-                        {event.imageLinks.length !== 1 ? "s" : ""}
+                    )}
+                    
+                    {/* Event Details */}
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-white text-lg mb-1">
+                        {event.title}
+                      </h3>
+                      <div className="flex items-center space-x-4 text-sm text-gray-400">
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {event.type}
+                        </div>
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {event.imageLinks && event.imageLinks.length > 0 ? `${event.imageLinks.length} image${event.imageLinks.length > 1 ? 's' : ''}` : "No images"}
+                        </div>
                       </div>
                     </div>
                   </div>

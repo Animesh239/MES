@@ -76,18 +76,18 @@ export const updateAlumni = async (
 };
 
 export const deleteAlumni = async (name: string) => {
-  const deletedAlumni = await DB_Connection.delete(alumniTable).where(
-    eq(alumniTable.name, name)
-  );
-  if (!deletedAlumni) {
+  try {
+    await DB_Connection.delete(alumniTable).where(eq(alumniTable.name, name));
+
+    return {
+      success: true,
+      message: "Alumni deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting alumni:", error);
     return {
       success: false,
       message: "Failed to delete alumni.",
     };
   }
-  return {
-    success: true,
-    message: "Alumni deleted successfully.",
-    data: deletedAlumni,
-  };
 };
