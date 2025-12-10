@@ -9,9 +9,10 @@ import type { HTMLMotionProps } from "framer-motion";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  pdfLink: string;
 }
 
-const Modal = ({ isOpen, onClose }: ModalProps) => {
+const Modal = ({ isOpen, onClose, pdfLink }: ModalProps) => {
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -105,9 +106,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                     className="bg-black text-white hover:scale-105 transition-all duration-300 p-2 border-2 border-white rounded-xl"
                     onClick={() => {
                       onClose();
-                      window.open(
-                        "https://drive.google.com/file/d/17yTQUbTBWKm1zwK1lbQ8Sh6uRzJkw7UD/view?usp=sharing"
-                      );
+                      window.open(pdfLink);
                     }}
                   >
                     <span className="text-lg sm:text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">

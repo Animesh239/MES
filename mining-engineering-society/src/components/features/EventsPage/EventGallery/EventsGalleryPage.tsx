@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import { SelectYear } from "./Selectyear";
 import { YearEventGallery } from "./YearEventGallery";
-import { getAllEvents } from "@/actions/mes/events/action";
+import { getPastEvents } from "@/actions/mes/events/action";
+import ComingSoon from "@/components/ui/ComingSoon";
 
 interface Event {
   id: number;
@@ -12,14 +12,13 @@ interface Event {
 }
 
 export const EventsGalleryPage = () => {
-  const [selectedYear, setSelectedYear] = useState("2024");
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const response = await getAllEvents();
+        const response = await getPastEvents();
         if (response.success && response.data) {
           setEvents(response.data);
         }
@@ -32,10 +31,6 @@ export const EventsGalleryPage = () => {
     fetchEvents();
   }, []);
 
-  const handleSelectYear = (year: string) => {
-    setSelectedYear(year);
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -44,10 +39,13 @@ export const EventsGalleryPage = () => {
     );
   }
 
+  if (events.length === 0) {
+    return <ComingSoon />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col gap-10 px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 h-auto py-32">
-      <SelectYear handleSelectYear={handleSelectYear} />
-      <YearEventGallery year={selectedYear} events={events} />
+      <YearEventGallery events={events} />
     </div>
   );
 };

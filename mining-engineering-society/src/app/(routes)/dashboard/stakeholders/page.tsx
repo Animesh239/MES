@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  getAllStakeholders,
+  getCurrentStakeholders,
+  getPastStakeholders,
   addStakeholder,
   updateStakeholder,
   deleteStakeholder,
@@ -11,7 +12,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CldUploadButton } from 'next-cloudinary';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CldUploadButton } from "next-cloudinary";
 
 interface Stakeholder {
   id: number;
@@ -22,7 +30,10 @@ interface Stakeholder {
 }
 
 export default function StakeholdersManagement() {
-  const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
+  const [currentStakeholders, setCurrentStakeholders] = useState<Stakeholder[]>(
+    []
+  );
+  const [pastStakeholders, setPastStakeholders] = useState<Stakeholder[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingStakeholder, setEditingStakeholder] =
     useState<Stakeholder | null>(null);
@@ -32,7 +43,7 @@ export default function StakeholdersManagement() {
   const [formData, setFormData] = useState({
     name: "",
     role: "",
-    tenure: "",
+    tenure: "current" as "current" | "past",
   });
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
 
@@ -43,9 +54,16 @@ export default function StakeholdersManagement() {
   const loadStakeholders = async () => {
     setLoading(true);
     try {
-      const result = await getAllStakeholders();
-      if (result.success && result.data) {
-        setStakeholders(result.data);
+      const [currentResult, pastResult] = await Promise.all([
+        getCurrentStakeholders(),
+        getPastStakeholders(),
+      ]);
+
+      if (currentResult.success && currentResult.data) {
+        setCurrentStakeholders(currentResult.data);
+      }
+      if (pastResult.success && pastResult.data) {
+        setPastStakeholders(pastResult.data);
       }
     } catch (error) {
       console.error("Error loading stakeholders:", error);
@@ -65,19 +83,29 @@ export default function StakeholdersManagement() {
     };
 
     try {
+      let result;
       if (editingStakeholder) {
-        await updateStakeholder(editingStakeholder.name, stakeholderData);
+        result = await updateStakeholder(
+          editingStakeholder.name,
+          stakeholderData
+        );
       } else {
-        await addStakeholder(stakeholderData);
+        result = await addStakeholder(stakeholderData);
       }
 
-      setFormData({ name: "", role: "", tenure: "" });
+      if (!result.success) {
+        alert(result.message);
+        return;
+      }
+
+      setFormData({ name: "", role: "", tenure: "current" });
       setUploadedPhoto("");
       setEditingStakeholder(null);
       setShowAddForm(false);
       loadStakeholders();
     } catch (error) {
       console.error("Error saving stakeholder:", error);
+      alert("An error occurred while saving the stakeholder.");
     }
   };
 
@@ -86,7 +114,7 @@ export default function StakeholdersManagement() {
     setFormData({
       name: stakeholder.name,
       role: stakeholder.role,
-      tenure: stakeholder.tenure,
+      tenure: stakeholder.tenure as "current" | "past",
     });
     setUploadedPhoto(stakeholder.photoUrl);
     setShowAddForm(true);
@@ -104,7 +132,7 @@ export default function StakeholdersManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "", tenure: "" });
+    setFormData({ name: "", role: "", tenure: "current" });
     setUploadedPhoto("");
     setEditingStakeholder(null);
     setShowAddForm(false);
@@ -209,48 +237,74 @@ export default function StakeholdersManagement() {
                 <Label htmlFor="tenure" className="text-gray-300 font-medium">
                   Tenure
                 </Label>
-                <Input
-                  id="tenure"
-                  type="text"
+                <Select
                   value={formData.tenure}
-                  onChange={(e) =>
-                    setFormData({ ...formData, tenure: e.target.value })
+                  onValueChange={(value: "current" | "past") =>
+                    setFormData({ ...formData, tenure: value })
                   }
-                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                  placeholder="e.g., 2020-2025, Current"
-                  required
-                />
+                >
+                  <SelectTrigger className="mt-2 bg-black/30 border-gray-700 text-white focus:border-purple-500 focus:ring-purple-500">
+                    <SelectValue placeholder="Select tenure" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black/90 border-gray-700">
+                    <SelectItem
+                      value="current"
+                      className="text-white hover:bg-purple-500/20"
+                    >
+                      Current
+                    </SelectItem>
+                    <SelectItem
+                      value="past"
+                      className="text-white hover:bg-purple-500/20"
+                    >
+                      Past
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
             <div>
-              <Label className="text-gray-300 font-medium">
-                Upload Photo
-              </Label>
+              <Label className="text-gray-300 font-medium">Upload Photo</Label>
               <div className="mt-2 flex items-center space-x-4">
                 <CldUploadButton
-                // @ts-ignore
+                  // @ts-ignore
                   onSuccess={(result: any) => {
                     console.log("Upload success:", result);
-                    if (result && result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
+                    if (
+                      result &&
+                      result.info &&
+                      typeof result.info === "object" &&
+                      "secure_url" in result.info
+                    ) {
                       console.log("Setting photo URL:", result.info.secure_url);
                       setUploadedPhoto(result.info.secure_url);
                     }
                   }}
-                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                  uploadPreset={
+                    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+                  }
                   className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-200"
                   options={{
                     multiple: false,
                     maxFiles: 1,
                   }}
                 >
-                  <svg className="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  <svg
+                    className="w-4 h-4 mr-2 inline"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                   {uploadedPhoto ? "Replace Photo" : "Upload Photo"}
                 </CldUploadButton>
               </div>
-              
+
               {/* Display uploaded photo */}
               {uploadedPhoto && (
                 <div className="mt-3">
@@ -295,22 +349,22 @@ export default function StakeholdersManagement() {
         </div>
       )}
 
-      {/* Stakeholders List */}
+      {/* Current Stakeholders List */}
       <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-800 bg-black/20">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-white">
-              All Stakeholders
+              Current Stakeholders
             </h2>
             <div className="text-sm text-gray-400">
-              {stakeholders.length} stakeholder
-              {stakeholders.length !== 1 ? "s" : ""} total
+              {currentStakeholders.length} stakeholder
+              {currentStakeholders.length !== 1 ? "s" : ""}
             </div>
           </div>
         </div>
 
         <div className="divide-y divide-gray-800">
-          {stakeholders.length === 0 ? (
+          {currentStakeholders.length === 0 ? (
             <div className="px-6 py-12 text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
                 <svg
@@ -322,7 +376,7 @@ export default function StakeholdersManagement() {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-white mb-2">
-                No stakeholders found
+                No current stakeholders found
               </h3>
               <p className="text-gray-400 mb-4">
                 Get started by adding your first stakeholder!
@@ -335,7 +389,7 @@ export default function StakeholdersManagement() {
               </Button>
             </div>
           ) : (
-            stakeholders.map((stakeholder) => (
+            currentStakeholders.map((stakeholder: Stakeholder) => (
               <div
                 key={stakeholder.id}
                 className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
@@ -350,6 +404,143 @@ export default function StakeholdersManagement() {
                         width={80}
                         height={80}
                         className="w-20 h-20 rounded-full object-cover border-2 border-gray-600"
+                      />
+                    </div>
+
+                    {/* Stakeholder Info */}
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-white text-lg mb-1">
+                        {stakeholder.name}
+                      </h3>
+                      <div className="flex items-center space-x-4 text-sm text-gray-400">
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {stakeholder.role}
+                        </div>
+                        <div className="flex items-center">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {stakeholder.tenure}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2 ml-4">
+                    <Button
+                      onClick={() => handleEdit(stakeholder)}
+                      size="sm"
+                      variant="outline"
+                      className="border-gray-600 text-gray-400 hover:text-white hover:border-purple-500 hover:bg-purple-500/20"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      </svg>
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => handleDelete(stakeholder.name)}
+                      size="sm"
+                      className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"
+                          clipRule="evenodd"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zM12 7a1 1 0 012 0v4a1 1 0 11-2 0V7z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* Past Stakeholders List */}
+      <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-800 bg-black/20">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-white">
+              Past Stakeholders
+            </h2>
+            <div className="text-sm text-gray-400">
+              {pastStakeholders.length} stakeholder
+              {pastStakeholders.length !== 1 ? "s" : ""}
+            </div>
+          </div>
+        </div>
+
+        <div className="divide-y divide-gray-800">
+          {pastStakeholders.length === 0 ? (
+            <div className="px-6 py-12 text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium text-white mb-2">
+                No past stakeholders found
+              </h3>
+              <p className="text-gray-400">
+                Past stakeholders will appear here.
+              </p>
+            </div>
+          ) : (
+            pastStakeholders.map((stakeholder: Stakeholder) => (
+              <div
+                key={stakeholder.id}
+                className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 flex-1">
+                    {/* Stakeholder Photo */}
+                    <div className="flex-shrink-0">
+                      <Image
+                        src={stakeholder.photoUrl}
+                        alt={`${stakeholder.name} photo`}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 rounded-full object-cover border-2 border-gray-600 grayscale"
                       />
                     </div>
 

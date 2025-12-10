@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
 
 const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
-const dates = "22ⁿᵈ - 23ʳᵈ March 2025";
+const dates = "7th - 8th March 2026";
 
 export const Hero = () => {
   const router = useRouter();
@@ -34,13 +34,13 @@ export const Hero = () => {
               visible: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 1, ease: easeIn }
-              }
+                transition: { duration: 1, ease: easeIn },
+              },
             }}
           >
             <div className="overflow-y-hidden"></div>
             <h1 className="text-6xl sm:text-7xl font-playfair_dispaly md:text-9xl font-bold mb-6 text-white">
-              MINARE&apos;25
+              MINARE&apos;26
             </h1>
           </motion.div>
           <motion.div
@@ -50,9 +50,9 @@ export const Hero = () => {
               visible: {
                 transition: {
                   staggerChildren: 0.08,
-                  delayChildren: 0.5
-                }
-              }
+                  delayChildren: 0.5,
+                },
+              },
             }}
           >
             <div className="text-xl sm-text-2xl md:text-3xl font-light tracking-widest text-gray-400 max-w-2xl mx-auto mb-8">
@@ -64,8 +64,8 @@ export const Hero = () => {
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.5, ease: easeIn }
-                  }
+                    transition: { duration: 1.5, ease: easeIn },
+                  },
                 }}
               >
                 <div className="inline-block mr-3 leading-relaxed ">

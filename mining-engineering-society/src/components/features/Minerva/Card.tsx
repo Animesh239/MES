@@ -5,8 +5,21 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Modal from "./Modal";
 
-const Card = () => {
+interface CardProps {
+  title: string;
+  issueDate: Date | string;
+  coverImageLink: string;
+  pdfLink: string;
+}
+
+const Card = ({ title, issueDate, coverImageLink, pdfLink }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Convert issueDate to Date object if it's a string
+  const formattedDate =
+    issueDate instanceof Date
+      ? issueDate.toLocaleDateString()
+      : new Date(issueDate).toLocaleDateString();
 
   return (
     <div className="flex flex-col items-center mb-20">
@@ -28,8 +41,8 @@ const Card = () => {
           style={{ width: "100%", height: "100%" }}
         >
           <Image
-            src="https://res.cloudinary.com/dhv234qct/image/upload/v1742501375/lizq0jojfjieuxdldexs.png"
-            alt="MINERVA 2024"
+            src={coverImageLink}
+            alt={title}
             fill
             style={{ objectFit: "cover" }}
           />
@@ -49,10 +62,14 @@ const Card = () => {
           </div>
         </div>
       </motion.div>
-      <p className="mt-4 text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
-        MINERVA 2025
+      <p className="mt-4 text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+        {title} - {formattedDate}
       </p>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        pdfLink={pdfLink}
+      />
       <style jsx>{`
         @keyframes shimmer {
           0% {

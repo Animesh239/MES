@@ -12,6 +12,17 @@ export const addStakeholder = async (stakeholderData: {
   tenure: string;
   photoUrl: string;
 }) => {
+  // Validate tenure field
+  if (
+    stakeholderData.tenure !== "current" &&
+    stakeholderData.tenure !== "past"
+  ) {
+    return {
+      success: false,
+      message: "Tenure must be either 'current' or 'past'.",
+    };
+  }
+
   const newStakeholder = await DB_Connection.insert(stakeholdersTable)
     .values(stakeholderData)
     .returning();
@@ -44,6 +55,40 @@ export const getAllStakeholders = async () => {
   };
 };
 
+export const getCurrentStakeholders = async () => {
+  const stakeholderList = await DB_Connection.select()
+    .from(stakeholdersTable)
+    .where(eq(stakeholdersTable.tenure, "current"));
+  if (!stakeholderList) {
+    return {
+      success: false,
+      message: "No current stakeholders found.",
+    };
+  }
+  return {
+    success: true,
+    message: "Current stakeholders retrieved successfully.",
+    data: stakeholderList,
+  };
+};
+
+export const getPastStakeholders = async () => {
+  const stakeholderList = await DB_Connection.select()
+    .from(stakeholdersTable)
+    .where(eq(stakeholdersTable.tenure, "past"));
+  if (!stakeholderList) {
+    return {
+      success: false,
+      message: "No past stakeholders found.",
+    };
+  }
+  return {
+    success: true,
+    message: "Past stakeholders retrieved successfully.",
+    data: stakeholderList,
+  };
+};
+
 export const updateStakeholder = async (
   name: string,
   updatedData: {
@@ -53,6 +98,18 @@ export const updateStakeholder = async (
     photoUrl?: string;
   }
 ) => {
+  // Validate tenure field if it's being updated
+  if (
+    updatedData.tenure &&
+    updatedData.tenure !== "current" &&
+    updatedData.tenure !== "past"
+  ) {
+    return {
+      success: false,
+      message: "Tenure must be either 'current' or 'past'.",
+    };
+  }
+
   const updatedStakeholder = await DB_Connection.update(stakeholdersTable)
     .set(updatedData)
     .where(eq(stakeholdersTable.name, name))
