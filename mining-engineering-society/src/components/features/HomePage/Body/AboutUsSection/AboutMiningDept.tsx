@@ -20,8 +20,8 @@ export const AboutMiningDept = () => {
           <Image
             src={MiningDeptImgUrl}
             alt="Minare"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             className="rounded-lg"
           />
         </div>

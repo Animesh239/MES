@@ -12,8 +12,8 @@ import MemberCard from "./MembersCard";
 interface Member {
   id: number;
   name: string;
-  designation: string;
-  image: string;
+  role: string;
+  photoUrl: string;
 }
 
 interface MembersCarouselProps {
@@ -68,7 +68,11 @@ export default function MembersCarousel({ members }: MembersCarouselProps) {
           {members.map((member) => (
             <CarouselItem key={member.id} className="pl-4">
               <div className="p-4">
-                <MemberCard {...member} />
+                <MemberCard 
+                  name={member.name}
+                  designation={member.role}
+                  image={member.photoUrl}
+                />
               </div>
             </CarouselItem>
           ))}

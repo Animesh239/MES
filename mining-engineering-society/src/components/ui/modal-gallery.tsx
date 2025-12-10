@@ -81,8 +81,8 @@ export const ModalGallery = ({
                 <Image
                   src={images[currentIndex]}
                   alt={`Gallery image ${currentIndex + 1}`}
-                  layout="fill"
-                  objectFit="contain"
+                  fill
+                  style={{ objectFit: "contain" }}
                   className="transform transition-transform duration-500"
                   priority
                 />
