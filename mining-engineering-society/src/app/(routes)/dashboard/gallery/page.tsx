@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { CldUploadWidget } from "next-cloudinary";
 import {
   getAllGalleryImages,
   addGalleryImage,
   deleteGalleryImage,
 } from "@/actions/minare/gallery/action";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 interface GalleryItem {
@@ -21,6 +21,7 @@ export default function GalleryManagement() {
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<GalleryItem | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
   // Form state
   const [formData, setFormData] = useState({
@@ -38,8 +39,8 @@ export default function GalleryManagement() {
       if (result.success && result.data) {
         setGallery(result.data);
       }
-    } catch (error) {
-      console.error("Error loading gallery:", error);
+    } catch {
+      // Error loading gallery
     } finally {
       setLoading(false);
     }
@@ -58,11 +59,12 @@ export default function GalleryManagement() {
       }
 
       setFormData({ imageUrl: "" });
+      setUploadedImageUrl("");
       setEditingItem(null);
       setShowAddForm(false);
       loadGallery();
-    } catch (error) {
-      console.error("Error saving gallery item:", error);
+    } catch {
+      // Error saving gallery item
     }
   };
 
@@ -71,6 +73,7 @@ export default function GalleryManagement() {
     setFormData({
       imageUrl: item.imageUrl,
     });
+    setUploadedImageUrl(item.imageUrl);
     setShowAddForm(true);
   };
 
@@ -79,14 +82,15 @@ export default function GalleryManagement() {
       try {
         await deleteGalleryImage(id);
         loadGallery();
-      } catch (error) {
-        console.error("Error deleting gallery item:", error);
+      } catch {
+        // Error deleting gallery item
       }
     }
   };
 
   const resetForm = () => {
     setFormData({ imageUrl: "" });
+    setUploadedImageUrl("");
     setEditingItem(null);
     setShowAddForm(false);
   };
@@ -131,29 +135,76 @@ export default function GalleryManagement() {
 
       {/* Add/Edit Form */}
       {showAddForm && (
-        <div className="bg-white p-6 rounded-lg shadow mb-6">
-          <h2 className="text-lg font-semibold mb-4">
+        <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-lg shadow-xl border border-gray-700 mb-6">
+          <h2 className="text-lg font-semibold mb-4 text-white">
             {editingItem ? "Edit Gallery Item" : "Add New Gallery Item"}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="imageUrl">Image URL</Label>
-              <Input
-                id="imageUrl"
-                type="url"
-                value={formData.imageUrl}
-                onChange={(e) =>
-                  setFormData({ ...formData, imageUrl: e.target.value })
-                }
-                required
-                placeholder="https://example.com/image.jpg"
-              />
+              <Label htmlFor="imageUrl" className="text-gray-200">Upload Image</Label>
+              <div className="mt-2 space-y-4">
+                <CldUploadWidget
+                  uploadPreset="mes-upload-images"
+                  options={{
+                    folder: "minare/gallery",
+                    resourceType: "image",
+                    clientAllowedFormats: ["jpg", "jpeg", "png", "gif", "webp"],
+                    maxFileSize: 10000000,
+                  }}
+                  onSuccess={(result: any) => {
+                    const url = result?.info?.secure_url;
+                    if (url) {
+                      setFormData({ ...formData, imageUrl: url });
+                      setUploadedImageUrl(url);
+                    }
+                  }}
+                >
+                  {({ open }) => (
+                    <Button
+                      type="button"
+                      onClick={() => open()}
+                      className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      {uploadedImageUrl ? "Change Image" : "Upload Image"}
+                    </Button>
+                  )}
+                </CldUploadWidget>
+                
+                {uploadedImageUrl && (
+                  <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-600">
+                    <Image
+                      src={uploadedImageUrl}
+                      alt="Uploaded preview"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+
+                {!uploadedImageUrl && (
+                  <div className="flex items-center justify-center w-full h-48 border-2 border-dashed border-gray-600 rounded-lg bg-gray-800">
+                    <div className="text-center">
+                      <svg className="mx-auto h-12 w-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <p className="mt-2 text-sm text-gray-400">No image uploaded</p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex space-x-2">
-              <Button type="submit" className="bg-green-600 hover:bg-green-700">
+              <Button 
+                type="submit" 
+                className="bg-green-600 hover:bg-green-700"
+                disabled={!uploadedImageUrl}
+              >
                 {editingItem ? "Update" : "Add"} Gallery Item
               </Button>
-              <Button type="button" onClick={resetForm} variant="outline">
+              <Button type="button" onClick={resetForm} variant="outline" className="text-white border-gray-600 hover:bg-gray-700">
                 Cancel
               </Button>
             </div>
