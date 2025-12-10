@@ -36,7 +36,7 @@ export const AboutSectionCardData = [
 ];
 
 export const MiningDeptImgUrl =
-  "https://res.cloudinary.com/dehegwbs0/image/upload/v1734216048/xmip9icopcn9cgl5bsri.png";
+  "https://res.cloudinary.com/dbnfkkfov/image/upload/v1765361953/Vector_8_spbzvs.png";
 
 export const MiningDeptDescription =
   "The Department of Mining Engineering at NIT Rourkela, established in 1979 in the coal and mineral belt, aims to lead eco-friendly mineral resource utilization and serve as a top choice for undergraduate and graduate studies. It specializes in areas like Mining Technology, Geomechanics, Mine Environment, Clean Coal Technology, GIS in Mining, Mine Planning, and Surveying, supported by modern equipment and advanced mining software. Faculty members contribute to national and international mining policies and technical evaluations. The Department conducts training for professionals and emphasizes all-round student development through mine visits, expert talks, industry projects, and technical activities.";

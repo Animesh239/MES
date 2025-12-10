@@ -11,6 +11,14 @@ export const addEvent = async (eventData: {
   type: string;
   imageLinks: string[];
 }) => {
+  // Validate type field
+  if (eventData.type !== "upcoming" && eventData.type !== "past") {
+    return {
+      success: false,
+      message: "Type must be either 'upcoming' or 'past'.",
+    };
+  }
+
   const newEvent = await DB_Connection.insert(eventsTable)
     .values(eventData)
     .returning();
@@ -43,6 +51,40 @@ export const getAllEvents = async () => {
   };
 };
 
+export const getUpcomingEvents = async () => {
+  const eventList = await DB_Connection.select()
+    .from(eventsTable)
+    .where(eq(eventsTable.type, "upcoming"));
+  if (!eventList) {
+    return {
+      success: false,
+      message: "No upcoming events found.",
+    };
+  }
+  return {
+    success: true,
+    message: "Upcoming events retrieved successfully.",
+    data: eventList,
+  };
+};
+
+export const getPastEvents = async () => {
+  const eventList = await DB_Connection.select()
+    .from(eventsTable)
+    .where(eq(eventsTable.type, "past"));
+  if (!eventList) {
+    return {
+      success: false,
+      message: "No past events found.",
+    };
+  }
+  return {
+    success: true,
+    message: "Past events retrieved successfully.",
+    data: eventList,
+  };
+};
+
 export const updateEvent = async (
   title: string,
   updatedData: {
@@ -51,6 +93,18 @@ export const updateEvent = async (
     imageLinks?: string[];
   }
 ) => {
+  // Validate type field if it's being updated
+  if (
+    updatedData.type &&
+    updatedData.type !== "upcoming" &&
+    updatedData.type !== "past"
+  ) {
+    return {
+      success: false,
+      message: "Type must be either 'upcoming' or 'past'.",
+    };
+  }
+
   const updatedEvent = await DB_Connection.update(eventsTable)
     .set(updatedData)
     .where(eq(eventsTable.title, title))

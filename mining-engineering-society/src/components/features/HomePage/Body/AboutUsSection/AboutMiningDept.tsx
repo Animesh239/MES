@@ -1,6 +1,6 @@
 import {
   MiningDeptDescription,
-  MiningDeptImgUrl
+  MiningDeptImgUrl,
 } from "@/config/Homepage/HomePagedata";
 import Image from "next/image";
 
@@ -16,7 +16,7 @@ export const AboutMiningDept = () => {
             {MiningDeptDescription}
           </div>
         </div>
-        <div className="relative w-full grayscale hover:grayscale-0 cursor-pointer md:w-1/2 lg::w-2/5 h-[30vh] sm:h-[40vh] md:h-[60vh] transition-all duration-500 ease-in-out ">
+        <div className="relative w-full cursor-pointer md:w-1/2 lg:w-3/5 h-[30vh] sm:h-[40vh] md:h-[60vh] transition-all duration-500 ease-in-out ">
           <Image
             src={MiningDeptImgUrl}
             alt="Minare"

@@ -13,7 +13,7 @@ interface Event {
   imageLinks: string[];
 }
 
-export const YearEventGallery = ({ year, events }: { year: string; events: Event[] }) => {
+export const YearEventGallery = ({ events }: { events: Event[] }) => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initialImageIndex, setInitialImageIndex] = useState(0);
@@ -24,13 +24,10 @@ export const YearEventGallery = ({ year, events }: { year: string; events: Event
     setIsModalOpen(true);
   };
 
-  // Filter events by type (year) - you might want to add a year field to the events table
-  const filteredEvents = events.filter(event => event.type === year);
-
   return (
     <div className="w-full px-6 py-16 min-h-screen bg-gradient-to-b from-black/0 via-black/5 to-black/0">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {filteredEvents.map((event) => (
+        {events.map((event) => (
           <section
             key={event.id}
             className="relative group bg-gradient-to-br from-white/[0.15] to-white/[0.05] backdrop-blur-md rounded-3xl p-8 space-y-8
@@ -68,62 +65,53 @@ export const YearEventGallery = ({ year, events }: { year: string; events: Event
                 className="grid grid-cols-2 grid-rows-2 gap-4 h-full p-1 rounded-2xl 
                 bg-gradient-to-br from-white/[0.15] to-transparent"
               >
-                {event.imageLinks
-                  .slice(0, 4)
-                  .map((imageUrl, imageIdx) => (
-                    <div
-                      key={imageIdx}
-                      className={`relative w-full h-full rounded-xl overflow-hidden ${
-                        imageIdx === 3 &&
-                        event.imageLinks.length > 4
-                          ? "group/image cursor-pointer"
-                          : ""
-                      } shadow-lg hover:shadow-2xl transition-all duration-500
+                {event.imageLinks.slice(0, 4).map((imageUrl, imageIdx) => (
+                  <div
+                    key={imageIdx}
+                    className={`relative w-full h-full rounded-xl overflow-hidden ${
+                      imageIdx === 3 && event.imageLinks.length > 4
+                        ? "group/image cursor-pointer"
+                        : ""
+                    } shadow-lg hover:shadow-2xl transition-all duration-500
                     before:absolute before:inset-0 before:z-10 before:bg-gradient-to-t before:from-black/30 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300`}
-                      onClick={() =>
-                        openModal(event.imageLinks, imageIdx)
-                      }
-                    >
-                      <Image
-                        src={imageUrl}
-                        alt={`${event.title} image ${
-                          imageIdx + 1
-                        }`}
-                        fill
-                        className={`object-cover transition-all duration-700 
+                    onClick={() => openModal(event.imageLinks, imageIdx)}
+                  >
+                    <Image
+                      src={imageUrl}
+                      alt={`${event.title} image ${imageIdx + 1}`}
+                      fill
+                      className={`object-cover transition-all duration-700 
                         group-hover/gallery:scale-[1.02] hover:scale-110 
                         ${
-                          imageIdx === 3 &&
-                          event.imageLinks.length > 4
+                          imageIdx === 3 && event.imageLinks.length > 4
                             ? "group-hover/image:opacity-40"
                             : ""
                         }`}
-                      />
-                      {imageIdx === 3 &&
-                        event.imageLinks.length > 4 && (
-                          <div
-                            className="absolute inset-0 z-20 bg-black/50 flex items-center justify-center 
+                    />
+                    {imageIdx === 3 && event.imageLinks.length > 4 && (
+                      <div
+                        className="absolute inset-0 z-20 bg-black/50 flex items-center justify-center 
                         opacity-0 group-hover/image:opacity-100 transition-all duration-500"
-                          >
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="text-white border-white/70 hover:border-white 
+                      >
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-white border-white/70 hover:border-white 
                             hover:bg-white/10 hover:text-white transition-all duration-300 
                             shadow-[0_0_20px_rgba(255,255,255,0.15)]
                             hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                openModal(event.imageLinks);
-                              }}
-                            >
-                              View Gallery
-                              <ChevronRight className="ml-1.5 h-3 w-3" />
-                            </Button>
-                          </div>
-                        )}
-                    </div>
-                  ))}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openModal(event.imageLinks);
+                          }}
+                        >
+                          View Gallery
+                          <ChevronRight className="ml-1.5 h-3 w-3" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </section>
