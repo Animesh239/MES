@@ -96,8 +96,8 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                   <Image
                     src="https://res.cloudinary.com/dhv234qct/image/upload/v1742501375/lizq0jojfjieuxdldexs.png"
                     alt="Random Minerva Image"
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    style={{ objectFit: "contain" }}
                   />
                 </div>
                 <div className="flex justify-center">

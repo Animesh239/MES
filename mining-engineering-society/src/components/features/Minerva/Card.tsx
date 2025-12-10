@@ -30,8 +30,8 @@ const Card = () => {
           <Image
             src="https://res.cloudinary.com/dhv234qct/image/upload/v1742501375/lizq0jojfjieuxdldexs.png"
             alt="MINERVA 2024"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
           />
           <div
             className="absolute inset-0 opacity-0 hover:opacity-90 transition-opacity duration-300 flex items-center justify-center"
