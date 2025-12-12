@@ -24,7 +24,7 @@ export default function ContactDetails() {
               href="mailto:122mn0699@nitrkl.ac.in"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"
             >
-              122mn0699@nitrkl.ac.in
+              123mn0530@nitrkl.ac.in
             </Link>
           </div>
         </div>
@@ -42,13 +42,13 @@ export default function ContactDetails() {
                 href="tel:+918260900261"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
-                +91-82609-00261 (Animesh Barik)
+                +91-99385-25212 (Satya Prakash Behera)
               </Link>
               <Link
                 href="tel:+918340153562"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
-                +91-78275-00393 (Rahul Ranjan Das)
+                +91-63767-52908 (Ayush Jaiswal)
               </Link>
             </div>
           </div>
