@@ -10,13 +10,13 @@ export const Statistics = () => {
   }>({
     faculties: 0,
     students: 0,
-    alumni: 0
+    alumni: 0,
   });
 
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref as React.RefObject<Element>, {
     once: true,
-    amount: 0.5
+    amount: 0.5,
   });
 
   useEffect(() => {
@@ -59,8 +59,8 @@ export const Statistics = () => {
           clearInterval(interval);
           setStatistics({
             faculties: "14",
-            students: "351*",
-            alumni: "10000+"
+            students: "350*",
+            alumni: "1200+",
           });
         }
       }, 50);
@@ -72,7 +72,7 @@ export const Statistics = () => {
   const statisticsData = [
     { item: "Faculties", count: statistics.faculties },
     { item: "Students", count: statistics.students },
-    { item: "Alumni", count: statistics.alumni }
+    { item: "Alumni", count: statistics.alumni },
   ];
 
   return (
