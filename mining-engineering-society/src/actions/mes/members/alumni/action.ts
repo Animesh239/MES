@@ -3,6 +3,7 @@
 import { alumniTable } from "@/db/schema";
 import { DB_Connection } from "@/lib/db_connection";
 import { eq } from "drizzle-orm";
+import { unstable_noStore as noStore } from "next/cache";
 
 // CRUD Operations for Alumni
 
@@ -32,6 +33,7 @@ export const addAlumni = async (alumniData: {
 };
 
 export const getAllAlumni = async () => {
+  noStore();
   const alumniList = await DB_Connection.select().from(alumniTable);
   if (!alumniList) {
     return {

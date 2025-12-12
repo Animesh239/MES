@@ -2,6 +2,9 @@ import Card from "@/components/features/Minerva/Card";
 import { getAllMinerva } from "@/actions/mes/minerva/action";
 import ComingSoon from "@/components/ui/ComingSoon";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function Home() {
   const response = await getAllMinerva();
   const minervaIssues = response.success && response.data ? response.data : [];
