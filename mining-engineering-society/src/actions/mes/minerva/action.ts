@@ -3,6 +3,7 @@
 import { minervaTable } from "@/db/schema";
 import { DB_Connection } from "@/lib/db_connection";
 import { eq } from "drizzle-orm";
+import { unstable_noStore as noStore } from "next/cache";
 
 // CRUD Operations for Minerva
 
@@ -30,6 +31,7 @@ export const addMinerva = async (minervaData: {
 };
 
 export const getAllMinerva = async () => {
+  noStore();
   const minervaList = await DB_Connection.select().from(minervaTable);
   if (!minervaList) {
     return {

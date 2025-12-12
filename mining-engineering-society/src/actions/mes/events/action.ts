@@ -3,6 +3,7 @@
 import { eventsTable } from "@/db/schema";
 import { DB_Connection } from "@/lib/db_connection";
 import { eq } from "drizzle-orm";
+import { unstable_noStore as noStore } from "next/cache";
 
 // CRUD Operations for Events
 
@@ -37,6 +38,7 @@ export const addEvent = async (eventData: {
 };
 
 export const getAllEvents = async () => {
+  noStore();
   const eventList = await DB_Connection.select().from(eventsTable);
   if (!eventList) {
     return {
@@ -52,6 +54,7 @@ export const getAllEvents = async () => {
 };
 
 export const getUpcomingEvents = async () => {
+  noStore();
   const eventList = await DB_Connection.select()
     .from(eventsTable)
     .where(eq(eventsTable.type, "upcoming"));
@@ -69,6 +72,7 @@ export const getUpcomingEvents = async () => {
 };
 
 export const getPastEvents = async () => {
+  noStore();
   const eventList = await DB_Connection.select()
     .from(eventsTable)
     .where(eq(eventsTable.type, "past"));

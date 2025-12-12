@@ -2,6 +2,9 @@ import Image from "next/image";
 import { getUpcomingEvents } from "@/actions/mes/events/action";
 import ComingSoon from "@/components/ui/ComingSoon";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function Home() {
   const response = await getUpcomingEvents();
   const upcomingEvents = response.success && response.data ? response.data : [];

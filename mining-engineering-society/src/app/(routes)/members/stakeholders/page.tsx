@@ -6,6 +6,9 @@ import {
   getPastStakeholders,
 } from "@/actions/mes/members/stakeholders/action";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function StakeholdersPage() {
   const [currentResponse, pastResponse] = await Promise.all([
     getCurrentStakeholders(),

@@ -3,6 +3,7 @@
 import { stakeholdersTable } from "@/db/schema";
 import { DB_Connection } from "@/lib/db_connection";
 import { eq } from "drizzle-orm";
+import { unstable_noStore as noStore } from "next/cache";
 
 // CRUD Operations for Stakeholders
 
@@ -41,6 +42,7 @@ export const addStakeholder = async (stakeholderData: {
 };
 
 export const getAllStakeholders = async () => {
+  noStore();
   const stakeholderList = await DB_Connection.select().from(stakeholdersTable);
   if (!stakeholderList) {
     return {
@@ -56,6 +58,7 @@ export const getAllStakeholders = async () => {
 };
 
 export const getCurrentStakeholders = async () => {
+  noStore();
   const stakeholderList = await DB_Connection.select()
     .from(stakeholdersTable)
     .where(eq(stakeholdersTable.tenure, "current"));
@@ -73,6 +76,7 @@ export const getCurrentStakeholders = async () => {
 };
 
 export const getPastStakeholders = async () => {
+  noStore();
   const stakeholderList = await DB_Connection.select()
     .from(stakeholdersTable)
     .where(eq(stakeholdersTable.tenure, "past"));
