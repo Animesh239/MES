@@ -20,6 +20,7 @@ export const stakeholdersTable = pgTable("stakeholders", {
   role: varchar("role").notNull(),
   tenure: varchar("tenure").notNull(),
   photoUrl: varchar("photo_url").notNull(),
+  linkedInProfile: varchar("linkedin_profile"),
 });
 
 // Events Table

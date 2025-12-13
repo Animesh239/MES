@@ -21,7 +21,7 @@ export default function ContactDetails() {
               Any issues or suggestions? Mail us at
             </p>
             <Link
-              href="mailto:122mn0699@nitrkl.ac.in"
+              href="mailto:123mn0530@nitrkl.ac.in"
               className="text-blue-500 hover:text-blue-400 transition-colors text-lg"
             >
               123mn0530@nitrkl.ac.in
@@ -39,13 +39,13 @@ export default function ContactDetails() {
             </p>
             <div className="space-y-1">
               <Link
-                href="tel:+918260900261"
+                href="tel:+919938525212"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
                 +91-99385-25212 (Satya Prakash Behera)
               </Link>
               <Link
-                href="tel:+918340153562"
+                href="tel:+916376752908"
                 className="block text-blue-500 hover:text-blue-400 transition-colors text-lg"
               >
                 +91-63767-52908 (Ayush Jaiswal)

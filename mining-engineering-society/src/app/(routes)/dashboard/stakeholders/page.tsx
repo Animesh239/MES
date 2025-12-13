@@ -27,6 +27,7 @@ interface Stakeholder {
   role: string;
   tenure: string;
   photoUrl: string;
+  linkedInProfile?: string | null;
 }
 
 export default function StakeholdersManagement() {
@@ -44,6 +45,7 @@ export default function StakeholdersManagement() {
     name: "",
     role: "",
     tenure: "current" as "current" | "past",
+    linkedInProfile: "",
   });
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
 
@@ -80,6 +82,7 @@ export default function StakeholdersManagement() {
       role: formData.role,
       tenure: formData.tenure,
       photoUrl: uploadedPhoto,
+      linkedInProfile: formData.linkedInProfile || undefined,
     };
 
     try {
@@ -98,7 +101,12 @@ export default function StakeholdersManagement() {
         return;
       }
 
-      setFormData({ name: "", role: "", tenure: "current" });
+      setFormData({
+        name: "",
+        role: "",
+        tenure: "current",
+        linkedInProfile: "",
+      });
       setUploadedPhoto("");
       setEditingStakeholder(null);
       setShowAddForm(false);
@@ -115,6 +123,7 @@ export default function StakeholdersManagement() {
       name: stakeholder.name,
       role: stakeholder.role,
       tenure: stakeholder.tenure as "current" | "past",
+      linkedInProfile: stakeholder.linkedInProfile || "",
     });
     setUploadedPhoto(stakeholder.photoUrl);
     setShowAddForm(true);
@@ -132,7 +141,7 @@ export default function StakeholdersManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "", tenure: "current" });
+    setFormData({ name: "", role: "", tenure: "current", linkedInProfile: "" });
     setUploadedPhoto("");
     setEditingStakeholder(null);
     setShowAddForm(false);
@@ -262,6 +271,25 @@ export default function StakeholdersManagement() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            <div>
+              <Label
+                htmlFor="linkedInProfile"
+                className="text-gray-300 font-medium"
+              >
+                LinkedIn Profile URL (Optional)
+              </Label>
+              <Input
+                id="linkedInProfile"
+                type="url"
+                value={formData.linkedInProfile}
+                onChange={(e) =>
+                  setFormData({ ...formData, linkedInProfile: e.target.value })
+                }
+                className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                placeholder="https://linkedin.com/in/username"
+              />
             </div>
 
             <div>

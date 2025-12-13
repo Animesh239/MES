@@ -7,6 +7,7 @@ interface Stakeholder {
   role: string;
   tenure: string;
   photoUrl: string;
+  linkedInProfile?: string | null;
 }
 
 interface PastStakeHolderCarouselProps {
@@ -26,6 +27,7 @@ export default function PastStakeHolderCarousel({
             position={stakeholder.role}
             imgURL={stakeholder.photoUrl}
             tenure={stakeholder.tenure}
+            linkedInProfile={stakeholder.linkedInProfile}
           />
         ))}
       </Marquee>
