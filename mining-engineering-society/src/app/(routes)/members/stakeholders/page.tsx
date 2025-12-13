@@ -47,6 +47,7 @@ export default async function StakeholdersPage() {
               name={stakeholder.name}
               position={stakeholder.role}
               imgURL={stakeholder.photoUrl}
+              linkedInProfile={stakeholder.linkedInProfile}
             />
           ))
         )}

@@ -12,6 +12,7 @@ export const addStakeholder = async (stakeholderData: {
   role: string;
   tenure: string;
   photoUrl: string;
+  linkedInProfile?: string;
 }) => {
   // Validate tenure field
   if (
@@ -100,6 +101,7 @@ export const updateStakeholder = async (
     role?: string;
     tenure?: string;
     photoUrl?: string;
+    linkedInProfile?: string;
   }
 ) => {
   // Validate tenure field if it's being updated

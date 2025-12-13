@@ -1,0 +1,1 @@
+ALTER TABLE "stakeholders" ADD COLUMN "linkedin_profile" varchar;
