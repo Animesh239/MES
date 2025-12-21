@@ -71,13 +71,13 @@ export default function Footer() {
             <div className="w-full lg:w-1/3 mb-6 lg:mb-0 text-center lg:text-left">
               <h3 className="text-xl font-bold mb-2">Call Us</h3>
               <p className="mb-1">
-                <Link href="tel:+918260900261" className="hover:underline">
-                  +91 82609 00261
+                <Link href="tel:+919938525212" className="hover:underline">
+                  +91 99385 25212
                 </Link>
               </p>
               <p className="mb-1">
-                <Link href="tel:+917827500393" className="hover:underline">
-                  +91 78275 00393
+                <Link href="tel:+91 63767 52908" className="hover:underline">
+                  +91 63767 52908
                 </Link>
               </p>
             </div>
@@ -94,10 +94,10 @@ export default function Footer() {
               </p>
               <p className="mb-1">
                 <Link
-                  href="mailto:122mn0699@nitrkl.ac.in"
+                  href="mailto:123mn0530@nitrkl.ac.in"
                   className="hover:underline"
                 >
-                  122mn0699@nitrkl.ac.in
+                  123mn0530@nitrkl.ac.in
                 </Link>
               </p>
             </div>
