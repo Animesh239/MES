@@ -81,3 +81,11 @@ export const membersTable = pgTable("members", {
   role: varchar("role").notNull(),
   photoUrl: varchar("photo_url").notNull(),
 });
+
+// Minare Events Table
+export const minareEventsTable = pgTable("minare_events", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar("title").notNull(),
+  imageLinks: varchar("image_links").array().notNull(),
+  type: varchar("type").notNull(),
+});
