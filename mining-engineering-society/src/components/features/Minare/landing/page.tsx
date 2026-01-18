@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import { About } from "./AboutSection/aboutUsSection";
 import { Hero } from "./HeroSection/heroSection";
-import { Event } from "./EventSection/Event";
+// import { Event } from "./EventSection/Event";
 import { Gallery } from "./GallerySection/Gallery";
 import { GetUserDetail } from "@/lib/firebase/getUserData";
 import { UserFormInterface } from "@/config/Minare/Registration/type";
 import {
   initializeAuthListener,
-  useAuthStore
+  useAuthStore,
 } from "@/lib/firebase/authListener";
 import { Profile } from "./HeroSection/profile";
 
@@ -22,7 +22,7 @@ export const LandingPage = () => {
     photoURL: "",
     graduationyear: "",
     uid: "",
-    paymentProofImgURL: ""
+    paymentProofImgURL: "",
   });
   const isLoading = useAuthStore((state) => state.isLoading);
   const [isLogin, setIsLogin] = useState(false);
@@ -67,7 +67,6 @@ export const LandingPage = () => {
     };
   }, [isLoading]);
 
-
   return (
     <div className=" h-auto p-[16px] relative flex flex-col gap-32">
       <div className="star-container fixed inset-0 -z-10 overflow-hidden"></div>
@@ -75,13 +74,13 @@ export const LandingPage = () => {
         className="absolute inset-0 -z-10 bg-[size:50px_50px] opacity-10 [mask-image:linear-gradient(transparent_70%,_black)]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)"
+            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
         }}
       />
       {isLogin && <Profile userData={userData} />}
       <Hero />
       <About />
-      <Event />
+      {/* <Event /> */}
       <Gallery />
     </div>
   );

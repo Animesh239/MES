@@ -10,9 +10,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   pdfLink: string;
+  coverImageLink: string;
 }
 
-const Modal = ({ isOpen, onClose, pdfLink }: ModalProps) => {
+const Modal = ({ isOpen, onClose, pdfLink, coverImageLink }: ModalProps) => {
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -95,8 +96,8 @@ const Modal = ({ isOpen, onClose, pdfLink }: ModalProps) => {
               >
                 <div className="relative w-full h-[90vh] mb-4 sm:mb-6 overflow-hidden rounded-lg">
                   <Image
-                    src="https://res.cloudinary.com/dhv234qct/image/upload/v1742501375/lizq0jojfjieuxdldexs.png"
-                    alt="Random Minerva Image"
+                    src={coverImageLink}
+                    alt="Minerva Issue Cover"
                     fill
                     style={{ objectFit: "contain" }}
                   />
