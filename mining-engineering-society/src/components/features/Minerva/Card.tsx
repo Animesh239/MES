@@ -69,6 +69,7 @@ const Card = ({ title, issueDate, coverImageLink, pdfLink }: CardProps) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         pdfLink={pdfLink}
+        coverImageLink={coverImageLink}
       />
       <style jsx>{`
         @keyframes shimmer {

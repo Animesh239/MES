@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CldUploadButton } from 'next-cloudinary';
+import { CldUploadButton } from "next-cloudinary";
 import Image from "next/image";
 
 interface MinervaIssue {
@@ -214,87 +214,29 @@ export default function MinervaManagement() {
             </div>
 
             <div>
-              <Label className="text-gray-300 font-medium">
-                Upload PDF
+              <Label htmlFor="pdfLink" className="text-gray-300 font-medium">
+                PDF Link
               </Label>
-              <div className="mt-2 flex items-center space-x-4">
-                <CldUploadButton
-                // @ts-ignore
-                  onSuccess={(result: any) => {
-                    console.log("PDF Upload success:", result);
-                    if (result && result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
-                      console.log("Setting PDF URL:", result.info.secure_url);
-                      setUploadedPdf(result.info.secure_url);
-                    }
-                  }}
-                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-200"
-                  options={{
-                    multiple: false,
-                    maxFiles: 1,
-                    resourceType: "raw",
-                  }}
-                >
-                  <svg className="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0v12h8V4H6z" clipRule="evenodd" />
-                  </svg>
-                  {uploadedPdf ? "Replace PDF" : "Upload PDF"}
-                </CldUploadButton>
-              </div>
-              
-              {/* Display uploaded PDF info */}
+              <Input
+                id="pdfLink"
+                type="text" // changed from file upload to text input
+                value={uploadedPdf} // reusing the state variable for simplicity, or could be renamed
+                onChange={(e) => setUploadedPdf(e.target.value)}
+                className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-orange-500 focus:ring-orange-500"
+                placeholder="Enter PDF URL (e.g., Google Drive link)"
+                required
+              />
+              {/* Optional: Preview link if valid URL */}
               {uploadedPdf && (
-                <div className="mt-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm text-gray-400">PDF Uploaded Successfully:</p>
-                    <button
-                      type="button"
-                      onClick={() => setUploadedPdf("")}
-                      className="bg-red-500 text-white rounded-lg px-3 py-1 text-xs hover:bg-red-600 transition-colors flex items-center"
-                    >
-                      <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M9 2a1 1 0 00-1 1v1H4a1 1 0 000 2h1v10a2 2 0 002 2h6a2 2 0 002-2V6h1a1 1 0 100-2h-4V3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                      </svg>
-                      Remove PDF
-                    </button>
-                  </div>
-                  <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/20 border border-blue-500/50 rounded-lg p-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="flex-shrink-0">
-                        <svg className="w-10 h-10 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0v12h8V4H6z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white mb-1">PDF Document Ready</p>
-                        <p className="text-xs text-gray-400 mb-3 break-all">{uploadedPdf}</p>
-                        <div className="flex flex-wrap gap-2">
-                          <a
-                            href={uploadedPdf}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs transition-colors"
-                          >
-                            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                            </svg>
-                            Open PDF in New Tab
-                          </a>
-                          <a
-                            href={uploadedPdf}
-                            download
-                            className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg text-xs transition-colors"
-                          >
-                            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                            Download PDF
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="mt-2">
+                  <a
+                    href={uploadedPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-400 hover:text-blue-300 underline"
+                  >
+                    Test Link
+                  </a>
                 </div>
               )}
             </div>
@@ -305,32 +247,54 @@ export default function MinervaManagement() {
               </Label>
               <div className="mt-2 flex items-center space-x-4">
                 <CldUploadButton
-                // @ts-ignore
+                  // @ts-ignore
                   onSuccess={(result: any) => {
                     console.log("Upload success:", result);
-                    if (result && result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
-                      console.log("Setting cover image URL:", result.info.secure_url);
+                    if (
+                      result &&
+                      result.info &&
+                      typeof result.info === "object" &&
+                      "secure_url" in result.info
+                    ) {
+                      console.log(
+                        "Setting cover image URL:",
+                        result.info.secure_url
+                      );
                       setUploadedCoverImage(result.info.secure_url);
                     }
                   }}
-                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                  uploadPreset={
+                    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+                  }
                   className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-200"
                   options={{
                     multiple: false,
                     maxFiles: 1,
                   }}
                 >
-                  <svg className="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  <svg
+                    className="w-4 h-4 mr-2 inline"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                      clipRule="evenodd"
+                    />
                   </svg>
-                  {uploadedCoverImage ? "Replace Cover Image" : "Upload Cover Image"}
+                  {uploadedCoverImage
+                    ? "Replace Cover Image"
+                    : "Upload Cover Image"}
                 </CldUploadButton>
               </div>
-              
+
               {/* Display uploaded cover image */}
               {uploadedCoverImage && (
                 <div className="mt-3">
-                  <p className="text-sm text-gray-400 mb-2">Uploaded Cover Image:</p>
+                  <p className="text-sm text-gray-400 mb-2">
+                    Uploaded Cover Image:
+                  </p>
                   <div className="relative inline-block">
                     <Image
                       src={uploadedCoverImage}
