@@ -3,38 +3,39 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  getCurrentStakeholders,
-  addStakeholder,
-  updateStakeholder,
-  deleteStakeholder,
-} from "@/actions/mes/members/stakeholders/action";
+  getAllPastStakeholders,
+  addPastStakeholder,
+  updatePastStakeholder,
+  deletePastStakeholder,
+} from "@/actions/mes/members/past-stakeholders/action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CldUploadButton } from "next-cloudinary";
 
-interface Stakeholder {
+interface PastStakeholder {
   id: number;
   name: string;
   role: string;
-  tenure: string;
+  year: string;
+  numericYear?: number | null;
   photoUrl: string;
   linkedInProfile?: string | null;
 }
 
-export default function StakeholdersManagement() {
-  const [currentStakeholders, setCurrentStakeholders] = useState<Stakeholder[]>(
-    []
-  );
+export default function PastStakeholdersManagement() {
+  const [stakeholders, setStakeholders] = useState<PastStakeholder[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingStakeholder, setEditingStakeholder] =
-    useState<Stakeholder | null>(null);
+    useState<PastStakeholder | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
     name: "",
     role: "",
+    year: "", // Display year e.g. "2023-24"
+    numericYear: "", // Sortable year e.g. "2023"
     linkedInProfile: "",
   });
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
@@ -46,13 +47,12 @@ export default function StakeholdersManagement() {
   const loadStakeholders = async () => {
     setLoading(true);
     try {
-      const currentResult = await getCurrentStakeholders();
-
-      if (currentResult.success && currentResult.data) {
-        setCurrentStakeholders(currentResult.data);
+      const result = await getAllPastStakeholders();
+      if (result.success && result.data) {
+        setStakeholders(result.data);
       }
     } catch (error) {
-      console.error("Error loading stakeholders:", error);
+      console.error("Error loading past stakeholders:", error);
     } finally {
       setLoading(false);
     }
@@ -61,10 +61,18 @@ export default function StakeholdersManagement() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!uploadedPhoto) {
+      alert("Please upload a photo.");
+      return;
+    }
+
     const stakeholderData = {
       name: formData.name,
       role: formData.role,
-      tenure: "current", // Always current for this page
+      year: formData.year,
+      numericYear: formData.numericYear
+        ? parseInt(formData.numericYear)
+        : undefined,
       photoUrl: uploadedPhoto,
       linkedInProfile: formData.linkedInProfile || undefined,
     };
@@ -72,12 +80,12 @@ export default function StakeholdersManagement() {
     try {
       let result;
       if (editingStakeholder) {
-        result = await updateStakeholder(
-          editingStakeholder.name,
+        result = await updatePastStakeholder(
+          editingStakeholder.id,
           stakeholderData
         );
       } else {
-        result = await addStakeholder(stakeholderData);
+        result = await addPastStakeholder(stakeholderData);
       }
 
       if (!result.success) {
@@ -85,36 +93,33 @@ export default function StakeholdersManagement() {
         return;
       }
 
-      setFormData({
-        name: "",
-        role: "",
-        linkedInProfile: "",
-      });
-      setUploadedPhoto("");
-      setEditingStakeholder(null);
-      setShowAddForm(false);
+      resetForm();
       loadStakeholders();
     } catch (error) {
-      console.error("Error saving stakeholder:", error);
+      console.error("Error saving past stakeholder:", error);
       alert("An error occurred while saving the stakeholder.");
     }
   };
 
-  const handleEdit = (stakeholder: Stakeholder) => {
+  const handleEdit = (stakeholder: PastStakeholder) => {
     setEditingStakeholder(stakeholder);
     setFormData({
       name: stakeholder.name,
       role: stakeholder.role,
+      year: stakeholder.year,
+      numericYear: stakeholder.numericYear
+        ? stakeholder.numericYear.toString()
+        : "",
       linkedInProfile: stakeholder.linkedInProfile || "",
     });
     setUploadedPhoto(stakeholder.photoUrl);
     setShowAddForm(true);
   };
 
-  const handleDelete = async (name: string) => {
+  const handleDelete = async (id: number) => {
     if (confirm("Are you sure you want to delete this stakeholder?")) {
       try {
-        await deleteStakeholder(name);
+        await deletePastStakeholder(id);
         loadStakeholders();
       } catch (error) {
         console.error("Error deleting stakeholder:", error);
@@ -123,7 +128,13 @@ export default function StakeholdersManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "", linkedInProfile: "" });
+    setFormData({
+      name: "",
+      role: "",
+      year: "",
+      numericYear: "",
+      linkedInProfile: "",
+    });
     setUploadedPhoto("");
     setEditingStakeholder(null);
     setShowAddForm(false);
@@ -134,7 +145,7 @@ export default function StakeholdersManagement() {
       <div className="flex items-center justify-center min-h-64">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-gray-400">Loading stakeholders...</p>
+          <p className="text-gray-400">Loading past stakeholders...</p>
         </div>
       </div>
     );
@@ -146,10 +157,10 @@ export default function StakeholdersManagement() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Stakeholders Management
+            Past Stakeholders Management
           </h1>
           <p className="text-gray-400 mt-2">
-            Manage current executive council members
+            Manage past executive council members
           </p>
         </div>
         <Button
@@ -163,7 +174,7 @@ export default function StakeholdersManagement() {
               clipRule="evenodd"
             />
           </svg>
-          Add New Stakeholder
+          Add Past Stakeholder
         </Button>
       </div>
 
@@ -172,7 +183,9 @@ export default function StakeholdersManagement() {
         <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-2xl">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-white">
-              {editingStakeholder ? "Edit Stakeholder" : "Add New Stakeholder"}
+              {editingStakeholder
+                ? "Edit Past Stakeholder"
+                : "Add New Past Stakeholder"}
             </h2>
             <Button
               onClick={resetForm}
@@ -204,7 +217,7 @@ export default function StakeholdersManagement() {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                  placeholder="Enter stakeholder name"
+                  placeholder="Enter name"
                   required
                 />
               </div>
@@ -220,8 +233,42 @@ export default function StakeholdersManagement() {
                     setFormData({ ...formData, role: e.target.value })
                   }
                   className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                  placeholder="e.g., CEO, Director, Manager"
+                  placeholder="e.g., General Secretary"
                   required
+                />
+              </div>
+              <div>
+                <Label htmlFor="year" className="text-gray-300 font-medium">
+                  Tenure Year (Display)
+                </Label>
+                <Input
+                  id="year"
+                  type="text"
+                  value={formData.year}
+                  onChange={(e) =>
+                    setFormData({ ...formData, year: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="e.g., 2023-24"
+                  required
+                />
+              </div>
+              <div>
+                <Label
+                  htmlFor="numericYear"
+                  className="text-gray-300 font-medium"
+                >
+                  Numeric Year (Sortable)
+                </Label>
+                <Input
+                  id="numericYear"
+                  type="number"
+                  value={formData.numericYear}
+                  onChange={(e) =>
+                    setFormData({ ...formData, numericYear: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="e.g., 2023"
                 />
               </div>
             </div>
@@ -251,14 +298,12 @@ export default function StakeholdersManagement() {
                 <CldUploadButton
                   // @ts-ignore
                   onSuccess={(result: any) => {
-                    console.log("Upload success:", result);
                     if (
                       result &&
                       result.info &&
                       typeof result.info === "object" &&
                       "secure_url" in result.info
                     ) {
-                      console.log("Setting photo URL:", result.info.secure_url);
                       setUploadedPhoto(result.info.secure_url);
                     }
                   }}
@@ -315,7 +360,9 @@ export default function StakeholdersManagement() {
                 type="submit"
                 className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg"
               >
-                {editingStakeholder ? "Update Stakeholder" : "Add Stakeholder"}
+                {editingStakeholder
+                  ? "Update Past Stakeholder"
+                  : "Add Past Stakeholder"}
               </Button>
               <Button
                 type="button"
@@ -330,22 +377,22 @@ export default function StakeholdersManagement() {
         </div>
       )}
 
-      {/* Current Stakeholders List */}
+      {/* Past Stakeholders List */}
       <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-800 bg-black/20">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-white">
-              Current Stakeholders
+              Past Stakeholders List
             </h2>
             <div className="text-sm text-gray-400">
-              {currentStakeholders.length} stakeholder
-              {currentStakeholders.length !== 1 ? "s" : ""}
+              {stakeholders.length} stakeholder
+              {stakeholders.length !== 1 ? "s" : ""}
             </div>
           </div>
         </div>
 
         <div className="divide-y divide-gray-800">
-          {currentStakeholders.length === 0 ? (
+          {stakeholders.length === 0 ? (
             <div className="px-6 py-12 text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
                 <svg
@@ -357,43 +404,52 @@ export default function StakeholdersManagement() {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-white mb-2">
-                No current stakeholders found
+                No past stakeholders found
               </h3>
               <p className="text-gray-400 mb-4">
-                Get started by adding your first stakeholder!
+                Get started by adding past council members!
               </p>
               <Button
                 onClick={() => setShowAddForm(true)}
                 className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
               >
-                Add Your First Stakeholder
+                Add Past Stakeholder
               </Button>
             </div>
           ) : (
-            currentStakeholders.map((stakeholder: Stakeholder) => (
+            stakeholders.map((stakeholder) => (
               <div
                 key={stakeholder.id}
                 className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 flex-1">
-                    {/* Stakeholder Photo */}
                     <div className="flex-shrink-0">
                       <Image
                         src={stakeholder.photoUrl}
                         alt={`${stakeholder.name} photo`}
                         width={80}
                         height={80}
-                        className="w-20 h-20 rounded-full object-cover border-2 border-gray-600"
+                        className="w-20 h-20 rounded-full object-cover border-2 border-gray-600 grayscale"
                       />
                     </div>
-
-                    {/* Stakeholder Info */}
                     <div className="flex-1">
                       <h3 className="font-semibold text-white text-lg mb-1">
                         {stakeholder.name}
                       </h3>
-                      <div className="flex items-center space-x-4 text-sm text-gray-400">
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-400">
+                        <div className="flex items-center">
+                          <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs border border-purple-500/30 mr-2">
+                            {stakeholder.year}
+                          </span>
+                        </div>
+                        {stakeholder.numericYear && (
+                          <div className="flex items-center">
+                            <span className="bg-gray-700/50 text-gray-300 px-2 py-0.5 rounded text-xs border border-gray-600 mr-2">
+                              Num: {stakeholder.numericYear}
+                            </span>
+                          </div>
+                        )}
                         <div className="flex items-center">
                           <svg
                             className="w-4 h-4 mr-1"
@@ -419,36 +475,13 @@ export default function StakeholdersManagement() {
                       variant="outline"
                       className="border-gray-600 text-gray-400 hover:text-white hover:border-purple-500 hover:bg-purple-500/20"
                     >
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                      </svg>
                       Edit
                     </Button>
                     <Button
-                      onClick={() => handleDelete(stakeholder.name)}
+                      onClick={() => handleDelete(stakeholder.id)}
                       size="sm"
                       className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
                     >
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"
-                          clipRule="evenodd"
-                        />
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zM12 7a1 1 0 012 0v4a1 1 0 11-2 0V7z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
                       Delete
                     </Button>
                   </div>

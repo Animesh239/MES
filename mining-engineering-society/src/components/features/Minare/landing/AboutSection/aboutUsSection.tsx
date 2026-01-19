@@ -21,7 +21,7 @@ export const About = () => {
   const toggleDescription = (sectionId: string) => {
     setExpandedSections((prev) => ({
       ...prev,
-      [sectionId]: !prev[sectionId]
+      [sectionId]: !prev[sectionId],
     }));
   };
 
@@ -37,8 +37,8 @@ export const About = () => {
 
   return (
     <div className="relative h-auto">
-      <div className="w-full text-white">
-        <section className="border-none max-w-6xl mx-auto">
+      <div className="w-full text-white bg-transparent">
+        <section className="border-none max-w-7xl mx-auto bg-transparent">
           <div>
             {AboutUsData.map((section) => (
               <motion.div
@@ -48,7 +48,7 @@ export const About = () => {
                 transition={{
                   duration: 1,
                   type: "tween",
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  ease: [0.25, 0.46, 0.45, 0.94],
                 }}
                 viewport={{ once: true, amount: 0.2 }}
               >

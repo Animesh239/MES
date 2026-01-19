@@ -3,56 +3,53 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  getCurrentStakeholders,
-  addStakeholder,
-  updateStakeholder,
-  deleteStakeholder,
-} from "@/actions/mes/members/stakeholders/action";
+  getAllAchievements,
+  addAchievement,
+  updateAchievement,
+  deleteAchievement,
+} from "@/actions/mes/achievements/action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { CldUploadButton } from "next-cloudinary";
 
-interface Stakeholder {
+interface Achievement {
   id: number;
   name: string;
-  role: string;
-  tenure: string;
+  year: string;
+  achievement: string;
   photoUrl: string;
-  linkedInProfile?: string | null;
 }
 
-export default function StakeholdersManagement() {
-  const [currentStakeholders, setCurrentStakeholders] = useState<Stakeholder[]>(
-    []
-  );
+export default function AchievementsManagement() {
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editingStakeholder, setEditingStakeholder] =
-    useState<Stakeholder | null>(null);
+  const [editingAchievement, setEditingAchievement] =
+    useState<Achievement | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
     name: "",
-    role: "",
-    linkedInProfile: "",
+    year: "",
+    achievement: "",
   });
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
 
   useEffect(() => {
-    loadStakeholders();
+    loadAchievements();
   }, []);
 
-  const loadStakeholders = async () => {
+  const loadAchievements = async () => {
     setLoading(true);
     try {
-      const currentResult = await getCurrentStakeholders();
-
-      if (currentResult.success && currentResult.data) {
-        setCurrentStakeholders(currentResult.data);
+      const result = await getAllAchievements();
+      if (result.success && result.data) {
+        setAchievements(result.data);
       }
     } catch (error) {
-      console.error("Error loading stakeholders:", error);
+      console.error("Error loading achievements:", error);
     } finally {
       setLoading(false);
     }
@@ -61,23 +58,27 @@ export default function StakeholdersManagement() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const stakeholderData = {
+    if (!uploadedPhoto) {
+      alert("Please upload a photo.");
+      return;
+    }
+
+    const achievementData = {
       name: formData.name,
-      role: formData.role,
-      tenure: "current", // Always current for this page
+      year: formData.year,
+      achievement: formData.achievement,
       photoUrl: uploadedPhoto,
-      linkedInProfile: formData.linkedInProfile || undefined,
     };
 
     try {
       let result;
-      if (editingStakeholder) {
-        result = await updateStakeholder(
-          editingStakeholder.name,
-          stakeholderData
+      if (editingAchievement) {
+        result = await updateAchievement(
+          editingAchievement.id,
+          achievementData
         );
       } else {
-        result = await addStakeholder(stakeholderData);
+        result = await addAchievement(achievementData);
       }
 
       if (!result.success) {
@@ -85,47 +86,40 @@ export default function StakeholdersManagement() {
         return;
       }
 
-      setFormData({
-        name: "",
-        role: "",
-        linkedInProfile: "",
-      });
-      setUploadedPhoto("");
-      setEditingStakeholder(null);
-      setShowAddForm(false);
-      loadStakeholders();
+      resetForm();
+      loadAchievements();
     } catch (error) {
-      console.error("Error saving stakeholder:", error);
-      alert("An error occurred while saving the stakeholder.");
+      console.error("Error saving achievement:", error);
+      alert("An error occurred while saving the achievement.");
     }
   };
 
-  const handleEdit = (stakeholder: Stakeholder) => {
-    setEditingStakeholder(stakeholder);
+  const handleEdit = (achievement: Achievement) => {
+    setEditingAchievement(achievement);
     setFormData({
-      name: stakeholder.name,
-      role: stakeholder.role,
-      linkedInProfile: stakeholder.linkedInProfile || "",
+      name: achievement.name,
+      year: achievement.year,
+      achievement: achievement.achievement,
     });
-    setUploadedPhoto(stakeholder.photoUrl);
+    setUploadedPhoto(achievement.photoUrl);
     setShowAddForm(true);
   };
 
-  const handleDelete = async (name: string) => {
-    if (confirm("Are you sure you want to delete this stakeholder?")) {
+  const handleDelete = async (id: number) => {
+    if (confirm("Are you sure you want to delete this achievement?")) {
       try {
-        await deleteStakeholder(name);
-        loadStakeholders();
+        await deleteAchievement(id);
+        loadAchievements();
       } catch (error) {
-        console.error("Error deleting stakeholder:", error);
+        console.error("Error deleting achievement:", error);
       }
     }
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "", linkedInProfile: "" });
+    setFormData({ name: "", year: "", achievement: "" });
     setUploadedPhoto("");
-    setEditingStakeholder(null);
+    setEditingAchievement(null);
     setShowAddForm(false);
   };
 
@@ -134,7 +128,7 @@ export default function StakeholdersManagement() {
       <div className="flex items-center justify-center min-h-64">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-gray-400">Loading stakeholders...</p>
+          <p className="text-gray-400">Loading achievements...</p>
         </div>
       </div>
     );
@@ -146,10 +140,10 @@ export default function StakeholdersManagement() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Stakeholders Management
+            Students Corner Management
           </h1>
           <p className="text-gray-400 mt-2">
-            Manage current executive council members
+            Manage student achievements and recognitions
           </p>
         </div>
         <Button
@@ -163,7 +157,7 @@ export default function StakeholdersManagement() {
               clipRule="evenodd"
             />
           </svg>
-          Add New Stakeholder
+          Add Achievement
         </Button>
       </div>
 
@@ -172,7 +166,7 @@ export default function StakeholdersManagement() {
         <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-2xl">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-white">
-              {editingStakeholder ? "Edit Stakeholder" : "Add New Stakeholder"}
+              {editingAchievement ? "Edit Achievement" : "Add New Achievement"}
             </h2>
             <Button
               onClick={resetForm}
@@ -204,44 +198,43 @@ export default function StakeholdersManagement() {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                  placeholder="Enter stakeholder name"
+                  placeholder="Student Name"
                   required
                 />
               </div>
               <div>
-                <Label htmlFor="role" className="text-gray-300 font-medium">
-                  Role
+                <Label htmlFor="year" className="text-gray-300 font-medium">
+                  Year
                 </Label>
                 <Input
-                  id="role"
+                  id="year"
                   type="text"
-                  value={formData.role}
+                  value={formData.year}
                   onChange={(e) =>
-                    setFormData({ ...formData, role: e.target.value })
+                    setFormData({ ...formData, year: e.target.value })
                   }
                   className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                  placeholder="e.g., CEO, Director, Manager"
+                  placeholder="e.g., 2024"
                   required
                 />
               </div>
             </div>
-
             <div>
               <Label
-                htmlFor="linkedInProfile"
+                htmlFor="achievement"
                 className="text-gray-300 font-medium"
               >
-                LinkedIn Profile URL (Optional)
+                Achievement Description
               </Label>
-              <Input
-                id="linkedInProfile"
-                type="url"
-                value={formData.linkedInProfile}
+              <Textarea
+                id="achievement"
+                value={formData.achievement}
                 onChange={(e) =>
-                  setFormData({ ...formData, linkedInProfile: e.target.value })
+                  setFormData({ ...formData, achievement: e.target.value })
                 }
                 className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
-                placeholder="https://linkedin.com/in/username"
+                placeholder="Describe the achievement..."
+                required
               />
             </div>
 
@@ -251,14 +244,12 @@ export default function StakeholdersManagement() {
                 <CldUploadButton
                   // @ts-ignore
                   onSuccess={(result: any) => {
-                    console.log("Upload success:", result);
                     if (
                       result &&
                       result.info &&
                       typeof result.info === "object" &&
                       "secure_url" in result.info
                     ) {
-                      console.log("Setting photo URL:", result.info.secure_url);
                       setUploadedPhoto(result.info.secure_url);
                     }
                   }}
@@ -293,7 +284,7 @@ export default function StakeholdersManagement() {
                   <div className="relative inline-block">
                     <Image
                       src={uploadedPhoto}
-                      alt="Uploaded stakeholder photo"
+                      alt="Uploaded achievement photo"
                       width={128}
                       height={128}
                       className="w-32 h-32 object-cover rounded-lg border border-gray-600"
@@ -315,7 +306,7 @@ export default function StakeholdersManagement() {
                 type="submit"
                 className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg"
               >
-                {editingStakeholder ? "Update Stakeholder" : "Add Stakeholder"}
+                {editingAchievement ? "Update Achievement" : "Add Achievement"}
               </Button>
               <Button
                 type="button"
@@ -330,22 +321,20 @@ export default function StakeholdersManagement() {
         </div>
       )}
 
-      {/* Current Stakeholders List */}
+      {/* Achievements List */}
       <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-800 bg-black/20">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-white">
-              Current Stakeholders
-            </h2>
+            <h2 className="text-xl font-semibold text-white">Achievements</h2>
             <div className="text-sm text-gray-400">
-              {currentStakeholders.length} stakeholder
-              {currentStakeholders.length !== 1 ? "s" : ""}
+              {achievements.length} achievement
+              {achievements.length !== 1 ? "s" : ""}
             </div>
           </div>
         </div>
 
         <div className="divide-y divide-gray-800">
-          {currentStakeholders.length === 0 ? (
+          {achievements.length === 0 ? (
             <div className="px-6 py-12 text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
                 <svg
@@ -353,102 +342,63 @@ export default function StakeholdersManagement() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-white mb-2">
-                No current stakeholders found
+                No achievements found
               </h3>
               <p className="text-gray-400 mb-4">
-                Get started by adding your first stakeholder!
+                Get started by adding student achievements!
               </p>
               <Button
                 onClick={() => setShowAddForm(true)}
                 className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
               >
-                Add Your First Stakeholder
+                Add Achievement
               </Button>
             </div>
           ) : (
-            currentStakeholders.map((stakeholder: Stakeholder) => (
+            achievements.map((achievement) => (
               <div
-                key={stakeholder.id}
+                key={achievement.id}
                 className="px-6 py-4 hover:bg-white/5 transition-colors duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 flex-1">
-                    {/* Stakeholder Photo */}
                     <div className="flex-shrink-0">
                       <Image
-                        src={stakeholder.photoUrl}
-                        alt={`${stakeholder.name} photo`}
+                        src={achievement.photoUrl}
+                        alt={`${achievement.name} photo`}
                         width={80}
                         height={80}
                         className="w-20 h-20 rounded-full object-cover border-2 border-gray-600"
                       />
                     </div>
-
-                    {/* Stakeholder Info */}
                     <div className="flex-1">
                       <h3 className="font-semibold text-white text-lg mb-1">
-                        {stakeholder.name}
+                        {achievement.name} ({achievement.year})
                       </h3>
-                      <div className="flex items-center space-x-4 text-sm text-gray-400">
-                        <div className="flex items-center">
-                          <svg
-                            className="w-4 h-4 mr-1"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          {stakeholder.role}
-                        </div>
-                      </div>
+                      <p className="text-gray-400 text-sm line-clamp-2">
+                        {achievement.achievement}
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex space-x-2 ml-4">
                     <Button
-                      onClick={() => handleEdit(stakeholder)}
+                      onClick={() => handleEdit(achievement)}
                       size="sm"
                       variant="outline"
                       className="border-gray-600 text-gray-400 hover:text-white hover:border-purple-500 hover:bg-purple-500/20"
                     >
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                      </svg>
                       Edit
                     </Button>
                     <Button
-                      onClick={() => handleDelete(stakeholder.name)}
+                      onClick={() => handleDelete(achievement.id)}
                       size="sm"
                       className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
                     >
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"
-                          clipRule="evenodd"
-                        />
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zM12 7a1 1 0 012 0v4a1 1 0 11-2 0V7z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
                       Delete
                     </Button>
                   </div>
