@@ -98,7 +98,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-black fixed w-full border-b border-gray-700 top-0 bg-opacity-100 z-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center justify-between flex-1">
             <div className="flex-shrink-0 flex items-center">
@@ -138,18 +138,30 @@ export default function Navbar() {
                     <ChevronDown className="ml-1 h-5 w-5" />
                   </button>
                   {openDropdown === "members" && (
-                    <div className="origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg py-1 bg-gray-700 text-white ring-1 ring-black ring-opacity-5 backdrop-blur-lg bg-opacity-90">
+                    <div className="origin-top-right absolute right-0 mt-4 w-60 rounded-md shadow-lg py-1 bg-gray-700 text-white ring-1 ring-black ring-opacity-5 backdrop-blur-lg bg-opacity-90">
                       <DropdownItem
                         href="/members/stakeholders"
                         onClick={closeDropdown}
                       >
-                        Stake Holders
+                        Executive Council
+                      </DropdownItem>
+                      <DropdownItem
+                        href="/members/past-stakeholders"
+                        onClick={closeDropdown}
+                      >
+                        Past Executive Council
                       </DropdownItem>
                       <DropdownItem
                         href="/members/alumni"
                         onClick={closeDropdown}
                       >
                         Alumni
+                      </DropdownItem>
+                      <DropdownItem
+                        href="/members/class-representatives"
+                        onClick={closeDropdown}
+                      >
+                        Class Representatives
                       </DropdownItem>
                     </div>
                   )}
@@ -184,9 +196,11 @@ export default function Navbar() {
                   )}
                 </div>
 
-                <NavItem href="/contactus">Contact</NavItem>
-
                 <NavItem href="/publications">Publications</NavItem>
+
+                <NavItem href="/achievements">Students Corner</NavItem>
+
+                <NavItem href="/contactus">Contact</NavItem>
 
                 <NavItem2 href="/minerva">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-xl p-2 transition-all duration-300 hover:shadow-[0_0_5px_3px_#fff] hover:rounded-lg">

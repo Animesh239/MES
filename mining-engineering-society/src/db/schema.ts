@@ -89,3 +89,32 @@ export const minareEventsTable = pgTable("minare_events", {
   imageLinks: varchar("image_links").array().notNull(),
   type: varchar("type").notNull(),
 });
+
+// Achievement Table (Students Corner)
+export const achievementsTable = pgTable("achievements", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name").notNull(),
+  year: varchar("year").notNull(),
+  achievement: varchar("achievement").notNull(),
+  photoUrl: varchar("photo_url").notNull(),
+});
+
+// Past Stakeholders Table
+export const pastStakeholdersTable = pgTable("past_stakeholders", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name").notNull(),
+  role: varchar("role").notNull(),
+  year: varchar("year").notNull(), // tenure year (e.g., "2023-24")
+  numericYear: integer("numeric_year"),
+  photoUrl: varchar("photo_url").notNull(),
+  linkedInProfile: varchar("linkedin_profile"),
+});
+
+// Class Representatives Table
+export const classRepresentativesTable = pgTable("class_representatives", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name").notNull(),
+  batch: varchar("batch").notNull(), // e.g., "2025" or "Final Year"
+  photoUrl: varchar("photo_url").notNull(),
+  linkedInProfile: varchar("linkedin_profile"),
+});

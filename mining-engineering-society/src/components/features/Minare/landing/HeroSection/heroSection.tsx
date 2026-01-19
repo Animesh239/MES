@@ -83,7 +83,7 @@ export const Hero = () => {
           </motion.div>
 
           <Button className="font-roboto    z-0 cursor-pointer">
-            Registerations Opening Soon
+            Registrations Opening Soon
           </Button>
         </div>
       </section>

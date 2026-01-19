@@ -11,7 +11,7 @@ export const AboutUsData = [
     description:
       "MINARE is the Geo-Mining Festival of NIT Rourkela, launched in 2014 to provide students a platform for technical competition,learning, and interaction with industry and academia. It now attracts participants from leading national institutes and universities  across India. Organized by the Mining Engineering Society (MES), a student-faculty-alumni body established in 1984, the fest promotes practical exposure and industry collaboration. Entering its 10th edition in 2026, MINARE will feature events such as mining robotics, mine design, case studies, workshops, expert talks and geoscience challenges, strengthening its role as a key student-driven mining festival in the country.",
     boxClasses:
-      "group space-y-8 p-10 bg-gradient-to-br from-gray-900/80 via-gray-900/50 to-gray-900/80 backdrop-blur-sm rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.1)] hover:shadow-[0_0_80px_rgba(0,0,0,0.2)] transition-all duration-700",
+      "group space-y-8 p-10 bg-transparent rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.1)] hover:shadow-[0_0_80px_rgba(0,0,0,0.2)] transition-all duration-700",
   },
 ];
 
