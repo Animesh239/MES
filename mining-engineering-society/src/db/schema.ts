@@ -29,6 +29,7 @@ export const eventsTable = pgTable("events", {
   title: varchar("title").notNull(),
   imageLinks: varchar("image_links").array().notNull(),
   type: varchar("type").notNull(),
+  year: varchar("year"),
 });
 
 // Minerva Table
@@ -72,6 +73,7 @@ export const usersTable = pgTable("users", {
 export const galleryTable = pgTable("gallary", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   imageUrl: varchar("image_url").notNull(),
+  year: varchar("year"),
 });
 
 // Members Table
@@ -80,6 +82,9 @@ export const membersTable = pgTable("members", {
   name: varchar("name").notNull(),
   role: varchar("role").notNull(),
   photoUrl: varchar("photo_url").notNull(),
+  linkedInProfile: varchar("linkedin_profile"),
+  year: varchar("year"),
+  type: varchar("type").default("current"), // 'current' or 'past'
 });
 
 // Minare Events Table
@@ -88,6 +93,7 @@ export const minareEventsTable = pgTable("minare_events", {
   title: varchar("title").notNull(),
   imageLinks: varchar("image_links").array().notNull(),
   type: varchar("type").notNull(),
+  year: varchar("year"),
 });
 
 // Achievement Table (Students Corner)
@@ -115,6 +121,7 @@ export const classRepresentativesTable = pgTable("class_representatives", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar("name").notNull(),
   batch: varchar("batch").notNull(), // e.g., "2025" or "Final Year"
+  class: varchar("class"), // e.g., "B.Tech" or "M.Tech"
   photoUrl: varchar("photo_url").notNull(),
   linkedInProfile: varchar("linkedin_profile"),
 });

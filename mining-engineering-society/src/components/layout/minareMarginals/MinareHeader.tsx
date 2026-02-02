@@ -40,9 +40,13 @@ const NavDropdown = ({
     >
       <button className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-semibold flex items-center gap-1 focus:outline-none">
         {title}
-        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`w-4 h-4 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
-      
+
       {isOpen && (
         <div className="absolute left-0 mt-0 w-48 rounded-md shadow-lg bg-black border border-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
           <div className="py-1">
@@ -102,13 +106,19 @@ export default function MinareNavbar() {
                 {" "}
                 {/* Increased spacing */}
                 <NavItem href="/minare">Home</NavItem>
-                <NavItem href="/minare/team">Members</NavItem>
-                <NavDropdown 
-                  title="Events" 
+                <NavDropdown
+                  title="Team"
+                  items={[
+                    { label: "Current Team", href: "/minare/team" },
+                    { label: "Past Team", href: "/minare/team/past" },
+                  ]}
+                />
+                <NavDropdown
+                  title="Events"
                   items={[
                     { label: "Upcoming", href: "/minare/events/upcoming" },
-                    { label: "Past", href: "/minare/events/past" }
-                  ]} 
+                    { label: "Past", href: "/minare/events/past" },
+                  ]}
                 />
                 <NavItem href="/minare/gallery">Gallery</NavItem>
                 <NavItem href="/minare/sponsors">Sponsors</NavItem>
@@ -153,7 +163,9 @@ export default function MinareNavbar() {
               Members
             </NavItem>
             <div className="flex flex-col items-center w-full">
-              <span className="text-white px-3 py-2 text-lg font-semibold">Events</span>
+              <span className="text-white px-3 py-2 text-lg font-semibold">
+                Events
+              </span>
               <NavItem href="/minare/events/upcoming" onClick={closeNavbar}>
                 <span className="text-base text-gray-300">Upcoming</span>
               </NavItem>

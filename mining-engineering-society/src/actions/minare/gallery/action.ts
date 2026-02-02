@@ -6,7 +6,10 @@ import { eq } from "drizzle-orm";
 
 // CRUD Operations for Gallary
 
-export const addGalleryImage = async (imageData: { imageUrl: string }) => {
+export const addGalleryImage = async (imageData: {
+  imageUrl: string;
+  year?: string;
+}) => {
   const newImage = await DB_Connection.insert(galleryTable)
     .values(imageData)
     .returning();

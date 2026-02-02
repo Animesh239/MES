@@ -1,0 +1,1 @@
+ALTER TABLE "gallary" ADD COLUMN "year" varchar;

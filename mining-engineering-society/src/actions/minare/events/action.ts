@@ -10,6 +10,7 @@ import { unstable_noStore as noStore } from "next/cache";
 export const addMinareEvent = async (eventData: {
   title: string;
   type: string;
+  year?: string;
   imageLinks: string[];
 }) => {
   // Validate type field
@@ -94,6 +95,7 @@ export const updateMinareEvent = async (
   updatedData: {
     title?: string;
     type?: string;
+    year?: string;
     imageLinks?: string[];
   }
 ) => {

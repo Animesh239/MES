@@ -17,6 +17,7 @@ interface ClassRepresentative {
   id: number;
   name: string;
   batch: string;
+  class?: string | null;
   photoUrl: string;
   linkedInProfile?: string | null;
 }
@@ -35,6 +36,7 @@ export default function ClassRepresentativesManagement() {
   const [formData, setFormData] = useState({
     name: "",
     batch: "",
+    class: "B.Tech", // Default
     linkedInProfile: "",
   });
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
@@ -68,6 +70,7 @@ export default function ClassRepresentativesManagement() {
     const repData = {
       name: formData.name,
       batch: formData.batch,
+      class: formData.class,
       photoUrl: uploadedPhoto,
       linkedInProfile: formData.linkedInProfile || undefined,
     };
@@ -98,6 +101,7 @@ export default function ClassRepresentativesManagement() {
     setFormData({
       name: rep.name,
       batch: rep.batch,
+      class: rep.class || "B.Tech",
       linkedInProfile: rep.linkedInProfile || "",
     });
     setUploadedPhoto(rep.photoUrl);
@@ -116,7 +120,7 @@ export default function ClassRepresentativesManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", batch: "", linkedInProfile: "" });
+    setFormData({ name: "", batch: "", class: "B.Tech", linkedInProfile: "" });
     setUploadedPhoto("");
     setEditingRep(null);
     setShowAddForm(false);
@@ -219,6 +223,24 @@ export default function ClassRepresentativesManagement() {
                   required
                 />
               </div>
+            </div>
+
+            <div>
+              <Label htmlFor="class" className="text-gray-300 font-medium">
+                Class
+              </Label>
+              <select
+                id="class"
+                value={formData.class}
+                onChange={(e) =>
+                  setFormData({ ...formData, class: e.target.value })
+                }
+                className="w-full mt-2 p-2 bg-black/30 border border-gray-700 rounded-md text-white focus:border-purple-500 focus:ring-purple-500 outline-none"
+              >
+                <option value="B.Tech">B.Tech</option>
+                <option value="M.Tech">M.Tech</option>
+                <option value="Ph.D">Ph.D</option>
+              </select>
             </div>
 
             <div>
@@ -384,11 +406,9 @@ export default function ClassRepresentativesManagement() {
                         {rep.name}
                       </h3>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                        <div className="flex items-center">
-                          <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs border border-purple-500/30 mr-2">
-                            {rep.batch}
-                          </span>
-                        </div>
+                        <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs border border-purple-500/30 mr-2">
+                          {rep.class || "B.Tech"} - {rep.batch}
+                        </span>
                       </div>
                     </div>
                   </div>

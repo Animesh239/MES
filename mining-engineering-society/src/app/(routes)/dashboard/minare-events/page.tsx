@@ -24,6 +24,7 @@ interface MinareEvent {
   id: number;
   title: string;
   type: string;
+  year?: string | null;
   imageLinks: string[];
 }
 
@@ -38,6 +39,7 @@ export default function MinareEventsManagement() {
   const [formData, setFormData] = useState({
     title: "",
     type: "upcoming" as "upcoming" | "past",
+    year: "",
   });
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
@@ -58,7 +60,7 @@ export default function MinareEventsManagement() {
       } else {
         setUpcomingEvents([]);
       }
-      
+
       if (pastResult.success && pastResult.data) {
         setPastEvents(pastResult.data);
       } else {
@@ -77,6 +79,7 @@ export default function MinareEventsManagement() {
     const eventData = {
       title: formData.title,
       type: formData.type,
+      year: formData.year,
       imageLinks: uploadedImages,
     };
 
@@ -93,7 +96,7 @@ export default function MinareEventsManagement() {
         return;
       }
 
-      setFormData({ title: "", type: "upcoming" });
+      setFormData({ title: "", type: "upcoming", year: "" });
       setUploadedImages([]);
       setEditingEvent(null);
       setShowAddForm(false);
@@ -109,6 +112,7 @@ export default function MinareEventsManagement() {
     setFormData({
       title: event.title,
       type: event.type as "upcoming" | "past",
+      year: event.year || "",
     });
     setUploadedImages(event.imageLinks || []);
     setShowAddForm(true);
@@ -126,7 +130,7 @@ export default function MinareEventsManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ title: "", type: "upcoming" });
+    setFormData({ title: "", type: "upcoming", year: "" });
     setUploadedImages([]);
     setEditingEvent(null);
     setShowAddForm(false);
@@ -246,6 +250,22 @@ export default function MinareEventsManagement() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            <div>
+              <Label htmlFor="year" className="text-gray-300 font-medium">
+                Year (Optional)
+              </Label>
+              <Input
+                id="year"
+                type="text"
+                value={formData.year}
+                onChange={(e) =>
+                  setFormData({ ...formData, year: e.target.value })
+                }
+                className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Enter event year (e.g., 2024)"
+              />
             </div>
 
             <div>
@@ -450,6 +470,13 @@ export default function MinareEventsManagement() {
                               }`
                             : "No images"}
                         </div>
+                        {event.year && (
+                          <div className="flex items-center">
+                            <span className="bg-white/10 px-2 py-0.5 rounded text-xs text-gray-300">
+                              {event.year}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -602,6 +629,13 @@ export default function MinareEventsManagement() {
                               }`
                             : "No images"}
                         </div>
+                        {event.year && (
+                          <div className="flex items-center">
+                            <span className="bg-white/10 px-2 py-0.5 rounded text-xs text-gray-300">
+                              {event.year}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

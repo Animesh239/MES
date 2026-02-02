@@ -1,0 +1,1 @@
+ALTER TABLE "class_representatives" ADD COLUMN "class" varchar;

@@ -11,13 +11,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CldUploadButton } from 'next-cloudinary';
+import { CldUploadButton } from "next-cloudinary";
 
 interface Member {
   id: number;
   name: string;
   role: string;
   photoUrl: string;
+  linkedInProfile?: string | null;
+  year?: string | null;
+  type?: string | null; // 'current' or 'past'
 }
 
 export default function MembersManagement() {
@@ -30,6 +33,9 @@ export default function MembersManagement() {
   const [formData, setFormData] = useState({
     name: "",
     role: "",
+    linkedInProfile: "",
+    year: new Date().getFullYear().toString(),
+    type: "current",
   });
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
 
@@ -40,9 +46,16 @@ export default function MembersManagement() {
   const loadMembers = async () => {
     setLoading(true);
     try {
+      console.log("Fetching members...");
       const result = await getAllMembers();
+      console.log("Fetch result:", result);
+
       if (result.success && result.data) {
+        console.log("Setting members:", result.data);
         setMembers(result.data);
+      } else {
+        console.error("Fetch failed or no data:", result);
+        // Optional: Set an error state to display to the user
       }
     } catch (error) {
       console.error("Error loading members:", error);
@@ -58,6 +71,9 @@ export default function MembersManagement() {
       name: formData.name,
       role: formData.role,
       photoUrl: uploadedPhoto,
+      linkedInProfile: formData.linkedInProfile || undefined,
+      year: formData.year || undefined,
+      type: formData.type || "current",
     };
 
     try {
@@ -67,10 +83,7 @@ export default function MembersManagement() {
         await addMember(memberData);
       }
 
-      setFormData({ name: "", role: "" });
-      setUploadedPhoto("");
-      setEditingMember(null);
-      setShowAddForm(false);
+      resetForm();
       loadMembers();
     } catch (error) {
       console.error("Error saving member:", error);
@@ -82,6 +95,9 @@ export default function MembersManagement() {
     setFormData({
       name: member.name,
       role: member.role,
+      linkedInProfile: member.linkedInProfile || "",
+      year: member.year || new Date().getFullYear().toString(),
+      type: member.type || "current",
     });
     setUploadedPhoto(member.photoUrl);
     setShowAddForm(true);
@@ -99,7 +115,13 @@ export default function MembersManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", role: "" });
+    setFormData({
+      name: "",
+      role: "",
+      linkedInProfile: "",
+      year: new Date().getFullYear().toString(),
+      type: "current",
+    });
     setUploadedPhoto("");
     setEditingMember(null);
     setShowAddForm(false);
@@ -124,9 +146,7 @@ export default function MembersManagement() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             MINARE Members Management
           </h1>
-          <p className="text-gray-400 mt-2">
-            Manage MINARE team members
-          </p>
+          <p className="text-gray-400 mt-2">Manage MINARE team members</p>
         </div>
         <Button
           onClick={() => setShowAddForm(true)}
@@ -169,7 +189,9 @@ export default function MembersManagement() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <Label htmlFor="name" className="text-gray-300 font-medium">Name</Label>
+                <Label htmlFor="name" className="text-gray-300 font-medium">
+                  Name
+                </Label>
                 <Input
                   id="name"
                   type="text"
@@ -183,7 +205,9 @@ export default function MembersManagement() {
                 />
               </div>
               <div>
-                <Label htmlFor="role" className="text-gray-300 font-medium">Role</Label>
+                <Label htmlFor="role" className="text-gray-300 font-medium">
+                  Role
+                </Label>
                 <Input
                   id="role"
                   type="text"
@@ -197,32 +221,103 @@ export default function MembersManagement() {
                 />
               </div>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <Label htmlFor="type" className="text-gray-300 font-medium">
+                  Type
+                </Label>
+                <select
+                  id="type"
+                  value={formData.type}
+                  onChange={(e) =>
+                    setFormData({ ...formData, type: e.target.value })
+                  }
+                  className="w-full mt-2 p-2 bg-black/30 border border-gray-700 rounded-md text-white focus:border-blue-500 focus:ring-blue-500 outline-none"
+                >
+                  <option value="current">Current Member</option>
+                  <option value="past">Past Member</option>
+                </select>
+              </div>
+              <div>
+                <Label htmlFor="year" className="text-gray-300 font-medium">
+                  Year
+                </Label>
+                <Input
+                  id="year"
+                  type="text"
+                  value={formData.year}
+                  onChange={(e) =>
+                    setFormData({ ...formData, year: e.target.value })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="e.g., 2025"
+                />
+              </div>
+              <div>
+                <Label
+                  htmlFor="linkedInProfile"
+                  className="text-gray-300 font-medium"
+                >
+                  LinkedIn Profile
+                </Label>
+                <Input
+                  id="linkedInProfile"
+                  type="url"
+                  value={formData.linkedInProfile}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      linkedInProfile: e.target.value,
+                    })
+                  }
+                  className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="https://linkedin.com/..."
+                />
+              </div>
+            </div>
+
             <div>
               <Label className="text-gray-300 font-medium">Upload Photo</Label>
               <div className="mt-2 flex items-center space-x-4">
                 <CldUploadButton
-                // @ts-ignore
+                  // @ts-ignore
                   onSuccess={(result: any) => {
                     console.log("Upload success:", result);
-                    if (result && result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
+                    if (
+                      result &&
+                      result.info &&
+                      typeof result.info === "object" &&
+                      "secure_url" in result.info
+                    ) {
                       console.log("Setting photo URL:", result.info.secure_url);
                       setUploadedPhoto(result.info.secure_url);
                     }
                   }}
-                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                  uploadPreset={
+                    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+                  }
                   className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-200"
                   options={{
                     multiple: false,
                     maxFiles: 1,
                   }}
                 >
-                  <svg className="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  <svg
+                    className="w-4 h-4 mr-2 inline"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                   {uploadedPhoto ? "Replace Photo" : "Upload Photo"}
                 </CldUploadButton>
               </div>
-              
+
               {/* Display uploaded photo */}
               {uploadedPhoto && (
                 <div className="mt-3">
@@ -247,15 +342,15 @@ export default function MembersManagement() {
               )}
             </div>
             <div className="flex space-x-3 pt-4">
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg"
               >
                 {editingMember ? "Update Member" : "Add Member"}
               </Button>
-              <Button 
-                type="button" 
-                onClick={resetForm} 
+              <Button
+                type="button"
+                onClick={resetForm}
                 variant="outline"
                 className="border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-white/10"
               >
@@ -321,6 +416,21 @@ export default function MembersManagement() {
                       {member.name}
                     </h3>
                     <p className="text-sm text-gray-400 mb-3">{member.role}</p>
+                    <div className="flex flex-wrap gap-2 mb-3 text-xs text-gray-500">
+                      <span className="bg-gray-800 px-2 py-0.5 rounded">
+                        {member.year || "N/A"}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 rounded ${
+                          member.type === "past"
+                            ? "bg-red-900/50 text-red-200"
+                            : "bg-green-900/50 text-green-200"
+                        }`}
+                      >
+                        {member.type === "past" ? "Past" : "Current"}
+                      </span>
+                    </div>
+
                     <div className="flex space-x-2">
                       <Button
                         onClick={() => handleEdit(member)}

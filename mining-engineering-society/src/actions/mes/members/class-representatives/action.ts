@@ -10,6 +10,7 @@ import { unstable_noStore as noStore } from "next/cache";
 export const addClassRepresentative = async (repData: {
   name: string;
   batch: string;
+  class?: string;
   photoUrl: string;
   linkedInProfile?: string;
 }) => {
@@ -51,6 +52,7 @@ export const updateClassRepresentative = async (
   updatedData: {
     name?: string;
     batch?: string;
+    class?: string;
     photoUrl?: string;
     linkedInProfile?: string;
   }
