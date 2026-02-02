@@ -6,8 +6,16 @@ export const revalidate = 0;
 
 export default async function TeamPage() {
   const response = await getAllMembers();
-  const members = response.success && response.data ? response.data : [];
-  console.log("TeamPage: members count:", members.length);
+  // Filter for current members only
+  // If 'type' is missing or null, we assume 'current' for backward compatibility
+  const members =
+    response.success && response.data
+      ? response.data.filter(
+          (member) => member.type === "current" || !member.type
+        )
+      : [];
+
+  console.log("TeamPage (Current): members count:", members.length);
 
   return (
     <>

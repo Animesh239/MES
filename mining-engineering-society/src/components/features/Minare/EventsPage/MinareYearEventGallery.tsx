@@ -10,6 +10,7 @@ interface MinareEvent {
   id: number;
   title: string;
   type: string;
+  year?: string | null;
   imageLinks: string[];
 }
 

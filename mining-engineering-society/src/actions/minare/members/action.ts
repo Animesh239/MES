@@ -10,6 +10,9 @@ export const addMember = async (memberData: {
   name: string;
   role: string;
   photoUrl: string;
+  linkedInProfile?: string;
+  year?: string;
+  type?: string;
 }) => {
   const newMember = await DB_Connection.insert(membersTable)
     .values(memberData)
@@ -49,6 +52,9 @@ export const updateMember = async (
     name?: string;
     role?: string;
     photoUrl?: string;
+    linkedInProfile?: string;
+    year?: string;
+    type?: string;
   }
 ) => {
   const updatedMember = await DB_Connection.update(membersTable)

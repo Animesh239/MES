@@ -14,6 +14,7 @@ interface Member {
   name: string;
   role: string;
   photoUrl: string;
+  linkedInProfile?: string | null;
 }
 
 interface MembersCarouselProps {
@@ -68,10 +69,11 @@ export default function MembersCarousel({ members }: MembersCarouselProps) {
           {members.map((member) => (
             <CarouselItem key={member.id} className="pl-4">
               <div className="p-4">
-                <MemberCard 
+                <MemberCard
                   name={member.name}
                   designation={member.role}
                   image={member.photoUrl}
+                  linkedInProfile={member.linkedInProfile}
                 />
               </div>
             </CarouselItem>
