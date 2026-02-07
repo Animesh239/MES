@@ -1,11 +1,5 @@
-import { RegistrationPage } from "@/components/features/Minare/Registration/page";
+import { redirect } from "next/navigation";
 
-const Registration = () => {
-  return (
-    <div className="min-h-screen h-auto ">
-      <RegistrationPage />
-    </div>
-  );
-};
-
-export default Registration;
+export default function RegistrationRedirect() {
+  redirect("/dashboard/user");
+}

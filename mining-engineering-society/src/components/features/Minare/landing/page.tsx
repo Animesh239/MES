@@ -4,32 +4,39 @@ import { About } from "./AboutSection/aboutUsSection";
 import { Hero } from "./HeroSection/heroSection";
 // import { Event } from "./EventSection/Event";
 import { Gallery } from "./GallerySection/Gallery";
-import { GetUserDetail } from "@/lib/firebase/getUserData";
+// import { GetUserDetail } from "@/lib/firebase/getUserData";
 import { UserFormInterface } from "@/config/Minare/Registration/type";
-import {
-  initializeAuthListener,
-  useAuthStore,
-} from "@/lib/firebase/authListener";
 import { Profile } from "./HeroSection/profile";
 
-export const LandingPage = () => {
-  const [userData, setUserData] = useState<UserFormInterface>({
-    fullname: "",
-    email: "",
-    phonenumber: "",
-    collegename: "",
-    branch: "",
-    photoURL: "",
-    graduationyear: "",
-    uid: "",
-    paymentProofImgURL: "",
-  });
-  const isLoading = useAuthStore((state) => state.isLoading);
-  const [isLogin, setIsLogin] = useState(false);
+interface LandingPageProps {
+  initialUserData: UserFormInterface | null;
+  isLoggedIn: boolean;
+}
+
+export const LandingPage = ({ initialUserData }: LandingPageProps) => {
+  const [userData, setUserData] = useState<UserFormInterface>(
+    initialUserData || {
+      fullname: "",
+      email: "",
+      phonenumber: "",
+      collegename: "",
+      branch: "",
+      photoURL: "",
+      graduationyear: "",
+      uid: "",
+      paymentProofImgURL: "",
+    }
+  );
+  const [isLogin, setIsLogin] = useState(!!initialUserData);
 
   useEffect(() => {
-    initializeAuthListener();
+    if (initialUserData) {
+      setUserData(initialUserData);
+      setIsLogin(true);
+    }
+  }, [initialUserData]);
 
+  useEffect(() => {
     const createStars = () => {
       const container = document.querySelector(".star-container");
       if (!container) return;
@@ -46,18 +53,8 @@ export const LandingPage = () => {
         container.appendChild(star);
       }
     };
-    const fetchUserData = async () => {
-      if (!isLoading) {
-        const result = await GetUserDetail();
-        if (result.success && result.data?.profileSubmitted) {
-          setUserData(result.data);
-          setIsLogin(true);
-        }
-      }
-    };
 
     createStars();
-    fetchUserData();
 
     return () => {
       const container = document.querySelector(".star-container");
@@ -65,7 +62,7 @@ export const LandingPage = () => {
         container.innerHTML = "";
       }
     };
-  }, [isLoading]);
+  }, []);
 
   return (
     <div className=" h-auto p-[16px] relative flex flex-col gap-32">

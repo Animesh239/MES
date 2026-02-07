@@ -1,16 +1,8 @@
 // Timeline.tsx
 import { Button } from "@/components/ui/button";
-import { UpdateData } from "@/lib/firebase/updateData";
 import { easeIn, motion, useScroll } from "framer-motion";
 import { RefObject, useEffect, useRef, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { getDocument } from "@/lib/firebase/dbOperation";
 import { events } from "@/config/Minare/landingpagedata";
-import {
-  initializeAuthListener,
-  useAuthStore,
-} from "@/lib/firebase/authListener";
-import { GetUserDetail } from "@/lib/firebase/getUserData";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { RulesDialog } from "../HeroSection/rulesAndRegulation";
@@ -18,13 +10,16 @@ import { RulesDialog } from "../HeroSection/rulesAndRegulation";
 export const Timeline = () => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [registeredEventsTitle, setRegisteredEventsTitle] = useState<string[]>(
     []
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [registeredEventIds, setRegisteredEventIds] = useState<number[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loadingEventId, setLoadingEventId] = useState<number | null>(null);
-  const isLoading = useAuthStore((state) => state.isLoading);
-  const [isLogin, setislogin] = useState(false);
+
+  //   const [isLogin, setislogin] = useState(false);
   const [selectedEventTitle, setSelectedEventTitle] = useState<string>("");
 
   const [expandedSections, setExpandedSections] = useState<{
@@ -55,30 +50,6 @@ export const Timeline = () => {
     return words.length > 20 ? `${truncatedText}...` : truncatedText;
   };
 
-  useEffect(() => {
-    initializeAuthListener();
-
-    const fetchUserData = async () => {
-      if (!isLoading) {
-        const result = await GetUserDetail();
-        if (result.success && result.data?.participatedEventTitles) {
-          setRegisteredEventsTitle(result.data.participatedEventTitles);
-          setislogin(true);
-        }
-      }
-    };
-
-    fetchUserData();
-  }, [isLoading]);
-
-  useEffect(() => {
-    const registeredIds = events
-      .filter((event) => registeredEventsTitle.includes(event.title))
-      .map((event) => event.id);
-
-    setRegisteredEventIds(registeredIds);
-  }, [registeredEventsTitle]);
-
   const handleOpenRules = (title: string) => {
     setSelectedEventTitle(title);
     setOpen(true);
@@ -90,39 +61,8 @@ export const Timeline = () => {
     offset: ["start start", "end end"],
   });
 
-  const eventRegisterationHandler = async (
-    eventId: number,
-    eventTitle: string
-  ) => {
-    if (registeredEventIds.includes(eventId)) return;
-
-    setLoadingEventId(eventId);
-
-    try {
-      const auth = getAuth();
-      const currentUser = auth.currentUser;
-      if (!currentUser?.uid) throw new Error("No user is currently logged in");
-
-      const userData = await getDocument("users", currentUser.uid);
-      const previousEvents = userData?.data?.participatedEventTitles || [];
-
-      const updatedEvents = [...previousEvents, eventTitle];
-
-      const reqdResult = await UpdateData({
-        participatedEventTitles: updatedEvents,
-      });
-
-      if (reqdResult.success) {
-        setRegisteredEventsTitle(updatedEvents);
-      } else {
-        console.error("Failed to register:", reqdResult.error);
-      }
-    } catch (error) {
-      console.error("Error registering for event:", error);
-      if (!isLogin) toast("Register before Registering for an Event");
-    } finally {
-      setLoadingEventId(null);
-    }
+  const eventRegisterationHandler = async () => {
+    toast("Event Registration is coming soon!");
   };
 
   return (
@@ -222,9 +162,7 @@ export const Timeline = () => {
 
                   <div className="w-full mt-2 flex flex-col sm:flex-row gap-3 sm:gap-5">
                     <Button
-                      onClick={() =>
-                        eventRegisterationHandler(event.id, event.title)
-                      }
+                      onClick={() => eventRegisterationHandler()}
                       className={`w-full z-50  h-10 font-normal font-roboto text-[#211330] rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base`}
                       disabled={
                         registeredEventIds.includes(event.id) ||

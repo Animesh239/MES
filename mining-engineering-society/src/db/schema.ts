@@ -62,8 +62,16 @@ export const articlesTable = pgTable("articles", {
 // Authentication Table
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  username: varchar("username").notNull().unique(),
+  username: varchar("username").notNull().unique(), // Acts as unique handle
   password: varchar("password").notNull(),
+  name: varchar("name"),
+  email: varchar("email").unique(),
+  phoneNumber: varchar("phone_number"),
+  collegeName: varchar("college_name"),
+  branch: varchar("branch"),
+  graduationYear: varchar("graduation_year"),
+  degree: varchar("degree"), // B.Tech, M.Tech, etc.
+  role: varchar("role").default("user").notNull(), // 'user', 'admin'
   createdAt: varchar("created_at").notNull(),
 });
 
@@ -124,4 +132,23 @@ export const classRepresentativesTable = pgTable("class_representatives", {
   class: varchar("class"), // e.g., "B.Tech" or "M.Tech"
   photoUrl: varchar("photo_url").notNull(),
   linkedInProfile: varchar("linkedin_profile"),
+});
+
+// Minare Registrations Table
+export const minareRegistrationsTable = pgTable("minare_registrations", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name").notNull(),
+  email: varchar("email").notNull(),
+  phoneNumber: varchar("phone_number").notNull(),
+  collegeName: varchar("college_name").notNull(),
+  branch: varchar("branch").notNull(),
+  graduationYear: varchar("graduation_year").notNull(),
+  photoUrl: varchar("photo_url"),
+  paymentProofUrl: varchar("payment_proof_url").notNull(),
+  transactionId: varchar("transaction_id"),
+  uid: varchar("uid"), // Legacy Firebase UID (kept for reference if needed)
+  userId: integer("user_id"), // Foreign Key to usersTable
+  status: varchar("status").default("pending").notNull(), // 'pending', 'approved', 'rejected'
+  createdAt: varchar("created_at").notNull(),
+  updatedAt: varchar("updated_at"),
 });

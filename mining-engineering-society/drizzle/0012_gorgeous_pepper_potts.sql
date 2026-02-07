@@ -1,0 +1,1 @@
+ALTER TABLE "minare_registrations" ADD COLUMN "uid" varchar;
