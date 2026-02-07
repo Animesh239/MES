@@ -8,16 +8,18 @@ const secret = new TextEncoder().encode(
 export interface SessionData {
   userId: number;
   username: string;
+  role: string;
   expires: Date;
 }
 
 export async function createSession(
   userId: number,
-  username: string
+  username: string,
+  role: string
 ): Promise<string> {
   const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day
 
-  const session = await new SignJWT({ userId, username })
+  const session = await new SignJWT({ userId, username, role })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(Math.floor(expires.getTime() / 1000))
@@ -39,6 +41,7 @@ export async function getSession(): Promise<SessionData | null> {
     return {
       userId: payload.userId as number,
       username: payload.username as string,
+      role: payload.role as string,
       expires: new Date(payload.exp! * 1000),
     };
   } catch {

@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { loginAction } from "@/actions/auth/action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export default function LoginPage() {
+export default function AdminLoginPage() {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
@@ -22,10 +21,7 @@ export default function LoginPage() {
         setError(result.error);
         setLoading(false);
       }
-      // If no error and no result, redirect happened successfully
-      // Don't set loading to false as the page will redirect
     } catch (error) {
-      // Check if it's a redirect error (which means success)
       if (
         error &&
         typeof error === "object" &&
@@ -33,7 +29,6 @@ export default function LoginPage() {
         typeof (error as { digest: unknown }).digest === "string" &&
         (error as { digest: string }).digest.startsWith("NEXT_REDIRECT")
       ) {
-        // Redirect is happening, don't show error
         return;
       }
 
@@ -43,22 +38,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
       {/* Background Pattern */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-10 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-red-900/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-orange-900/20 rounded-full blur-3xl"></div>
         </div>
       </div>
 
       {/* Login Card */}
-      <div className="relative w-full max-w-md p-8 bg-black/40 backdrop-blur-xl rounded-2xl border border-gray-700/50 shadow-2xl">
+      <div className="relative w-full max-w-md p-8 bg-black/60 backdrop-blur-xl rounded-2xl border border-red-900/30 shadow-2xl">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="mb-6">
-            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl flex items-center justify-center mb-4">
               <svg
                 className="w-8 h-8 text-white"
                 fill="none"
@@ -74,24 +68,24 @@ export default function LoginPage() {
               </svg>
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Welcome Back
+              Admin Portal
             </h1>
           </div>
-          <p className="text-gray-400">Sign in to access your dashboard</p>
+          <p className="text-gray-400">Restricted Access</p>
         </div>
 
         <form action={handleSubmit} className="space-y-6">
           <div>
-            <Label htmlFor="email" className="text-gray-300 font-medium">
-              Email
+            <Label htmlFor="username" className="text-gray-300 font-medium">
+              Username
             </Label>
             <Input
-              id="email"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="text"
               required
-              className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm"
-              placeholder="Enter your email"
+              className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-red-500 focus:ring-red-500 backdrop-blur-sm"
+              placeholder="Enter admin username"
             />
           </div>
 
@@ -104,8 +98,8 @@ export default function LoginPage() {
               name="password"
               type="password"
               required
-              className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500 backdrop-blur-sm"
-              placeholder="Enter your password"
+              className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-red-500 focus:ring-red-500 backdrop-blur-sm"
+              placeholder="Enter password"
             />
           </div>
 
@@ -130,13 +124,13 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 shadow-lg py-3 text-lg font-medium"
+            className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white border-0 shadow-lg py-3 text-lg font-medium"
             disabled={loading}
           >
             {loading ? (
               <div className="flex items-center justify-center space-x-2">
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                <span>Signing in...</span>
+                <span>Verifying...</span>
               </div>
             ) : (
               <div className="flex items-center justify-center space-x-2">
@@ -153,21 +147,11 @@ export default function LoginPage() {
                     d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                   />
                 </svg>
-                <span>Sign in</span>
+                <span>Login</span>
               </div>
             )}
           </Button>
         </form>
-
-        <div className="mt-6 text-center text-sm text-gray-400">
-          Don&apos;t have an account?{" "}
-          <Link
-            href="/signup"
-            className="text-white hover:text-blue-400 hover:underline transition-colors"
-          >
-            Create one
-          </Link>
-        </div>
 
         {/* Footer */}
         <div className="mt-8 text-center">

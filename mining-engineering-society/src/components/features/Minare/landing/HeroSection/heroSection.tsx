@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 // import { Button } from "@/components/ui/button";
 import { easeIn, motion } from "framer-motion";
 // import Link from "next/link";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 // import { useState } from "react";
 // import { RulesDialog } from "./rulesAndRegulation";
 // import { RulesAndRegulations } from "@/config/Minare/landingpagedata";
@@ -17,10 +17,10 @@ const subtitle = "The Annual Geo-technical Fest of NIT Rourkela";
 const dates = "7th - 8th March 2026";
 
 export const Hero = () => {
-  // const router = useRouter();
-  // const handleRegister = () => {
-  //   router.push("minare/registration");
-  // };
+  const router = useRouter();
+  const handleRegister = () => {
+    router.push("/minare/registration");
+  };
 
   return (
     <motion.div>
@@ -82,8 +82,11 @@ export const Hero = () => {
             </div>
           </motion.div>
 
-          <Button className="font-roboto    z-0 cursor-pointer">
-            Registrations Opening Soon
+          <Button
+            className="font-roboto z-0 cursor-pointer"
+            onClick={handleRegister}
+          >
+            Register Now
           </Button>
         </div>
       </section>
