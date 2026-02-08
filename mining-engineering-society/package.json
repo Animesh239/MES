@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "drizzle:generate": "npx drizzle-kit generate",
-    "drizzle:migrate": "npx drizzle-kit migrate"
+    "drizzle:migrate": "npx drizzle-kit migrate",
+    "drizzle:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
