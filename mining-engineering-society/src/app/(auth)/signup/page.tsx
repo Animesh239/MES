@@ -28,6 +28,7 @@ export default function SignupPage() {
     branch: "",
     graduationYear: "",
     degree: "",
+    gender: "Male",
   });
 
   const handleInputChange = (
@@ -61,7 +62,7 @@ export default function SignupPage() {
       case 1:
         return ["username", "email", "password"];
       case 2:
-        return ["name", "phoneNumber"];
+        return ["name", "phoneNumber", "gender"];
       case 3:
         return ["collegeName", "branch", "graduationYear", "degree"];
       default:
@@ -165,6 +166,30 @@ export default function SignupPage() {
                   className="border-gray-700 bg-gray-900 text-white placeholder:text-gray-500"
                   placeholder="+91 9876543210"
                 />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="gender" className="text-white">
+                  Gender
+                </Label>
+                <Select
+                  name="gender"
+                  value={formData.gender}
+                  onValueChange={(value) =>
+                    setFormData({ ...formData, gender: value })
+                  }
+                  required
+                >
+                  <SelectTrigger className="border-gray-700 bg-gray-900 text-white">
+                    <SelectValue placeholder="Select Gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Male">Male</SelectItem>
+                    <SelectItem value="Female">Female</SelectItem>
+                    <SelectItem value="Others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
+                {/* Hidden input for gender to ensure it's submitted with FormData */}
+                <input type="hidden" name="gender" value={formData.gender} />
               </div>
             </div>
 

@@ -86,6 +86,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
   const branch = formData.get("branch") as string;
   const graduationYear = formData.get("graduationYear") as string;
   const degree = formData.get("degree") as string;
+  const gender = formData.get("gender") as string;
 
   if (
     !username ||
@@ -96,7 +97,10 @@ export async function createUserAction(prevState: any, formData: FormData) {
     !collegeName ||
     !branch ||
     !graduationYear ||
-    !degree
+    !branch ||
+    !graduationYear ||
+    !degree ||
+    !gender
   ) {
     return { error: "All fields are required" };
   }
@@ -128,6 +132,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
         graduationYear,
         degree,
         role: "user",
+        gender: gender || "Male",
         createdAt,
       })
       .returning();
@@ -168,6 +173,7 @@ export async function getUserDetails(userId: number) {
       branch: usersTable.branch,
       graduationYear: usersTable.graduationYear,
       degree: usersTable.degree,
+      gender: usersTable.gender,
       role: usersTable.role,
       createdAt: usersTable.createdAt,
     })
