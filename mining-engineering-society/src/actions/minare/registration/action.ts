@@ -36,6 +36,7 @@ export async function submitRegistration(
       collegeName: user.collegeName || "",
       branch: user.branch || "",
       graduationYear: user.graduationYear || "",
+      gender: user.gender || "Male",
       photoUrl: "", // Optional, or fetch from user if available
       paymentProofUrl: paymentProofUrl,
       userId: userId,

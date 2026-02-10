@@ -72,6 +72,7 @@ export const usersTable = pgTable("users", {
   graduationYear: varchar("graduation_year"),
   degree: varchar("degree"), // B.Tech, M.Tech, etc.
   role: varchar("role").default("user").notNull(), // 'user', 'admin'
+  gender: varchar("gender").default("Male"),
   createdAt: varchar("created_at").notNull(),
 });
 
@@ -143,6 +144,7 @@ export const minareRegistrationsTable = pgTable("minare_registrations", {
   collegeName: varchar("college_name").notNull(),
   branch: varchar("branch").notNull(),
   graduationYear: varchar("graduation_year").notNull(),
+  gender: varchar("gender"),
   photoUrl: varchar("photo_url"),
   paymentProofUrl: varchar("payment_proof_url").notNull(),
   transactionId: varchar("transaction_id"),
