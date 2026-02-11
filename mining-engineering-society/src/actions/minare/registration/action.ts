@@ -75,6 +75,33 @@ export async function getUserRegistration(userId: number) {
   }
 }
 
+export async function uploadIdCard(userId: number, idCardUrl: string) {
+  try {
+    const registration = await db
+      .select()
+      .from(minareRegistrationsTable)
+      .where(eq(minareRegistrationsTable.userId, userId))
+      .limit(1);
+
+    if (registration.length === 0) {
+      return { success: false, error: "Registration not found" };
+    }
+
+    await db
+      .update(minareRegistrationsTable)
+      .set({
+        idCardUrl: idCardUrl,
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(minareRegistrationsTable.userId, userId));
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error uploading ID card:", error);
+    return { success: false, error: "Failed to upload ID card" };
+  }
+}
+
 export async function getMinareRegistrations() {
   try {
     const registrations = await db

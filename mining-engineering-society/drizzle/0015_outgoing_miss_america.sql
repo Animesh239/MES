@@ -1,0 +1,4 @@
+-- ALTER TABLE "minare_events" ADD COLUMN "description" varchar;--> statement-breakpoint
+-- ALTER TABLE "minare_events" ADD COLUMN "prize_pool" varchar;--> statement-breakpoint
+-- ALTER TABLE "minare_events" ADD COLUMN "participation_type" varchar;--> statement-breakpoint
+-- ALTER TABLE "minare_registrations" ADD COLUMN "id_card_url" varchar;

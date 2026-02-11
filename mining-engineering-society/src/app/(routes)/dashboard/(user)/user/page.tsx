@@ -2,9 +2,10 @@ import { getSession } from "@/lib/session";
 import { getUserRegistration } from "@/actions/minare/registration/action";
 import { getUserDetails, logoutAction } from "@/actions/auth/action";
 import { RegistrationCard } from "@/components/features/Minare/Registration/UserDashboard/RegistrationCard";
-import { redirect } from "next/navigation";
+import { IdCardUpload } from "@/components/features/Minare/Registration/UserDashboard/IdCardUpload";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 export default async function UserDashboardData() {
   const session = await getSession();
@@ -296,6 +297,108 @@ export default async function UserDashboardData() {
                 )}
               </div>
             </div>
+
+            {/* ID Card Upload Section */}
+            {registration && (
+              <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+                <div className="p-6 border-b border-gray-800 flex justify-between items-center bg-gray-900/50">
+                  <h2 className="text-xl font-bold text-white flex items-center">
+                    <span className="w-2 h-8 bg-blue-500 rounded-full mr-3"></span>
+                    College ID Card
+                  </h2>
+                  {registration.idCardUrl ? (
+                    <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border bg-green-500/10 text-green-400 border-green-500/20">
+                      Uploaded
+                    </span>
+                  ) : (
+                    <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border bg-red-500/10 text-red-400 border-red-500/20">
+                      Action Required
+                    </span>
+                  )}
+                </div>
+
+                <div className="p-6">
+                  {!registration.idCardUrl && (
+                    <div className="mb-6 p-4 bg-red-500/5 border border-red-500/10 rounded-lg flex items-start gap-3">
+                      <svg
+                        className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                        />
+                      </svg>
+                      <div>
+                        <h4 className="text-red-400 font-bold text-sm">
+                          Missing ID Card
+                        </h4>
+                        <p className="text-xs text-red-200/70 mt-1">
+                          Please upload your College ID Card to complete your
+                          registration profile. This is required for
+                          verification.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      {registration.idCardUrl ? (
+                        <div className="relative w-full aspect-video rounded-lg overflow-hidden border border-gray-700 bg-black/40 group">
+                          <Image
+                            src={registration.idCardUrl}
+                            alt="ID Card"
+                            fill
+                            className="object-contain group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      ) : (
+                        <div className="h-40 bg-gray-800/50 rounded-lg flex flex-col items-center justify-center border border-dashed border-gray-700">
+                          <svg
+                            className="w-8 h-8 text-gray-600 mb-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                            />
+                          </svg>
+                          <span className="text-gray-500 text-sm">
+                            No ID Card uploaded
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex flex-col justify-center">
+                      {/* This component needs to be created or integrated. For now we will add a placeholder or modify RegistrationCard to handle just ID upload or new component */}
+                      <div className="space-y-4">
+                        <p className="text-sm text-gray-400">
+                          Upload a clear image of your College ID Card. Allowed
+                          formats: JPG, PNG.
+                        </p>
+                        {/* We will need a client component here to handle the upload. 
+                                 For this step, I"ll use a placeholder comment and then create a new component `IdCardUpload` 
+                                 or reuse `CldUploadButton` directly if this was a client component. 
+                                 Since this is a server component, I need to verify if I can import a client component here. 
+                                 `RegistrationCard` is likely a client component. I should create `IdCardUpload.tsx`.
+                             */}
+                        <IdCardUpload userId={session.userId} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Profile Details Card */}
             <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
