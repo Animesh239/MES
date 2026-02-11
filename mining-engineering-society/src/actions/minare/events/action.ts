@@ -11,6 +11,9 @@ export const addMinareEvent = async (eventData: {
   title: string;
   type: string;
   year?: string;
+  description?: string;
+  prizePool?: string;
+  participationType?: string;
   imageLinks: string[];
 }) => {
   // Validate type field
@@ -96,6 +99,9 @@ export const updateMinareEvent = async (
     title?: string;
     type?: string;
     year?: string;
+    description?: string;
+    prizePool?: string;
+    participationType?: string;
     imageLinks?: string[];
   }
 ) => {

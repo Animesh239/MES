@@ -25,6 +25,9 @@ interface MinareEvent {
   title: string;
   type: string;
   year?: string | null;
+  description?: string | null;
+  prizePool?: string | null;
+  participationType?: string | null;
   imageLinks: string[];
 }
 
@@ -40,6 +43,9 @@ export default function MinareEventsManagement() {
     title: "",
     type: "upcoming" as "upcoming" | "past",
     year: "",
+    description: "",
+    prizePool: "",
+    participationType: "",
   });
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
@@ -80,6 +86,9 @@ export default function MinareEventsManagement() {
       title: formData.title,
       type: formData.type,
       year: formData.year,
+      description: formData.description,
+      prizePool: formData.prizePool,
+      participationType: formData.participationType,
       imageLinks: uploadedImages,
     };
 
@@ -96,7 +105,14 @@ export default function MinareEventsManagement() {
         return;
       }
 
-      setFormData({ title: "", type: "upcoming", year: "" });
+      setFormData({
+        title: "",
+        type: "upcoming",
+        year: "",
+        description: "",
+        prizePool: "",
+        participationType: "",
+      });
       setUploadedImages([]);
       setEditingEvent(null);
       setShowAddForm(false);
@@ -113,6 +129,9 @@ export default function MinareEventsManagement() {
       title: event.title,
       type: event.type as "upcoming" | "past",
       year: event.year || "",
+      description: event.description || "",
+      prizePool: event.prizePool || "",
+      participationType: event.participationType || "",
     });
     setUploadedImages(event.imageLinks || []);
     setShowAddForm(true);
@@ -130,7 +149,14 @@ export default function MinareEventsManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ title: "", type: "upcoming", year: "" });
+    setFormData({
+      title: "",
+      type: "upcoming",
+      year: "",
+      description: "",
+      prizePool: "",
+      participationType: "",
+    });
     setUploadedImages([]);
     setEditingEvent(null);
     setShowAddForm(false);
@@ -268,6 +294,87 @@ export default function MinareEventsManagement() {
               />
             </div>
 
+            {formData.type === "upcoming" && (
+              <>
+                <div>
+                  <Label
+                    htmlFor="description"
+                    className="text-gray-300 font-medium"
+                  >
+                    Description
+                  </Label>
+                  <textarea
+                    id="description"
+                    value={formData.description}
+                    onChange={(e) =>
+                      setFormData({ ...formData, description: e.target.value })
+                    }
+                    className="w-full mt-2 h-24 px-3 py-2 bg-black/30 border border-gray-700 rounded-md text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                    placeholder="Enter event description..."
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Label
+                      htmlFor="prizePool"
+                      className="text-gray-300 font-medium"
+                    >
+                      Prize Pool
+                    </Label>
+                    <Input
+                      id="prizePool"
+                      type="text"
+                      value={formData.prizePool}
+                      onChange={(e) =>
+                        setFormData({ ...formData, prizePool: e.target.value })
+                      }
+                      className="mt-2 bg-black/30 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                      placeholder="e.g. ₹50,000"
+                    />
+                  </div>
+                  <div>
+                    <Label
+                      htmlFor="participationType"
+                      className="text-gray-300 font-medium"
+                    >
+                      Participation Type
+                    </Label>
+                    <Select
+                      value={formData.participationType}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, participationType: value })
+                      }
+                    >
+                      <SelectTrigger className="mt-2 bg-black/30 border-gray-700 text-white focus:border-blue-500 focus:ring-blue-500">
+                        <SelectValue placeholder="Select type" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-black/90 border-gray-700">
+                        <SelectItem
+                          value="Solo"
+                          className="text-white hover:bg-blue-500/20"
+                        >
+                          Solo
+                        </SelectItem>
+                        <SelectItem
+                          value="Team"
+                          className="text-white hover:bg-blue-500/20"
+                        >
+                          Team
+                        </SelectItem>
+                        <SelectItem
+                          value="Solo/Team"
+                          className="text-white hover:bg-blue-500/20"
+                        >
+                          Solo/Team
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </>
+            )}
+
             <div>
               <Label className="text-gray-300 font-medium">Upload Images</Label>
               <div className="mt-2 flex items-center space-x-4">
@@ -309,6 +416,12 @@ export default function MinareEventsManagement() {
                   Upload Images ({uploadedImages.length})
                 </CldUploadButton>
               </div>
+              {formData.type === "upcoming" && (
+                <p className="text-xs text-gray-400 mt-1">
+                  * Images are optional for upcoming events if a description is
+                  provided.
+                </p>
+              )}
 
               {/* Display uploaded images */}
               {uploadedImages.length > 0 && (

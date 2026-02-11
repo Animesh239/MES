@@ -103,6 +103,9 @@ export const minareEventsTable = pgTable("minare_events", {
   imageLinks: varchar("image_links").array().notNull(),
   type: varchar("type").notNull(),
   year: varchar("year"),
+  description: varchar("description"), // Added description
+  prizePool: varchar("prize_pool"), // Added prize pool
+  participationType: varchar("participation_type"), // 'Solo' or 'Team'
 });
 
 // Achievement Table (Students Corner)
@@ -146,6 +149,7 @@ export const minareRegistrationsTable = pgTable("minare_registrations", {
   graduationYear: varchar("graduation_year").notNull(),
   gender: varchar("gender"),
   photoUrl: varchar("photo_url"),
+  idCardUrl: varchar("id_card_url"), // Added ID Card URL
   paymentProofUrl: varchar("payment_proof_url").notNull(),
   transactionId: varchar("transaction_id"),
   uid: varchar("uid"), // Legacy Firebase UID (kept for reference if needed)
