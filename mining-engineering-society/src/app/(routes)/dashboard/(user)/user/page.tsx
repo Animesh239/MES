@@ -180,7 +180,7 @@ export default async function UserDashboardData() {
           </div>
         </div>
 
-        <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+        {/* <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
           <div className="p-6 border-b border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-gray-900/50">
             <div className="flex items-center gap-3">
               <span className="w-2 h-8 bg-amber-400 rounded-full" />
@@ -262,7 +262,7 @@ export default async function UserDashboardData() {
               MINARE&apos;26 merchandise.
             </p>
           </div>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* LEFT COLUMN - Primary Actions & Content */}

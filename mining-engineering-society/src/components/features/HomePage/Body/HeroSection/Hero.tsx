@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { HeroSectionData, LogosData } from "@/config/Homepage/HomePagedata";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { WelcomeCarouselModal } from "@/components/ui/WelcomeCarouselModal";
+// import { WelcomeCarouselModal } from "@/components/ui/WelcomeCarouselModal";
 
 export const Body = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -27,7 +27,7 @@ export const Body = () => {
 
   return (
     <>
-      <WelcomeCarouselModal />
+      {/* <WelcomeCarouselModal /> */}
       <div className="bg-[#000000] relative overflow-hidden pt-[5vh] h-auto md:px-[5vw] z-0">
         <VerticalLine leftPosition="11vw" delay="0" topPostion="" />
 

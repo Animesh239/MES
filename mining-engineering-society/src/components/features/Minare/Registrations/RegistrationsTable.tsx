@@ -47,6 +47,8 @@ export function RegistrationsTable({
   const [registrations, setRegistrations] =
     useState<Registration[]>(initialData);
   const [loadingId, setLoadingId] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const handleStatusUpdate = async (
     id: number,
@@ -116,30 +118,38 @@ export function RegistrationsTable({
     }
   };
 
-  const renderTable = (data: Registration[]) => (
-    <div className="bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden">
-      <Table>
-        <TableHeader>
-          <TableRow className="border-white/10 hover:bg-white/5">
-            <TableHead className="text-gray-400">Name</TableHead>
-            <TableHead className="text-gray-400">College</TableHead>
-            <TableHead className="text-gray-400">Branch/Year</TableHead>
-            <TableHead className="text-gray-400">Gender</TableHead>
-            <TableHead className="text-gray-400">Proof</TableHead>
-            <TableHead className="text-gray-400">ID Card</TableHead>
-            <TableHead className="text-gray-400">Status</TableHead>
-            <TableHead className="text-gray-400 text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.length === 0 ? (
-            <TableRow className="border-white/10 hover:bg-white/5">
-              <TableCell colSpan={8} className="text-center text-gray-500 py-8">
-                No registrations found.
-              </TableCell>
-            </TableRow>
-          ) : (
-            data.map((reg) => (
+  const renderTable = (data: Registration[]) => {
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const paginatedData = data.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
+
+    return (
+      <div className="space-y-4">
+        <div className="bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow className="border-white/10 hover:bg-white/5">
+                <TableHead className="text-gray-400">Name</TableHead>
+                <TableHead className="text-gray-400">College</TableHead>
+                <TableHead className="text-gray-400">Branch/Year</TableHead>
+                <TableHead className="text-gray-400">Gender</TableHead>
+                <TableHead className="text-gray-400">Proof</TableHead>
+                <TableHead className="text-gray-400">ID Card</TableHead>
+                <TableHead className="text-gray-400">Status</TableHead>
+                <TableHead className="text-gray-400 text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.length === 0 ? (
+                <TableRow className="border-white/10 hover:bg-white/5">
+                  <TableCell colSpan={8} className="text-center text-gray-500 py-8">
+                    No registrations found.
+                  </TableCell>
+                </TableRow>
+              ) : (
+                paginatedData.map((reg) => (
               <TableRow
                 key={reg.id}
                 className="border-white/10 hover:bg-white/5"
@@ -284,7 +294,40 @@ export function RegistrationsTable({
         </TableBody>
       </Table>
     </div>
+    {totalPages > 1 && (
+      <div className="flex items-center justify-between px-2">
+        <div className="text-sm text-gray-400">
+          Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
+          {Math.min(currentPage * itemsPerPage, data.length)} of {data.length} entries
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="border-white/20 hover:bg-white hover:text-black text-white disabled:opacity-50"
+          >
+            Previous
+          </Button>
+          <div className="flex items-center justify-center min-w-[2rem] text-sm text-gray-300">
+            {currentPage} / {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="border-white/20 hover:bg-white hover:text-black text-white disabled:opacity-50"
+          >
+            Next
+          </Button>
+        </div>
+      </div>
+    )}
+    </div>
   );
+};
 
   const pendingRegistrations = registrations.filter(
     (reg) => reg.status === "pending"
@@ -320,7 +363,7 @@ export function RegistrationsTable({
         </Button>
       </div>
 
-      <Tabs defaultValue="pending" className="w-full">
+      <Tabs defaultValue="pending" className="w-full" onValueChange={() => setCurrentPage(1)}>
         <TabsList className="grid w-full grid-cols-3 bg-white/5 border border-white/10 text-gray-400">
           <TabsTrigger
             value="pending"
@@ -353,4 +396,4 @@ export function RegistrationsTable({
       </Tabs>
     </div>
   );
-}
+  }
